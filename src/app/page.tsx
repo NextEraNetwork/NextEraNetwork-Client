@@ -1,7 +1,5 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { Provider } from "react-redux";
-import { store } from "@/reducer/store";
 import { FaUniversity, FaClipboardList, FaBriefcase, FaComments, FaUserAlt, FaChartLine, FaHandshake, FaCommentDots } from 'react-icons/fa';
 import InfoCard from '@/components/InfoCard';
 import Header from '@/components/Header';
@@ -21,8 +19,8 @@ export default function Home({ children }: { children: React.ReactNode }) {
   }, [headerRef]);
 
   return (
-    <Provider store={store}>
-      {!user ? (
+    <>
+      {user ? (
         <>
           <Header />
           <div className="landing min-h-screen flex flex-col items-center justify-center">
@@ -106,6 +104,6 @@ export default function Home({ children }: { children: React.ReactNode }) {
           </aside>
         </div>
       )}
-    </Provider>
+    </>
   );
 };

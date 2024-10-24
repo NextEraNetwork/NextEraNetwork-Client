@@ -1,10 +1,11 @@
-import { Dispatch, SetStateAction } from "react";
 import { apiConnector } from "@/services/apiConnector";
 import { profileEndpoints } from "@/services/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { ProfileData } from "@/types/MultiForm";
 import { setLoading } from "@/reducer/studentSlices/profileSlice";
+import { useSelector } from "react-redux";
+import { RootState } from '@/reducer/store';
 
 // const token = localStorage.getItem("token");
 const {
@@ -14,15 +15,19 @@ const {
 } = profileEndpoints;
 
 
-export const createProfileUser = (profileData: ProfileData, token:string ) => async (dispatch: any) => {
+// const token = useSelector((state: RootState) => state.auth.token);
+
+
+export const createProfileUser = (formData: ProfileData, token:string ) => async (dispatch: any) => {
     dispatch(setLoading(true));
+    console.log("Profile data in createProfileUser ", formData)
 
     try {
-        console.log("profile data", profileData);
+        console.log("profile data", formData);
         const response = await apiConnector({
             method: 'PUT',
             url: PUT_PROFILE_API,
-            bodyData: profileData,
+            bodyData: formData,
             headers: {
                 Authorization: `Bearer ${token}`,
             },

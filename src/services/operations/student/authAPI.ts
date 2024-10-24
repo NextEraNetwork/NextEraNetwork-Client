@@ -37,15 +37,25 @@ interface SendOTPData {
 //     setEmailSent: Dispatch<SetStateAction<boolean>>
 // }
 
-export const sendOtp = (otpData: SendOTPData) => async (dispatch: any) => {
+export const sendOtp = (email: string ) => async (dispatch: any) => {
     dispatch(setLoading(true));
 
     try {
         const response = await apiConnector({
             method: 'POST',
             url: SEND_OTP_API,
-            bodyData: otpData
+            bodyData: email
         });
+
+        if(response.status === 200)
+        {
+            toast.success(`OTP successfully sent on ${email}.`)
+            return true;
+        }
+        else{
+            toast.error(`Failed to send OTP. Please try again.`)
+            return false;
+        }
 
         const router = useRouter();
         router.push("/verify-otp");
@@ -59,6 +69,7 @@ export const sendOtp = (otpData: SendOTPData) => async (dispatch: any) => {
 
 export const signupUser = (signupData: SignupData) => async (dispatch: any) => {
     dispatch(setLoading(true));
+    console.log("signupUser", signupUser);
 
     try {
         const response = await apiConnector({

@@ -3,12 +3,21 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 interface InstructionsComponentProps {
     setCheckMark: Dispatch<SetStateAction<boolean>>;
-    onProceed: () => void;
+    onProceed: () => void; // Assuming you'll use this in the future
 }
 
-const InstructionsComponent: React.FC<InstructionsComponentProps> = ({ setCheckMark }) => {
+const InstructionsComponent: React.FC<InstructionsComponentProps> = ({ setCheckMark, onProceed }) => {
+    // const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const isChecked = e.target.checked;
+    //     setCheckMark(isChecked);
+
+    //     if (isChecked) {
+    //         onProceed(); // Assuming this function handles the next steps
+    //     }
+    // };
+
     return (
-        <div className="flex items-center justify-center  bg-gray-100 p-16">
+        <div className="flex items-center justify-cente">
             <div className="p-10 bg-white rounded-lg shadow-xl w-full space-y-10">
                 <h2 className="text-xl font-semibold text-center">Welcome to NextEraNetwork!</h2>
                 <p className="text-center text-gray-600">
@@ -23,23 +32,19 @@ const InstructionsComponent: React.FC<InstructionsComponentProps> = ({ setCheckM
                     <li className="text-gray-800">✅ Remember, a well-filled profile is key to unlocking the full potential of the NextEraNetwork.</li>
                 </ul>
 
-                <p className="text-center text-gray-600">Once you're ready, check the box below to proceed to the Educational Details form.</p>
+                {/* <p className="text-center text-gray-600">Once you're ready, check the box below to proceed to the Educational Details form.</p>
 
                 <div className="flex items-center justify-center">
                     <input
                         type="checkbox"
                         id="agreeToInstructions"
                         className="mr-2 leading-tight"
-                        onChange={(e) => {
-                            setCheckMark(e.target.checked);
-                            if (e.target.checked) {
-                            }
-                        }}
+                        onChange={handleCheckboxChange}
                     />
                     <label htmlFor="agreeToInstructions" className="text-gray-700">
                         I have read and understood the instructions.
                     </label>
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -5,6 +5,11 @@ import EducationalDetails from '@/components/Forms/MultiForm/EducationalDetails/
 import PersonalInformation from '@/components/Forms/MultiForm/PersonalInformation/PersonalInformation';
 import AdditionalInformation from '@/components/Forms/MultiForm/AdditionalInformation/AdditionalInformation';
 import InstructionsComponent from './InstructionsComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@/reducer/store';
+import { createProfileUser } from '@/services/operations/student/profileAPI';
+import { RootState } from '@/reducer/store';
+import PreLoader from '@/components/PreLoader';
 
 const ProfileCreationGuide: React.FC = () => {
     const [formData, setFormData] = useState<ProfileData>({
@@ -37,7 +42,9 @@ const ProfileCreationGuide: React.FC = () => {
     });
 
     const [currentStep, setCurrentStep] = useState(0);
-    const [checkMark, setCheckmark] = useState(false);
+    const [checkMark, setCheckmark] = useState(true);
+    const loading = useSelector((state: RootState) => state.profile.loading);
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (newData: Partial<ProfileData>) => {
         setFormData((prev) => ({ ...prev, ...newData }));
@@ -45,17 +52,14 @@ const ProfileCreationGuide: React.FC = () => {
 
     const handleNext = () => {
         if (currentStep === 0 && checkMark) {
-            setCurrentStep(1);
+            setCurrentStep(1)
+            console.log("currentStep", currentStep);
         }
         else if (currentStep === 1 && validateEducationalDetails()) {
             setCurrentStep((prev) => prev + 1);
         } else if (currentStep === 2) {
             setCurrentStep((prev) => prev + 1);
         }
-    };
-
-    const handleBack = () => {
-        setCurrentStep((prev) => Math.max(prev - 1, 0));
     };
 
     const validateEducationalDetails = () => {
@@ -71,9 +75,19 @@ const ProfileCreationGuide: React.FC = () => {
         return requiredFields.every(field => field);
     };
 
+    const handleBack = () => {
+        setCurrentStep((prev) => Math.max(prev - 1, 0));
+    };
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('Profile submitted:', formData);
+        // dispatch(createProfileUser(formData));
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-16 px-32">
-            <div className="p-10 bg-white rounded-lg shadow-xl w-full space-y-10">
+            <form onSubmit={handleFormSubmit} className="p-10 bg-white rounded-lg shadow-xl w-full space-y-10">
                 <h2 className="text-xl font-semibold text-center">Create Your Profile</h2>
                 <p className="text-center text-gray-600">
                     Please fill out the following sections accurately. Your information helps us provide you with tailored experiences.
@@ -103,7 +117,7 @@ const ProfileCreationGuide: React.FC = () => {
                             Back
                         </button>
                     )}
-                    {currentStep < 2 ? (
+                    {currentStep < 3 ? (
                         <button
                             onClick={handleNext}
                             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
@@ -112,14 +126,15 @@ const ProfileCreationGuide: React.FC = () => {
                         </button>
                     ) : (
                         <button
-                            onClick={() => console.log('Profile submitted:', formData)}
-                            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+                            type='submit'
+                            className={`bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600`}
+                            disabled={loading}
                         >
-                            Submit
+                            {loading  ? "Submit" : <PreLoader/>}
                         </button>
                     )}
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

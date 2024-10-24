@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/reducer/store';
 
 
 interface DiscussionFormData {
@@ -17,6 +19,7 @@ const DiscussionForm = () => {
         branch: '',
         description: '',
     });
+    const dispatch = useDispatch<AppDispatch>();
 
 
     // Handling form field changes
@@ -36,10 +39,11 @@ const DiscussionForm = () => {
 
 
     // Submit Handler
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         console.log("form value", formData);
+        
+        
     };
 
     return (

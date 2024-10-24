@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://6d01-2401-4900-7d73-40c8-bd00-bf81-db91-55a9.ngrok-free.app/api/v1";
+const BASE_URL = "https://2d10-2401-4900-5231-e0ad-5433-f12-8726-176c.ngrok-free.app/api/v1";
 
 // Define the endpoints as a constant object with specific types
 export const authEndpoints = {
@@ -72,6 +72,20 @@ export const newsEndpoints = {
 }
 
 
+export const superAdminEndpoints = {
+    POST_UNIVERSITY_API:`${BASE_URL}/`,
+    POST_COLLEGE_API:`${BASE_URL}/`,
+    POST_DEPARTMENT_API:`${BASE_URL}/`,
+    POST_COURSE_API:`${BASE_URL}/`,
+    POST_BRANCH_API:`${BASE_URL}/`,
+
+    GET_UNIVERSITY_API: `${BASE_URL}/university/get/university`,
+    GET_COLLEGE_API: `${BASE_URL}/`,
+    GET_DEPARTMENT_API: `${BASE_URL}/`,
+    GET_COURSE_API: `${BASE_URL}/`,
+    GET_BRANCH_API: `${BASE_URL}/`,
+}
+
 
 
 // export const 
@@ -85,3 +99,4 @@ export type QuestionEndpoints = typeof questionEndpoints;
 export type OpportunityEndpoints  = typeof opportunityEndpoints;
 export type AllUsersEndpoints = typeof allUsersEndpoints;
 export type NewsEndpoints = typeof newsEndpoints;
+export type SuperAdminEndpoints = typeof superAdminEndpoints

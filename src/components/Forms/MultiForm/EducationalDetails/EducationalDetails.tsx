@@ -1,8 +1,12 @@
 // EducationalDetails.tsx
-import React from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import SelectInput from '@/components/Forms/Inputs/SelectInput';
 import InputText from '@/components/Forms/Inputs/InputText';
 import { ProfileData } from '@/types/MultiForm';
+import { AppDispatch } from '@/reducer/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/reducer/store';
+import { fetchUniversities } from '@/services/operations/student/universityAPI';
 
 interface EducationalDetailsProps {
     formData: ProfileData;
@@ -59,6 +63,49 @@ const branches = {
 }
 
 const EducationalDetails: React.FC<EducationalDetailsProps> = ({ formData, handleChange }) => {
+    const dispatch = useDispatch<AppDispatch>();
+    // const universities = useSelector((state: RootState) => state.university.universities);
+
+    const [universities, setUniversities] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('https://2d10-2401-4900-5231-e0ad-5433-f12-8726-176c.ngrok-free.app/api/v1/university/get/university');
+           
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status} ${response.statusText}`);
+            }
+
+            console.log("response data",response);
+    
+            const data = await response.json();
+
+            console.log("response data", data);
+    
+            if (!data.success || !Array.isArray(data.data)) {
+              throw new Error('Unexpected data format');
+            }
+            
+            // console.log("")
+            setUniversities(data.data);
+          } catch (error:any) {
+            setError(error.message);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+      
+
+    console.log("fetched universities", universities)
+
+    // useEffect(() => {
+    //     dispatch(fetchUniversities());
+    // }, [dispatch]);
+
     return (
         <div>
             <h2 className="text-lg font-semibold mb-4">Section 1: Educational Details</h2>
