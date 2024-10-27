@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SideBar } from '@/components/student/Sidebar';
 import { StudentHeader } from '@/components/student/StudentHeader';
+import StudentDashBoard from './home/page';
 
-const StudentHomeLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const StudentLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState<number>(0);
 
@@ -16,16 +17,16 @@ const StudentHomeLayout: React.FC<{ children: React.ReactNode }> = ({ children }
   return (
     <div className="flex flex-col bg-white h-screen">
       {/* Header */}
-      <div ref={headerRef} className="border-b border-[#DBDBDB] sticky top-0 z-50">
+      <div ref={headerRef} className="border-b border-[#DBDBDB] text-black sticky top-0 z-50">
         <StudentHeader />
       </div>
 
       {/* Main Content */}
       <aside className="flex flex-row flex-grow overflow-hidden">
-        <div className={`max-w-64 bg-white border-r border-[#DBDBDB]`}>
+        <div className={`max-w-64 bg-white border-r text-black border-[#DBDBDB]`}>
           <SideBar />
         </div>
-        <main className="flex-grow px-8 pt-8 overflow-y-auto bg-slate-50">
+        <main className="flex-grow px-8 pt-8 overflow-y-auto bg-slate-50 text-black">
           {children}
         </main>
       </aside>
@@ -33,4 +34,4 @@ const StudentHomeLayout: React.FC<{ children: React.ReactNode }> = ({ children }
   );
 };
 
-export default StudentHomeLayout;
+export default StudentLayout;

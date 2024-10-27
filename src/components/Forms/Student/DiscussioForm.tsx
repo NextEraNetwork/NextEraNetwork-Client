@@ -5,6 +5,7 @@ import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/reducer/store';
+import { addDiscussion } from '@/services/operations/student/discussionAPI';
 
 
 interface DiscussionFormData {
@@ -42,7 +43,7 @@ const DiscussionForm = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("form value", formData);
-        
+        dispatch(addDiscussion(formData));
         
     };
 

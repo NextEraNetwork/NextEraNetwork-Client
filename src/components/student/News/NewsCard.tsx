@@ -15,7 +15,7 @@ interface NewsCardProps {
 const NewsCard: React.FC<NewsCardProps> = ({ title, content, createdAt, image, tags, id }) => {
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            {image && <Image src={image} alt={title} className="w-full h-48 lg:h-64 object-cover" />}
+            {image && <img src={image} alt={title} className="w-full h-48 lg:h-64 object-cover" />}
             <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{title}</h2>
                 <p className="text-gray-600 mb-4 line-clamp-4 overflow-hidden">{content}</p>

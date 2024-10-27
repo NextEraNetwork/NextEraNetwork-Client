@@ -24,16 +24,16 @@ export default function MyProfile({
             <ProfileHeader />
             <div
                 id="about"
-                className="scroll-mt-[11vh] flex flex-col gap-20 py-12 section px-3 lg:p-20"
+                className="scroll-mt-[11vh] flex flex-col gap-20 py-12 bg-gray-100 dark:bg-gray-900 px-3 lg:p-20"
                 data-aos="fade-up"
                 data-aos-delay="100"
             >
                 <About {...userData} />
                 <Education educationList={educationData} />
                 <Experience experienceList={experienceData} />
+                <Project projects={projectData} />
                 <Achievement achievements={achievementData} />
                 <Certificate certificates={certificateData} />
-                <Project projects={projectData} />
             </div>
         </>
 

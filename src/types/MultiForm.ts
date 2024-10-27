@@ -28,9 +28,9 @@ export interface ProfileData {
     courses: string;
     branch: string;
     enrollmentNumber: string;
-    education: string[];
-    projects: string[];
-    experience: string[];
-    certification: string[];
-    achievement: string[];
+    // education: string[];
+    // projects: string[];
+    // experience: string[];
+    // certification: string[];
+    // achievement: string[];
 }

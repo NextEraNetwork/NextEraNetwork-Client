@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import { formatTimeAgo } from "@/app/lib/utils";
 import { BiSolidUpvote } from "react-icons/bi";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 import { bookmarkOutline, bookmark } from "ionicons/icons";
 import { FaEye } from "react-icons/fa";
 import CommentList from "@/components/student/Discussions/CommentList";
-import Image from "next/image";
+import { useRouter } from 'next/navigation'
 
 interface User {
     username: string;
@@ -40,11 +41,11 @@ export default function DiscussionTopicDetail({
         upvotes: ["user1", "user2"],
         views: 300,
     });
-
     const [bookmarkState, setBookmarkState] = useState(false);
+    const router = useRouter();
 
     const handleClose = () => {
-        // router.back();
+        router.back();
     };
 
     const handleUpvoteClick = () => {
@@ -65,15 +66,16 @@ export default function DiscussionTopicDetail({
                     <div className="pt-2 pr-3">
                         <div className="flex flex-col">
                             <div className="flex items-center">
-                                <BiSolidUpvote
+                                <FaArrowAltCircleDown
                                     className="p-2 text-sm bg-slate-200 text-slate-600 rounded-sm duration-500 cursor-pointer hover:bg-slate-300 hover:text-slate-800"
                                     onClick={handleUpvoteClick}
                                 />
+
                                 <div className="ml-2">{discussionTopic.upvotes.length}</div>
                             </div>
                             <div className="pt-5">
-                                <Image src={bookmarkOutline}
-                                    alt="bookmark"
+                                <img src={bookmarkOutline}
+                                    // alt="bookmark"
                                     className={`p-2 bg-slate-200 rounded-sm duration-500 cursor-pointer hover:bg-slate-300 ${bookmarkState ? "fa-solid fa-bookmark text-slate-600" : "fa-regular fa-bookmark text-slate-800"}`}
                                     onClick={handleBookMark}
                                 />
@@ -87,7 +89,7 @@ export default function DiscussionTopicDetail({
                             <h2 className='text-lg font-semibold'>{discussionTopic.discussTitle}</h2>
                             <span
                                 className=' bg-slate-200 font-bold p-2 rounded-md hover:bg-slate-500 hover:text-white text-xs cursor-pointer'
-                                onClick={handleClose}
+                                onClick={() => router.back()}
                             >
                                 Close
                             </span>
@@ -95,7 +97,7 @@ export default function DiscussionTopicDetail({
 
                         {/* user and discussion time  */}
                         <div className='flex items-center gap-3 pt-2'>
-                            <Image src={discussionTopic.userId.profileImage} alt={discussionTopic.userId.username} className="w-8 h-8 rounded-full" />
+                            <img src={discussionTopic.userId.profileImage} alt={discussionTopic.userId.username} className="w-8 h-8 rounded-full" />
                             <div className="flex flex-row items-center gap-3">
                                 <div className="font-medium">{discussionTopic.userId.username}</div>
                                 <div className="text-xs text-gray-400">{formatTimeAgo(discussionTopic.createdAt)}</div>

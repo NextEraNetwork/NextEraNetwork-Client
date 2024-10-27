@@ -1,8 +1,9 @@
 // PersonalInformation.tsx
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import SelectInput from '@/components/Forms/Inputs/SelectInput';
 import InputText from '@/components/Forms/Inputs/InputText';
 import { ProfileData } from '@/types/MultiForm';
+import {State, City } from 'country-state-city';
 
 interface PersonalInformationProps {
     formData: ProfileData;
@@ -10,6 +11,27 @@ interface PersonalInformationProps {
 }
 
 const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, handleChange }) => {
+
+    const [districts, setDistricts] = useState<{ value: string; label: string; }[]>([]);
+    const statesData = State.getStatesOfCountry("IN");
+    const states = statesData.map((state :any)=>({
+        value:state.isoCode,
+        label:state.name
+    }));
+
+    useEffect(() => {
+        if (formData.state) {
+            const districtData = City.getCitiesOfState("IN", formData.state);
+            const districtOptions = districtData.map((district: any) => ({
+                value: district.name,
+                label: district.name
+            }));
+            setDistricts(districtOptions);
+        } else {
+            setDistricts([]); 
+        }
+    }, [formData.state]);
+
     return (
         <div>
             <h2 className="text-lg font-semibold mb-4">Section 2: Personal Information</h2>
@@ -61,20 +83,14 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
                 <SelectInput
                     label="State"
                     value={formData.state}
-                    options={[
-                        { value: 'andhra_pradesh', label: 'Andhra Pradesh' },
-                        { value: 'rajasthan', label: 'Rajasthan' },
-                    ]}
+                    options={states}
                     onChange={(value) => handleChange({ state: value })}
                     required={true}
                 />
                 <SelectInput
-                    label="District"
+                    label="City"
                     value={formData.district}
-                    options={[
-                        { value: 'udaipur', label: 'udaipur' },
-                        { value: 'dungarpur', label: 'dungarpur' },
-                    ]}
+                    options={districts}
                     onChange={(value) => handleChange({ district: value })}
                     required={true}
                 />
@@ -83,7 +99,6 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
                     label="Profession"
                     value={formData.profession}
                     onChange={(value) => handleChange({ profession: value })}
-                    required={true}
                     placeholder="Enter Profession"
                 />
                 <InputText

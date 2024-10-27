@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/reducer/store';
+import { addQuestion } from '@/services/operations/student/questionAPI';
 
 interface QuestionFormData {
     branch: string;
@@ -22,6 +25,7 @@ const QuestionForm = () => {
         questionTitle: '',
         questionLink: '',
     });
+    const dispatch = useDispatch<AppDispatch>();
 
     const branches = ['Computer Science', 'Mechanical', 'Electrical', 'Civil'];
     const difficulties = [
@@ -42,6 +46,8 @@ const QuestionForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("form value", formData);
+        dispatch(addQuestion(formData));
+
     };
 
     return (
@@ -86,7 +92,7 @@ const QuestionForm = () => {
                     value={formData.questionLink}
                     onChange={(value) => handleChange({ questionLink: value })}
                     placeholder="Enter question link"
-                    required={true}
+                    // required={true}
                 />
             </div>
 

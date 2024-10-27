@@ -1,16 +1,13 @@
 import { apiConnector } from "../../apiConnector";
-import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { questionEndpoints } from '../../api';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/reducer/store';
+
 const {
     POST_QUESTION_API
 
 } = questionEndpoints;
 
-const token = useSelector((state: RootState) => state.auth.token);
-const router = useRouter();
+let token  = localStorage.getItem("token");
 
 interface QuestionFormData {
     branch: string;
@@ -21,7 +18,7 @@ interface QuestionFormData {
     questionLink: string;
 }
 
-export const addOpportunity = (formData: QuestionFormData) => async (dispatch: any) => {
+export const addQuestion = (formData: QuestionFormData) => async (dispatch: any) => {
 
     try {
         const response = await apiConnector({
@@ -35,10 +32,10 @@ export const addOpportunity = (formData: QuestionFormData) => async (dispatch: a
 
         if (response.status === 200) {
             toast.success("Question added successfully");
-            router.push("/questions");
+            // router.push("/questions");
         }
         else{
-            router.push("/questions/addQuestions");
+            // router.push("/questions/addQuestions");
         }
 
     } catch (error) {

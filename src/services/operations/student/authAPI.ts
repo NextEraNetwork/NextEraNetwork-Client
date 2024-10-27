@@ -2,8 +2,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { apiConnector } from "../../apiConnector";
 import { clearToken, setLoading, setToken } from "@/reducer/studentSlices/authSlice";
 import { authEndpoints, } from "../../api";
-import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie'; 
+import { getCookies } from '@/utils/getCookies';
 
 const {
     SIGNUP_API,
@@ -22,7 +23,7 @@ interface SignupData {
 }
 
 interface LoginData {
-    email: string,
+    username: string,
     password: string
 }
 
@@ -56,9 +57,6 @@ export const sendOtp = (email: string ) => async (dispatch: any) => {
             toast.error(`Failed to send OTP. Please try again.`)
             return false;
         }
-
-        const router = useRouter();
-        router.push("/verify-otp");
     }
     catch (error) {
         console.error(error);
@@ -86,17 +84,35 @@ export const signupUser = (signupData: SignupData) => async (dispatch: any) => {
     }
 };
 
-export const loginUser = (loginData: LoginData) => async (dispatch: any) => {
+export const loginUser = (loginData: string, router:any) => async (dispatch: any) => {
     dispatch(setLoading(true));
 
     try {
         const response = await apiConnector({
             method: 'POST',
             url: LOGIN_API,
-            bodyData: loginData
+            bodyData: loginData,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded', 
+            }
         });
 
-        dispatch(setToken(response.data.token));
+        console.log("login response", response);
+        
+
+        if(response.data.ok === true){
+            const token = getCookies();
+
+            console.log("token from login", token);
+            // dispatch(setToken(token));
+            toast.success("Login Successfully.");
+
+            await new Promise(resolve => setTimeout(resolve, 100)); // Optional delay
+            // router.push("/");
+        }
+        else{
+            toast.error("Login credential error");
+        }
     }
     catch (error) {
         console.error(error);
@@ -118,9 +134,6 @@ export const logoutUser = (token: string) => async (dispatch: any) => {
         })
 
         dispatch(clearToken());
-        const router = useRouter();
-        router.push("/login");
-
     }
     catch (error) {
         console.error(error);

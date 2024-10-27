@@ -1,5 +1,5 @@
 import React from 'react';
-import images from '@/utils/images';
+import { images } from '@/utils/images';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -21,7 +21,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData }) => {
     <div className="user-card bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 w-60">
       <div className="user-profileImage relative">
         <Image 
-          src={userData.profileImage ? userData.profileImage : images.user} 
+          src={userData.profileImage ? userData.profileImage : images.jinesh} 
           alt={userData.fullName} 
           className="w-full h-36 rounded-t-lg object-contain" 
         />
@@ -102,7 +102,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData }) => {
             </li>
           ))}
         </div>
-        <Link href={`/${userData.username}`}>
+        <Link href={`/user/${userData.username}`}>
           <div className="mt-4">
             <button className="w-full border border-gray-400 rounded-full py-1 text-sm font-semibold text-gray-800 hover:bg-gray-800 hover:text-white transition-colors duration-300">
               View Profile

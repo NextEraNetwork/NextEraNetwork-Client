@@ -1,5 +1,7 @@
 import QuestionsTable from "@/components/student/Questions/QuestionsTable";
 import Pagination from "@/components/student/Questions/Pagination";
+import Link from "next/link";
+import { FaPlus } from 'react-icons/fa';
 
 const questions = [
     { questionNo: 1, branch: 'Computer Science', description: 'Given an array of size n, write a program to check if the given array is sorted in (ascending / Increasing / Non-decreasing) order or not. If the array is sorted then return True, Else return False.', link: 'https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/', difficulty: 'Medium', company: 'App Perfect', year: 2023 },
@@ -48,11 +50,28 @@ export default async function Questions({
     const currentQuestions = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
 
     return (
-        <div className="w-full">
-            <QuestionsTable questions={currentQuestions} />
-            <div className="mt-5 flex w-full justify-center">
-                <Pagination totalPages={totalPages} />
+
+        <div className="flex h-full flex-col">
+            <div className="flex items-center justify-between mb-4">
+                <h1 className="text-2xl font-bold">Questions</h1>
+                <Link
+                    href='/questions/addQuestions'
+                    className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+                >
+                    <FaPlus className="mr-2" />
+                    Add Questions
+                </Link>
+            </div>
+            <div
+                className="flex-grow overflow-y-auto"
+            >
+                <QuestionsTable questions={currentQuestions} />
+                <div className="mt-5 flex w-full justify-center">
+                    <Pagination totalPages={totalPages} />
+                </div>
             </div>
         </div>
     );
+
+
 }

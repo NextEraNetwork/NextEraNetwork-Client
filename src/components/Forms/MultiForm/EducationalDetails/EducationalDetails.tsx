@@ -6,39 +6,12 @@ import { ProfileData } from '@/types/MultiForm';
 import { AppDispatch } from '@/reducer/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/reducer/store';
-import { fetchUniversities } from '@/services/operations/student/universityAPI';
+import { fetchBranches, fetchColleges, fetchCourses, fetchDepartment, fetchUniversities } from '@/services/operations/student/optionAPI';
 
 interface EducationalDetailsProps {
     formData: ProfileData;
     handleChange: (newData: Partial<ProfileData>) => void;
 }
-
-const universities = [
-    { value: 'university_a', label: 'University A' },
-    { value: 'university_b', label: 'University B' },
-];
-
-const colleges = {
-    university_a: [
-        { value: 'college_a1', label: 'College A1' },
-        { value: 'college_a2', label: 'College A2' },
-    ],
-    university_b: [
-        { value: 'college_b1', label: 'College B1' },
-        { value: 'college_b2', label: 'College B2' },
-    ],
-};
-
-const departments = {
-    college_a1: [
-        { value: 'cse', label: 'CSE' },
-        { value: 'ece', label: 'ECE' },
-    ],
-    college_a2: [
-        { value: 'ee', label: 'EE' },
-        { value: 'cse', label: 'CSE' },
-    ],
-};
 
 const courses = {
     cse: [
@@ -64,47 +37,47 @@ const branches = {
 
 const EducationalDetails: React.FC<EducationalDetailsProps> = ({ formData, handleChange }) => {
     const dispatch = useDispatch<AppDispatch>();
-    // const universities = useSelector((state: RootState) => state.university.universities);
+    const universities = useSelector((state: RootState) => state.options.universities);
+    const colleges = useSelector((state:RootState)=>state.options.colleges) ;
+    const departments = useSelector((state:RootState)=>state.options.department);
+    const courses = useSelector((state:RootState)=>state.options.courses);
+    const branches = useSelector((state:RootState)=>state.options.branches);
+    // console.log("fetched universities", departments)
 
-    const [universities, setUniversities] = useState([]);
-    const [error, setError] = useState(null);
-
+    // Fetch universities
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch('https://2d10-2401-4900-5231-e0ad-5433-f12-8726-176c.ngrok-free.app/api/v1/university/get/university');
-           
-            if (!response.ok) {
-              throw new Error(`Error: ${response.status} ${response.statusText}`);
-            }
+        dispatch(fetchUniversities());
+    }, [dispatch]);
 
-            console.log("response data",response);
-    
-            const data = await response.json();
+    // fetch colleges
+    useEffect(() => {
+        if (formData.university) {
+            dispatch(fetchColleges(formData.university));
+        }
+    }, [formData.university, dispatch]);
 
-            console.log("response data", data);
-    
-            if (!data.success || !Array.isArray(data.data)) {
-              throw new Error('Unexpected data format');
-            }
-            
-            // console.log("")
-            setUniversities(data.data);
-          } catch (error:any) {
-            setError(error.message);
-          }
-        };
-    
-        fetchData();
-      }, []);
+    // Fetch departments when the college changes
+    useEffect(() => {
+        if (formData.college && formData.university) {
+            dispatch(fetchDepartment(formData.university, formData.college));
+        }
+    }, [formData.college,formData.university, dispatch]);
 
-      
+    // Fetch colleges on basis of university, college, dept
+    useEffect(() => {
+        if (formData.college && formData.university && formData.department) {
+            dispatch(fetchCourses(formData.university, formData.college, formData.department));
+        }
+    }, [formData.college,formData.university,formData.department, dispatch]);
 
-    console.log("fetched universities", universities)
+    // Fetch colleges on basis of university, college, dept
+    useEffect(() => {
+        if (formData.college && formData.university && formData.department) {
+            dispatch(fetchBranches(formData.university, formData.college, formData.department, formData.courses));
+        }
+    }, [formData.college,formData.university,formData.department, formData.courses,  dispatch]);
 
-    // useEffect(() => {
-    //     dispatch(fetchUniversities());
-    // }, [dispatch]);
+
 
     return (
         <div>
@@ -120,21 +93,21 @@ const EducationalDetails: React.FC<EducationalDetailsProps> = ({ formData, handl
                 <SelectInput
                     label="College"
                     value={formData.college}
-                    options={colleges[formData.university as keyof typeof colleges] || []}
+                    options={colleges}
                     onChange={(value) => handleChange({ college: value })}
                     required={true}
                 />
                 <SelectInput
                     label="Department"
                     value={formData.department}
-                    options={departments[formData.college as keyof typeof departments] || []}
+                    options={departments}
                     onChange={(value) => handleChange({ department: value })}
                     required={true}
                 />
                 <SelectInput
                     label="Course"
                     value={formData.courses}
-                    options={courses[formData.department as keyof typeof courses] || []}
+                    options={courses}
                     onChange={(value) => handleChange({ courses: value })}
                     required={true}
                 />
@@ -142,7 +115,7 @@ const EducationalDetails: React.FC<EducationalDetailsProps> = ({ formData, handl
                 <SelectInput
                     label="Branch"
                     value={formData.branch}
-                    options={branches[formData.courses as keyof typeof branches] || []}
+                    options={branches}
                     onChange={(value) => handleChange({ branch: value })}
                     required={true}
                 />

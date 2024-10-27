@@ -1,9 +1,8 @@
+'use client';
 import { apiConnector } from "../../apiConnector";
 import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { discussionEndpoints } from '../../api';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/reducer/store';
 
 const {
     GET_ALL_DISCUSSION_API,
@@ -17,7 +16,7 @@ const {
 
 } = discussionEndpoints;
 
-const token = useSelector((state: RootState) => state.auth.token);
+let token = localStorage.getItem("token");
 
 interface DiscussionFormData {
     title: string;

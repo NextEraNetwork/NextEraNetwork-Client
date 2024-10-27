@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
+import { useDispatch } from 'react-redux';
+import { addOpportunity } from '@/services/operations/student/opportunityAPI';
+import { AppDispatch } from '@/reducer/store';
 
 interface OpportunityFormData {
     profile: string;
@@ -26,6 +29,7 @@ const OpportunityForm = () => {
         positionType: '',
         applicationDeadline: '',
     });
+    const dispatch=useDispatch<AppDispatch>();
 
     const branches = ['Computer Science', 'Mechanical', 'Electrical', 'Civil'];
     const positionTypes = [
@@ -54,12 +58,11 @@ const OpportunityForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("form value", formData);
+        dispatch(addOpportunity(formData));
     };
 
     return (
         <form onSubmit={handleSubmit} className="p-4 bg-white rounded-md shadow-md">
-
-
             <div className='md:grid md:grid-cols-2 md:gap-x-10'>
                 {/* Company */}
                 <InputText

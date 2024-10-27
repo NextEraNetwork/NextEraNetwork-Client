@@ -9,7 +9,7 @@ const {
 
 } = opportunityEndpoints;
 
-const token = useSelector((state: RootState) => state.auth.token);
+let token = localStorage.getItem("token");
 
 interface OpportunityFormData {
     profile: string;

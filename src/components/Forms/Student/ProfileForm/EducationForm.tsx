@@ -85,11 +85,11 @@ const EducationForm = () => {
   };
 
   return (
-    <form>
-      <h2 className="text-xl font-bold mb-4">Education Details</h2>
+    <form className="bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Education Details</h2>
       {educationList.map((education, index) => (
-        <div key={index} className="mb-6 border border-gray-200 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold">Education Entry {index + 1}</h3>
+        <div key={index} className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
+          <h3 className="text-lg font-semibold text-gray-700 mb-2">Education - {index + 1}</h3>
 
           <div className='md:grid md:grid-cols-2 md:gap-x-10'>
             {/* Institution Name Input */}
@@ -165,33 +165,45 @@ const EducationForm = () => {
             placeholder="Enter Description"
           />
 
-          <button
+          {/* <button
             type="button"
             className="bg-red-500 text-white px-4 py-2 rounded"
             onClick={() => handleRemoveEntry(index)}
           >
             Remove Entry
-          </button>
+          </button> */}
+
+          <div className="flex justify-end">
+            {educationList.length > 1 && (
+              <button
+                type="button"
+                className="text-red-500 hover:underline mt-2"
+                onClick={() => handleRemoveEntry(index)}
+              >
+                Remove Education
+              </button>
+            )}
+          </div>
         </div>
       ))}
 
-      <div className='flex flex-row gap-5'>
-      <button
-        type="button"
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-        onClick={handleAddEntry}
-      >
-        Add Another Education Entry
-      </button>
+      <div className='flex flex-row justify-between'>
+        <button
+          type="button"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+          onClick={handleAddEntry}
+        >
+          Add Another Education
+        </button>
 
-      {/* Save Button */}
-      <button
-        type="button"
-        className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-        onClick={handleSave}
-      >
-        Save Education Data
-      </button>
+        {/* Save Button */}
+        <button
+          type="button"
+          className="bg-green-500 text-white px-4 py-2 rounded mt-4"
+          onClick={handleSave}
+        >
+          Save
+        </button>
       </div>
     </form>
   );

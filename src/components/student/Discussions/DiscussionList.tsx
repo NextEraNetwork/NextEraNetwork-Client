@@ -24,11 +24,11 @@ const DiscussionList: React.FC<DiscussionListProps> = ({ discussions }) => {
                 <div key={index} className="border-b border-gray-200 transition hover:bg-gray-100 p-4">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center">
-                            <Link href={`/${discussion.userId.username}`} className="mr-4">
-                                <Image src={discussion.userId.profileImage} alt="" className="w-10 h-10 rounded-full" />
+                            <Link href={`/user/${discussion.userId.username}`} className="mr-4">
+                                <Image src={discussion.userId.profileImage} alt={discussion.userId.username} className="w-10 h-10 rounded-full" />
                             </Link>
                             <div className="cursor-pointer w-full">
-                                <Link href={`/Discuss/${discussion.discussTitle}`} className="text-md font-medium text-black block">
+                                <Link href={`/discussions/${discussion.discussTitle}`} className="text-md font-medium text-black block">
                                     {discussion.discussTitle}
                                 </Link>
                                 <div className="text-gray-600 text-sm pr-5">

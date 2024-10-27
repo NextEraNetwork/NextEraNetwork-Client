@@ -1,5 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
+import { FaArrowLeft } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function NewsDetail({
     params
@@ -11,21 +12,24 @@ export default function NewsDetail({
     const newsData = {
         id: "1",
         title: "New Campus Initiative Launched",
-        content: "The college has launched a new initiative to enhance student engagement and participation The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...The college has launched a new initiative to enhance student engagement and participation...",
+        content: "The college has launched a new initiative to enhance student engagement and participation. The college has launched a new initiative to enhance student engagement and participation...",
         createdAt: new Date().toISOString(),
         image: "https://via.placeholder.com/800",
         pdf: "https://example.com/sample.pdf", // Optional PDF link
         tags: ["Campus", "Initiative"],
     };
 
-
     return (
         <div className="container mx-auto p-6">
+            <Link href="/news" className="flex items-center text-gray-600 hover:text-blue-600 mb-4">
+                <FaArrowLeft className="mr-2" />
+                Back to News
+            </Link>
             <h1 className="text-3xl font-bold mb-4">{newsData.title}</h1>
             <span className="text-gray-500 text-sm mb-4">
                 {new Date(newsData.createdAt).toLocaleDateString()}
             </span>
-            <div className="mt-4">
+            <div className="my-4">
                 {newsData.tags && newsData.tags.length > 0 && (
                     <div className="flex space-x-2">
                         {newsData.tags.map((tag, index) => (
@@ -39,7 +43,7 @@ export default function NewsDetail({
 
             {newsData.image && (
                 <div className="mb-4">
-                    <Image src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
+                    <img src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
                 </div>
             )}
             <p className="text-gray-700 mb-4">{newsData.content}</p>
@@ -48,7 +52,6 @@ export default function NewsDetail({
                     Download PDF
                 </a>
             )}
-            
         </div>
     );
 };

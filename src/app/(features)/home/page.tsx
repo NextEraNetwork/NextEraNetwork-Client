@@ -1,7 +1,7 @@
 // pages/index.tsx
 
 import React from 'react';
-import images from '@/utils/images';
+import { images } from '@/utils/images';
 import Image from 'next/image';
 
 const dummyData = {
@@ -28,7 +28,7 @@ const dummyData = {
   ],
 };
 
-const Home: React.FC = () => {
+const StudentDashBoard: React.FC = () => {
   return (
     <>
       <header className="flex items-center mb-6">
@@ -78,4 +78,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default StudentDashBoard;

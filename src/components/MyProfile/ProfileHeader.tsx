@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { IoIosArrowDown, IoIosApps } from "react-icons/io";
+import { images } from '@/utils/images';
 // import useDarkMode from '@/hooks/useDarkMode';
+import Image from 'next/image';
 
 interface Link {
     _id: number;
@@ -13,11 +15,13 @@ interface Link {
 
 const Links: Link[] = [
     { _id: 1, label: 'About', path: "#about" },
-    { _id: 2, label: 'Achievement', path: "#acheivement" },
-    { _id: 3, label: 'Projects', path: '#project' },
-    { _id: 4, label: 'Education', path: '#education' },
-    { _id: 5, label: 'Certificate', path: "#certificate" },
-    { _id: 6, label: 'Experience', path: '#experience' },
+    { _id: 2, label: 'Education', path: '#education' },
+    { _id: 3, label: 'Experience', path: '#experience' },
+    { _id: 4, label: 'Projects', path: '#project' },
+    { _id: 5, label: 'Achievement', path: "#achievement" },
+    { _id: 6, label: 'Certificate', path: "#certificate" },
+    { _id: 7, label: 'Contact', path: "#contact" },
+    
 ];
 
 const ProfileHeader: React.FC = () => {
@@ -25,7 +29,7 @@ const ProfileHeader: React.FC = () => {
     const [hoveredDropdown, setHoveredDropdown] = useState<number | null>(null);
     const [hoveredSubDropdown, setHoveredSubDropdown] = useState<number | null>(null);
     const [activeSection, setActiveSection] = useState<string>("/");
-    const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+    const [windowWidth, setWindowWidth] = useState<number>(0);
     
     // const router = useRouter();
 
@@ -92,6 +96,7 @@ const ProfileHeader: React.FC = () => {
             <div className="container lg:mx-20 flex items-center justify-between relative">
                 <div className='flex items-center justify-between w-full'>
                     <Link href="/" className="flex items-center justify-center gap-2">
+                    <Image src={images.garudblack} alt='logo' className="w-10 h-10"/>
                         <div className="flex items-center text-xl lg:text-3xl">Jinesh Prajapat</div>
                     </Link>
                     <div className='lg:hidden'>

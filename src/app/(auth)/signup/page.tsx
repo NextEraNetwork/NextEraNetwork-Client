@@ -61,7 +61,7 @@ const SignupPage: React.FC = () => {
 
     return (
         <div className="flex-grow flex items-center justify-center">
-            <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-sm md:max-w-md lg:max-w-2xl">
+            <div className="bg-white rounded-lg shadow-custom p-8 w-full max-w-sm md:max-w-md lg:max-w-2xl">
                 <h2 className="text-2xl font-semibold text-center mb-6">Create Your Account</h2>
                 <form onSubmit={handleFormSubmit}>
                     {!otpSent ? (

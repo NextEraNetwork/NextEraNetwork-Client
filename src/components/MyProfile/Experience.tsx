@@ -13,7 +13,7 @@ interface ExperienceProps {
 
 const Experience: React.FC<ExperienceProps> = ({ experienceList }) => {
     return (
-        <section id="experience" className="" data-aos="fade-up" data-aos-delay="200">
+        <section id="experience" className="scroll-mt-[11vh]" data-aos="fade-up" data-aos-delay="200">
              <div className="flex flex-col items-center gap-2">
                 <h2 className="text-4xl font-semibold text-gray-800 dark:text-white">Professional Experience</h2>
                 <hr className="flex justify-center items-center w-16 h-1 mb-8 bg-blue-500" />

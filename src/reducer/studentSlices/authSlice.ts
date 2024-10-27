@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 // Define the shape of the signup data
 interface SignupData {
@@ -24,8 +25,8 @@ const initialState: AuthState = {
     confirmPassword: "",
   },
   loading: false,
-  token: typeof window !== 'undefined' && localStorage.getItem("token")
-    ? JSON.parse(localStorage.getItem("token") as string)
+  token: typeof window !== 'undefined' && Cookies.get('refresh_token')
+    ? Cookies.get('refresh_token') as string
     : null,
 };
 

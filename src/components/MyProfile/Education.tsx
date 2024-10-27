@@ -12,7 +12,7 @@ interface EducationProps {
 
 const Education: React.FC<EducationProps> = ({ educationList }) => {
     return (
-        <section id="education" className="" data-aos="fade-up" data-aos-delay="100">
+        <section id="education" className="scroll-mt-[11vh]" data-aos="fade-up" data-aos-delay="100">
              <div className="flex flex-col items-center gap-2">
                 <h2 className="text-4xl font-semibold text-gray-800 dark:text-white">Education</h2>
                 <hr className="flex justify-center items-center w-16 h-1 mb-8 bg-blue-500" />

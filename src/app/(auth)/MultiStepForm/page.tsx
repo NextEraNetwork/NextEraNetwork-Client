@@ -7,9 +7,10 @@ import AdditionalInformation from '@/components/Forms/MultiForm/AdditionalInform
 import InstructionsComponent from './InstructionsComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/reducer/store';
-import { createProfileUser } from '@/services/operations/student/profileAPI';
 import { RootState } from '@/reducer/store';
 import PreLoader from '@/components/PreLoader';
+import { createProfileUser } from '@/services/operations/student/profileAPI';
+import { getCookies } from '@/utils/getCookies';
 
 const ProfileCreationGuide: React.FC = () => {
     const [formData, setFormData] = useState<ProfileData>({
@@ -20,7 +21,7 @@ const ProfileCreationGuide: React.FC = () => {
         category: 'gen',
         profession: '',
         position: '',
-        state: 'andhra_pradesh',
+        state: '',
         district: '',
         about: '',
         passOut_Year: new Date().getFullYear(),
@@ -34,11 +35,11 @@ const ProfileCreationGuide: React.FC = () => {
         courses: '',
         branch: '',
         enrollmentNumber: '',
-        education: [],
-        projects: [],
-        experience: [],
-        certification: [],
-        achievement: [],
+        // education: [],
+        // projects: [],
+        // experience: [],
+        // certification: [],
+        // achievement: [],
     });
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -57,7 +58,7 @@ const ProfileCreationGuide: React.FC = () => {
         }
         else if (currentStep === 1 && validateEducationalDetails()) {
             setCurrentStep((prev) => prev + 1);
-        } else if (currentStep === 2) {
+        } else if (currentStep === 2 && validatePersonalDetails()) {
             setCurrentStep((prev) => prev + 1);
         }
     };
@@ -75,6 +76,20 @@ const ProfileCreationGuide: React.FC = () => {
         return requiredFields.every(field => field);
     };
 
+    const validatePersonalDetails = () => {
+        const requiredFields = [
+            formData.firstName,
+            formData.lastName,
+            formData.category,
+            formData.gender,
+            formData.state,
+            formData.district,
+            formData.position,
+        ]
+
+        return requiredFields.every(field => field);
+    }
+
     const handleBack = () => {
         setCurrentStep((prev) => Math.max(prev - 1, 0));
     };
@@ -82,8 +97,13 @@ const ProfileCreationGuide: React.FC = () => {
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('Profile submitted:', formData);
-        // dispatch(createProfileUser(formData));
+        dispatch(createProfileUser(formData));
     }
+
+    console.log('All cookies:', document.cookie);
+    console.log("getcookies", getCookies());
+    const cookies = getCookies();
+    console.log('Cookies:', cookies);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-16 px-32">
@@ -130,7 +150,7 @@ const ProfileCreationGuide: React.FC = () => {
                             className={`bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600`}
                             disabled={loading}
                         >
-                            {loading  ? "Submit" : <PreLoader/>}
+                            {!loading ? "Submit" : <PreLoader />}
                         </button>
                     )}
                 </div>

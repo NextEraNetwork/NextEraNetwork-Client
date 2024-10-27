@@ -1,5 +1,5 @@
 // data/usersData.ts
-import images from '@/utils/images'; // Adjust the import based on your image utilities
+import { images } from "@/utils/images";
 
 const usersData = [
     {

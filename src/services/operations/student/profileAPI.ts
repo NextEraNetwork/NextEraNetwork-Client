@@ -4,10 +4,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { ProfileData } from "@/types/MultiForm";
 import { setLoading } from "@/reducer/studentSlices/profileSlice";
-import { useSelector } from "react-redux";
-import { RootState } from '@/reducer/store';
 
-// const token = localStorage.getItem("token");
 const {
     PUT_PROFILE_API,
     UPDATE_PROFILE_API,
@@ -15,13 +12,11 @@ const {
 } = profileEndpoints;
 
 
-// const token = useSelector((state: RootState) => state.auth.token);
 
-
-export const createProfileUser = (formData: ProfileData, token:string ) => async (dispatch: any) => {
+export const createProfileUser = (formData: ProfileData) => async (dispatch: any) => {
     dispatch(setLoading(true));
     console.log("Profile data in createProfileUser ", formData)
-
+    let token ="hello"
     try {
         console.log("profile data", formData);
         const response = await apiConnector({
@@ -34,7 +29,9 @@ export const createProfileUser = (formData: ProfileData, token:string ) => async
         })
 
         if (response.status === 200) {
-            toast.success("Profile is updated");
+            toast.success("Profile is Created successfully");
+            const router = useRouter();
+            router.push("/");
         }
     }
     catch (error) {

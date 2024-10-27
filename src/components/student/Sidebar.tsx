@@ -61,13 +61,13 @@ export const SideBar: React.FC = () => {
                             <li className='link py-1' key={i}>
                                 <Link href={menu.path} >
                                     <div
-                                        className={`flex gap-3 py-2 px-2 rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-gray-200 "}`}
+                                        className={`flex gap-3 py-2 px-2 dark:text-black rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-gray-200 "}`}
                                         onClick={() => handleClick(i)}
                                     >
                                         <span className={`icon text-xl duration-500 flex items-center ${(pathname.startsWith(menu.path)) && ""}`}>
                                             <IonIcon icon={menu.icon} />
                                         </span>
-                                        <span className={` whitespace-nowrap text-base font-sans duration-500 ${!isToggle ? "hidden" : ""} ${(pathname === menu.path) && "text-black duration-700"}`}>
+                                        <span className={` whitespace-nowrap text-base font-sans  duration-500 ${!isToggle ? "hidden" : ""} ${(pathname === menu.path) && "dark:text-black duration-700"}`}>
                                             {menu.name}
                                         </span>
                                     </div>

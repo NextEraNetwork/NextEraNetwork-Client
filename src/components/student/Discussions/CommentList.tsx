@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { arrowUndoOutline, chatboxEllipsesOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import { formatTimeAgo } from '@/app/lib/utils';
-import images from '@/utils/images';
+import { images } from '@/utils/images';
 import Image from 'next/image';
 
 // Define types for user and comment

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import DiscussionFilterSection from "@/components/student/Discussions/DiscussionFilterSection";
 import DiscussionList from "@/components/student/Discussions/DiscussionList";
-import images from "@/utils/images";
+import { images } from "@/utils/images";
 import Pagination from "@/components/student/Questions/Pagination";
 
 const discussionTopicData = [

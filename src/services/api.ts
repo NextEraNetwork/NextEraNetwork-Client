@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://2d10-2401-4900-5231-e0ad-5433-f12-8726-176c.ngrok-free.app/api/v1";
+const BASE_URL = "http://localhost:8010/api/v1";
 
 // Define the endpoints as a constant object with specific types
 export const authEndpoints = {
@@ -80,10 +80,10 @@ export const superAdminEndpoints = {
     POST_BRANCH_API:`${BASE_URL}/`,
 
     GET_UNIVERSITY_API: `${BASE_URL}/university/get/university`,
-    GET_COLLEGE_API: `${BASE_URL}/`,
-    GET_DEPARTMENT_API: `${BASE_URL}/`,
-    GET_COURSE_API: `${BASE_URL}/`,
-    GET_BRANCH_API: `${BASE_URL}/`,
+    GET_COLLEGE_API: `${BASE_URL}/college/university/college`,
+    GET_DEPARTMENT_API: `${BASE_URL}/college/college/department`,
+    GET_COURSE_API: `${BASE_URL}/college/college/course`,
+    GET_BRANCH_API: `${BASE_URL}/college/college/branch`,
 }
 
 
