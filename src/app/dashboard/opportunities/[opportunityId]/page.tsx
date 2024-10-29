@@ -10,7 +10,7 @@ export default function OpportunityDetail({
     params: { opportunityId: string }
 }) {
     const opportunity: Opportunity = {
-        opportunityID: 1,
+        id: "1",
         profile: "Software Developer",
         company: "Tech Solutions Inc.",
         branch: "Computer Science",
@@ -21,6 +21,8 @@ export default function OpportunityDetail({
         applicationDeadline: "2024-12-31",
         createdAt: new Date().toISOString(),
     };
+
+    console.log("params", params);
 
     return (
         <div className="flex flex-col items-center justify-center  bg-gray-100">

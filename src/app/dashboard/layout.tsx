@@ -1,17 +1,16 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SideBar } from '@/components/student/Sidebar';
 import { StudentHeader } from '@/components/student/StudentHeader';
-import StudentDashBoard from './home/page';
 
 const StudentLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState<number>(0);
+  // const [headerHeight, setHeaderHeight] = useState<number>(0);
 
   useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
+    // if (headerRef.current) {
+    //   setHeaderHeight(headerRef.current.offsetHeight);
+    // }
   }, [headerRef]);
 
   return (

@@ -6,7 +6,7 @@ interface InstructionsComponentProps {
     onProceed: () => void; // Assuming you'll use this in the future
 }
 
-const InstructionsComponent: React.FC<InstructionsComponentProps> = ({ setCheckMark, onProceed }) => {
+const InstructionsComponent: React.FC<InstructionsComponentProps> = () => {
     // const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     const isChecked = e.target.checked;
     //     setCheckMark(isChecked);

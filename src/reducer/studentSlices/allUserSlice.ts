@@ -13,7 +13,7 @@ interface AllUsersData {
 
 interface AllUserState {
     allUseresList: AllUsersData[],
-    loading: Boolean
+    loading: boolean
 }
 
 const initialState: AllUserState = {

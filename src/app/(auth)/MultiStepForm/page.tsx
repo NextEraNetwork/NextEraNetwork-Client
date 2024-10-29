@@ -10,7 +10,6 @@ import { AppDispatch } from '@/reducer/store';
 import { RootState } from '@/reducer/store';
 import PreLoader from '@/components/PreLoader';
 import { createProfileUser } from '@/services/operations/student/profileAPI';
-import { getCookies } from '@/utils/getCookies';
 
 const ProfileCreationGuide: React.FC = () => {
     const [formData, setFormData] = useState<ProfileData>({
@@ -100,10 +99,6 @@ const ProfileCreationGuide: React.FC = () => {
         dispatch(createProfileUser(formData));
     }
 
-    console.log('All cookies:', document.cookie);
-    console.log("getcookies", getCookies());
-    const cookies = getCookies();
-    console.log('Cookies:', cookies);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-16 px-32">

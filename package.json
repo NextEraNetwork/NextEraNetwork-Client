@@ -12,6 +12,7 @@
     "@ionic/react": "^8.3.3",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
+    "cookies-next": "^4.3.0",
     "country-state-city": "^3.2.1",
     "crypto-js": "^4.2.0",
     "highlight.js": "^11.10.0",

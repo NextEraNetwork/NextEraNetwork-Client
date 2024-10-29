@@ -114,7 +114,9 @@ const newsData = [
 
 const News: React.FC = () => {
     const [newsItems, setNewsItems] = useState<NewsItem[]>(newsData);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
+
+    setNewsItems(newsData);
 
     // useEffect(() => {
     //     const fetchNews = async () => {
@@ -128,9 +130,9 @@ const News: React.FC = () => {
     //     fetchNews();
     // }, []);
 
-    if (loading) {
-        return <div className="text-center">Loading...</div>;
-    }
+    // if (loading) {
+    //     return <div className="text-center">Loading...</div>;
+    // }
 
     return (
         <div className="container mx-auto p-6">

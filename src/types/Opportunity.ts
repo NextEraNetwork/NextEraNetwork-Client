@@ -1,5 +1,5 @@
 export interface Opportunity {
-    opportunityID: number; 
+    id: string; 
     profile: string;       // Assuming you have a profile reference
     company: string;
     branch: string;

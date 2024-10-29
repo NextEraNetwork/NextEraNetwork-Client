@@ -11,7 +11,7 @@ const OpportunityList: React.FC<OpportunityListProps> = ({ opportunities }) => {
     return (
         <div className="space-y-4">
             {opportunities.map(opportunity => (
-                <OpportunityCard key={opportunity.opportunityID} opportunity={opportunity} />
+                <OpportunityCard key={opportunity.id} opportunity={opportunity} />
             ))}
         </div>
     );

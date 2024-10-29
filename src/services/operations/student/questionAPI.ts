@@ -1,13 +1,14 @@
 import { apiConnector } from "../../apiConnector";
 import { toast } from 'react-toastify';
 import { questionEndpoints } from '../../api';
+import { AppDispatch } from "@/reducer/store";
+import { setLoading } from "@/reducer/studentSlices/questionSlice";
 
 const {
     POST_QUESTION_API
 
 } = questionEndpoints;
 
-let token  = localStorage.getItem("token");
 
 interface QuestionFormData {
     branch: string;
@@ -18,7 +19,8 @@ interface QuestionFormData {
     questionLink: string;
 }
 
-export const addQuestion = (formData: QuestionFormData) => async (dispatch: any) => {
+export const addQuestion = (formData: QuestionFormData) => async (dispatch: AppDispatch) => {
+    dispatch(setLoading(true));
 
     try {
         const response = await apiConnector({
@@ -26,7 +28,7 @@ export const addQuestion = (formData: QuestionFormData) => async (dispatch: any)
             url: POST_QUESTION_API,
             bodyData: formData,
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${"token"}`,
             },
         });
 
@@ -39,10 +41,10 @@ export const addQuestion = (formData: QuestionFormData) => async (dispatch: any)
         }
 
     } catch (error) {
-        toast.error("Network Error, Try again later");
+        toast.error(`Network Error, Try again later ${error}`);
         //   dispatch(setError(error.response?.data.message || 'Signup failed')); // Handle the error message
     } finally {
-        // dispatch(setLoading(false));
+        dispatch(setLoading(false));
     }
 }
 

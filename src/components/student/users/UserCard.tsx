@@ -8,7 +8,7 @@ interface UserCardProps {
     id: string;
     profileImage: string | null;
     fullName: string;
-    passOutYear: number;
+    passOutYear: Date;
     selectedBranch: string;
     position: string;
     links: { type: string; url: string }[];
@@ -26,7 +26,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData }) => {
           className="w-full h-36 rounded-t-lg object-contain" 
         />
         <div className="passing-year absolute bottom-1 right-1 text-xs bg-black text-white px-2 rounded">
-          {userData.passOutYear}
+          {userData?.passOutYear}
         </div>
       </div>
 

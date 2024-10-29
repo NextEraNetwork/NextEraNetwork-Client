@@ -3,28 +3,26 @@ import React from 'react';
 import { ExperienceType } from '@/types/Experience';
 import { FaBuilding, FaMapMarkerAlt, FaBriefcase, FaLightbulb, FaThumbsUp, FaBookmark } from 'react-icons/fa';
 import { MdTipsAndUpdates } from 'react-icons/md';
-import Link from 'next/link';
 
-interface ExperienceCardProps {
-    experience: ExperienceType;
-}
 
-export default function ExperienceDetail ({
+export default function ExperienceDetail({
     params
 }: {
     params: { experienceId: string }
 }) {
 
-    const experience : ExperienceType ={
-            title: "Interview at Google",
-            experienceType: "Interview",
-            companyName: "Google",
-            position: "Software Engineer",
-            location: "Mountain View, CA",
-            content: "The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.",
-            keyTakeaways: "Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.",
-            tips: "Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions."
+    const experience: ExperienceType = {
+        title: "Interview at Google",
+        experienceType: "Interview",
+        companyName: "Google",
+        position: "Software Engineer",
+        location: "Mountain View, CA",
+        content: "The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.The interview process was rigorous, with five rounds focusing on data structures, algorithms, and system design. I learned the importance of clear communication and structuring my answers.",
+        keyTakeaways: "Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.",
+        tips: "Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions.Practice coding daily, understand system design basics, and be prepared for behavioral questions."
     }
+
+    console.log("params, ", params);
 
     const handleUpvote = () => {
         // Logic to handle upvote

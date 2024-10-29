@@ -7,7 +7,7 @@ import Pagination from "@/components/student/Questions/Pagination";
 
 const discussionTopicData = [
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file. hello",
         discussDescription: "Some description about ISO file.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 24,
@@ -15,7 +15,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 12,
@@ -23,7 +23,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileDiscussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file[...]",
         upvotes: 24,
@@ -31,7 +31,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition.Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 12,
@@ -39,7 +39,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file.Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 24,
@@ -47,7 +47,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition.Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 12,
@@ -55,7 +55,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file.Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 24,
@@ -63,7 +63,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition.Discussion about equal tree partition.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 12,
@@ -71,7 +71,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -79,7 +79,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -87,7 +87,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -95,7 +95,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -103,7 +103,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -111,7 +111,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage:" images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -119,7 +119,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -127,7 +127,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -135,7 +135,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -143,7 +143,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -151,7 +151,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -159,7 +159,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh "},
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -167,7 +167,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -175,7 +175,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -183,7 +183,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -191,7 +191,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -199,7 +199,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -207,7 +207,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,
@@ -215,7 +215,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user1", profileImage: images.jinesh },
+        userId: { username: "user1", profileImage: "images.jinesh" },
         discussTitle: "You may not find ISO file.",
         discussDescription: "Some description about ISO file. [...]",
         upvotes: 24,
@@ -223,7 +223,7 @@ const discussionTopicData = [
         createdAt: new Date().toISOString(),
     },
     {
-        userId: { username: "user2", profileImage: images.jinesh },
+        userId: { username: "user2", profileImage: "images.jinesh" },
         discussTitle: "Equal tree partition.",
         discussDescription: "Discussion about equal tree partition. [...]",
         upvotes: 12,

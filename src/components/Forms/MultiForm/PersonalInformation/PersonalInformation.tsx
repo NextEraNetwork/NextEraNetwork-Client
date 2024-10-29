@@ -10,11 +10,20 @@ interface PersonalInformationProps {
     handleChange: (newData: Partial<ProfileData>) => void;
 }
 
+interface State{
+    isoCode : string;
+    name:string;
+}
+
+interface District{
+    name: string;
+}
+
 const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, handleChange }) => {
 
     const [districts, setDistricts] = useState<{ value: string; label: string; }[]>([]);
     const statesData = State.getStatesOfCountry("IN");
-    const states = statesData.map((state :any)=>({
+    const states = statesData.map((state :State)=>({
         value:state.isoCode,
         label:state.name
     }));
@@ -22,7 +31,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
     useEffect(() => {
         if (formData.state) {
             const districtData = City.getCitiesOfState("IN", formData.state);
-            const districtOptions = districtData.map((district: any) => ({
+            const districtOptions = districtData.map((district: District) => ({
                 value: district.name,
                 label: district.name
             }));

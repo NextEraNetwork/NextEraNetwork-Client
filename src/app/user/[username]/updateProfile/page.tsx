@@ -6,7 +6,6 @@ import AchievementForm from '@/components/Forms/Student/ProfileForm/AchievementF
 import CertificationForm from '@/components/Forms/Student/ProfileForm/CertificationForm';
 import ProjectForm from '@/components/Forms/Student/ProfileForm/ProjectForm';
 import PersonalInformationForm from '@/components/Forms/Student/ProfileForm/PersonalInformationForm';
-import AdditionalInformationForm from '@/components/Forms/Student/ProfileForm/AdditionalInformationForm';
 import SkillForm from '@/components/Forms/Student/ProfileForm/SkillForm';
 import LinkForm from '@/components/Forms/Student/ProfileForm/LinkForm';
 import HobbiesForm from '@/components/Forms/Student/ProfileForm/HobbiesForm';

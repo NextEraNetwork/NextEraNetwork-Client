@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdOutlineDelete, MdCancel } from 'react-icons/md';
+import { MdCancel } from 'react-icons/md';
 
 interface SkillManagerProps {
     skills: string[];

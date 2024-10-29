@@ -14,6 +14,8 @@ interface EducationFormData {
   description: string | null;
 }
 
+type EducationFieldTypes = | string | boolean | number | null;
+
 const EducationForm = () => {
   const [educationList, setEducationList] = useState<EducationFormData[]>([
     {
@@ -29,7 +31,7 @@ const EducationForm = () => {
   ]);
 
   // Handle input change for a specific education entry
-  const handleInputChange = (index: number, field: keyof EducationFormData, value: any) => {
+  const handleInputChange = (index: number, field: keyof EducationFormData, value: EducationFieldTypes) => {
     const newList = [...educationList];
     newList[index] = {
       ...newList[index],

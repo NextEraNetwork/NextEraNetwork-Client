@@ -2,7 +2,7 @@
 import CreateUniversityForm from "@/components/Forms/SuperAdmin/CreateUniversityForm";
 import React from "react";
 
-const Users: React.FC = () => {
+export default function AdminForm(){
     return(
         <p>
             <CreateUniversityForm/>

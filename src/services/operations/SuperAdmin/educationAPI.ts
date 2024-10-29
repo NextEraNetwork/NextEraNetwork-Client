@@ -2,8 +2,8 @@ import { apiConnector } from "../../apiConnector";
 import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { superAdminEndpoints } from '../../api';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/reducer/store';
+import { AppDispatch } from "@/reducer/store";
+import { setLoading } from "@/reducer/studentSlices/allUserSlice";
 
 const {
     POST_UNIVERSITY_API
@@ -15,7 +15,9 @@ interface UniversityFormData {
     image: File | null;
   }
 
-export const createUniversity = (formData: UniversityFormData) => async (dispatch: any) => {
+export const createUniversity = (formData: UniversityFormData) => async (dispatch: AppDispatch) => {
+    dispatch(setLoading(true));
+
     try {
         const response = await apiConnector({
             method: 'POST',
@@ -33,9 +35,9 @@ export const createUniversity = (formData: UniversityFormData) => async (dispatc
         }
 
     } catch (error) {
-        toast.error("Network Error, Try again later");
+        toast.error(`Network Error, Try again later ${error}`);
         //   dispatch(setError(error.response?.data.message || 'Signup failed')); // Handle the error message
     } finally {
-        // dispatch(setLoading(false));
+        dispatch(setLoading(false));
     }
 }

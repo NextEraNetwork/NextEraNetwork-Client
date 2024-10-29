@@ -12,8 +12,8 @@ export const StudentHeader: React.FC = () => {
         <header className="flex justify-between items-center border-b  border-[#DBDBDB] p-2 md:px-8 bg-white">
             {/* Search bar */}
             <Link href={"/"} className="flex items-center w-full max-w-lg gap-2 rounded-lg px-4 py-2">
-                <Image src={images.ctaelogo} alt="ctae logo" className='w-10 h-10 md:w-20 md:h-20'/>
-                <h1 className='base lg:text-2xl md:font-extrabold text-black hidden md:block'>College of Technology and Engineering</h1>
+                <Image src={images.ctaelogo} alt="ctae logo" className='w-10 h-10 lg:w-15 lg:h-15'/>
+                <h1 className='base lg:text-xl md:font-extrabold text-black hidden md:block'>College of Technology and Engineering</h1>
             </Link>
 
             {/* Right-side container */}

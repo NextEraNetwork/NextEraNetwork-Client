@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { analyticsSharp, homeOutline, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline, chatbubbleOutline, bookOutline, briefcaseOutline, personOutline, bookmarkOutline } from "ionicons/icons";
+import {  homeOutline, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline, chatbubbleOutline, bookOutline, briefcaseOutline, personOutline } from "ionicons/icons";
 import { usePathname } from 'next/navigation';
 import { IonIcon } from '@ionic/react';
 import { MdDoubleArrow } from "react-icons/md";
@@ -17,12 +17,12 @@ interface MenuItem {
 
 export const CollegeSideBar: React.FC = () => {
     const [isToggle, setIsToggle] = useState<boolean>(true);
-    const [active, setActive] = useState<number>(0);
+    // const [active, setActive] = useState<number>(0);
     const pathname = usePathname();
 
-    const handleClick = (index: number) => {
-        setActive(index);
-    };
+    // const handleClick = (index: number) => {
+    //     setActive(index);
+    // };
 
     const collegecode = "ctae";
 
@@ -63,10 +63,7 @@ export const CollegeSideBar: React.FC = () => {
                         {Menus.map((menu, i) => (
                             <li className='link py-1' key={i}>
                                 <Link href={menu.path} >
-                                    <div
-                                        className={`flex gap-3 py-2 px-2 rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-gray-200 "}`}
-                                        onClick={() => handleClick(i)}
-                                    >
+                                    <div className={`flex gap-3 py-2 px-2 rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-gray-200 "}`}>
                                         <span className={`icon text-xl duration-500 flex items-center ${(pathname.startsWith(menu.path)) && ""}`}>
                                             <IonIcon icon={menu.icon} />
                                         </span>

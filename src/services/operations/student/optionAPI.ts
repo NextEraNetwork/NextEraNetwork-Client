@@ -12,6 +12,31 @@ const {
     GET_BRANCH_API
 } = superAdminEndpoints;
 
+interface University {
+    _id : string;
+    universityName: string;
+}
+
+interface College {
+    _id:string;
+    collegeName:string;
+}
+
+interface Department{
+    _id:string;
+    departmentName:string;
+}
+
+interface Course {
+    _id:string;
+    courseName:string;
+}
+
+interface Branch{
+    _id:string;
+    branchName:string;
+}
+
 export const fetchUniversities = () => async (dispatch: AppDispatch) => {
 
     try {
@@ -30,7 +55,7 @@ export const fetchUniversities = () => async (dispatch: AppDispatch) => {
             if (response.data.success && Array.isArray(response.data.data)) {
                 const universities = response.data.data;
                 // formatin according to options displayed
-                const formattedUniversities = universities.map((university: any) => ({
+                const formattedUniversities = universities.map((university: University) => ({
                     value: university._id,
                     label: university.universityName
                 }));
@@ -70,7 +95,7 @@ export const fetchColleges = (university_id: string) => async (dispatch: AppDisp
                 console.log("colleges", colleges);
 
                 if (colleges) {
-                    const formattedColleges = colleges.map((college: any) => ({
+                    const formattedColleges = colleges.map((college: College) => ({
                         value: college._id,
                         label: college.collegeName
                     }));
@@ -114,7 +139,7 @@ export const fetchDepartment = (university_id: string, college_id: string) => as
                 console.log("departments", departments);
 
                 if (departments) {
-                    const formattedDepartment = departments.map((department: any) => ({
+                    const formattedDepartment = departments.map((department: Department) => ({
                         value: department._id,
                         label: department.departmentName
                     }));
@@ -159,7 +184,7 @@ export const fetchCourses = (university_id: string, college_id: string, dept_id:
                 console.log("Courses", courses);
 
                 if (courses) {
-                    const formattedCourses = courses.map((course: any) => ({
+                    const formattedCourses = courses.map((course: Course) => ({
                         value: course._id,
                         label: course.courseName
                     }));
@@ -204,7 +229,7 @@ export const fetchBranches = (university_id: string, college_id: string, dept_id
                 console.log("branches", branches);
 
                 if (branches) {
-                    const formattedBranches = branches.map((branch: any) => ({
+                    const formattedBranches = branches.map((branch: Branch) => ({
                         value: branch._id,
                         label: branch.branchName
                     }));

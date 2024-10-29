@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 interface SelectDropdownProps {
   label: string;
-  value: string;
+  value: string | number;
   options: Array<{ value: string; label: string }>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

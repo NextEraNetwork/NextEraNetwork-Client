@@ -1,5 +1,5 @@
 // EducationalDetails.tsx
-import React, { SetStateAction, useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import SelectInput from '@/components/Forms/Inputs/SelectInput';
 import InputText from '@/components/Forms/Inputs/InputText';
 import { ProfileData } from '@/types/MultiForm';
@@ -13,27 +13,6 @@ interface EducationalDetailsProps {
     handleChange: (newData: Partial<ProfileData>) => void;
 }
 
-const courses = {
-    cse: [
-        { value: 'btech', label: 'B.Tech' },
-        { value: 'mtech', label: 'M.Tech' },
-    ],
-    ece: [
-        { value: 'btech', label: 'B.Tech' },
-        { value: 'mtech', label: 'M.Tech' },
-    ],
-};
-
-const branches = {
-    btech: [
-        { value: 'btech', label: 'B.Tech' },
-        { value: 'mtech', label: 'M.Tech' },
-    ],
-    mtech: [
-        { value: 'btech', label: 'B.Tech' },
-        { value: 'mtech', label: 'M.Tech' },
-    ]
-}
 
 const EducationalDetails: React.FC<EducationalDetailsProps> = ({ formData, handleChange }) => {
     const dispatch = useDispatch<AppDispatch>();

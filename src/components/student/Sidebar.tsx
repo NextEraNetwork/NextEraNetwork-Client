@@ -14,30 +14,25 @@ interface MenuItem {
 
 // Menu items
 const Menus: MenuItem[] = [
-    { name: "Home", icon: homeOutline, path: "/" },
-    { name: "News", icon: newspaperOutline, path: "/news" },
-    { name: "Events", icon: calendarClearOutline, path: "/events" },
-    { name: "My Network", icon: personOutline, path: "/users" },
-    { name: "Gallery", icon: imageOutline, path: "/gallery" },
-    { name: "Questions", icon: bookOutline, path: "/questions" },
-    { name: "Discuss", icon: chatbubbleOutline, path: "/discussions" },
-    { name: "Opportunities", icon: briefcaseOutline, path: "/opportunities" },
-    { name: "Expericences", icon: chatboxEllipsesOutline, path: "/experiences" },
-    { name: "Saved", icon: bookmarkOutline, path: "/saves" },
+    { name: "Home", icon: homeOutline, path: "/dashboard" },
+    { name: "News", icon: newspaperOutline, path: "/dashboard/news" },
+    { name: "Events", icon: calendarClearOutline, path: "/dashboard/events" },
+    { name: "My Network", icon: personOutline, path: "/dashboard/users" },
+    { name: "Gallery", icon: imageOutline, path: "/dashboard/gallery" },
+    { name: "Questions", icon: bookOutline, path: "/dashboard/questions" },
+    { name: "Discuss", icon: chatbubbleOutline, path: "/dashboard/discussions" },
+    { name: "Opportunities", icon: briefcaseOutline, path: "/dashboard/opportunities" },
+    { name: "Expericences", icon: chatboxEllipsesOutline, path: "/dashboard/experiences" },
+    { name: "Saved", icon: bookmarkOutline, path: "/dashboard/saves" },
     // { name: "Community", icon: thumbsUpOutline, path: "/Community" },
-    { name: "Placement Statistics", icon: analyticsSharp, path: "/placementStats" },
+    { name: "Placement Statistics", icon: analyticsSharp, path: "/dashboard/placementStats" },
 
 ];
 
 
 export const SideBar: React.FC = () => {
     const [isToggle, setIsToggle] = useState<boolean>(true);
-    const [active, setActive] = useState<number>(0);
     const pathname = usePathname();
-
-    const handleClick = (index: number) => {
-        setActive(index);
-    };
 
     return (
         <nav className=''>
@@ -60,14 +55,11 @@ export const SideBar: React.FC = () => {
                         {Menus.map((menu, i) => (
                             <li className='link py-1' key={i}>
                                 <Link href={menu.path} >
-                                    <div
-                                        className={`flex gap-3 py-2 px-2 dark:text-black rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-gray-200 "}`}
-                                        onClick={() => handleClick(i)}
-                                    >
-                                        <span className={`icon text-xl duration-500 flex items-center ${(pathname.startsWith(menu.path)) && ""}`}>
+                                    <div className={`flex gap-3 py-2 px-2 dark:text-black rounded-lg duration-500 ${pathname === menu.path && "text-grey bg-[#2A9DAF] "}`}>
+                                        <span className={`icon text-xl duration-500 flex items-center ${(pathname === menu.path) && "text-white"}`}>
                                             <IonIcon icon={menu.icon} />
                                         </span>
-                                        <span className={` whitespace-nowrap text-base font-sans  duration-500 ${!isToggle ? "hidden" : ""} ${(pathname === menu.path) && "dark:text-black duration-700"}`}>
+                                        <span className={` whitespace-nowrap text-base font-sans  duration-500 ${!isToggle ? "hidden" : ""} ${(pathname === menu.path) && "dark:text-black text-white duration-700"}`}>
                                             {menu.name}
                                         </span>
                                     </div>

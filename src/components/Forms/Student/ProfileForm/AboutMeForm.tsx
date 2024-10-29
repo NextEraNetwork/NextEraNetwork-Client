@@ -1,10 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import InputText from '../../Inputs/InputText';
-import SelectInput from '../../Inputs/SelectInput';
 import InputTextArea from '../../Inputs/InputTextArea';
-import SkillManager from '../../MultiForm/AdditionalInformation/SkillManager';
-import LinkInput from '../../MultiForm/AdditionalInformation/LinkInput';
 
 interface FormData {
   about?: string;
@@ -13,7 +9,6 @@ interface FormData {
 
 const AboutMeForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    
     about: '',
   });
 

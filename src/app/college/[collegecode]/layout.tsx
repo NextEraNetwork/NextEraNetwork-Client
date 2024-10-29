@@ -1,20 +1,18 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { SideBar } from '@/components/student/Sidebar';
+import React, { useEffect, useRef } from 'react';
 import { StudentHeader } from '@/components/student/StudentHeader';
-import { useRouter } from 'next/router';
 import { CollegeSideBar } from '@/components/College/CollegeSideBar';
 
 const CollegeLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState<number>(0);
+  // const [headerHeight, setHeaderHeight] = useState<number>(0);
   // const router = useRouter();
   // const { collegecode } = router.query;
 
   useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
+    // if (headerRef.current) {
+    //   setHeaderHeight(headerRef.current.offsetHeight);
+    // }
   }, [headerRef]);
 
   return (

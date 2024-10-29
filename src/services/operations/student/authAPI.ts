@@ -3,8 +3,9 @@ import { apiConnector } from "../../apiConnector";
 import { clearToken, setLoading, setToken } from "@/reducer/studentSlices/authSlice";
 import { authEndpoints, } from "../../api";
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie'; 
-import { getCookies } from '@/utils/getCookies';
+import { AppDispatch } from '@/reducer/store';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { NextRequest } from "next/server";
 
 const {
     SIGNUP_API,
@@ -22,15 +23,6 @@ interface SignupData {
     confirmPassword: string;
 }
 
-interface LoginData {
-    username: string,
-    password: string
-}
-
-interface SendOTPData {
-    email: string;
-}
-
 // interface ResetPassword {
 //     password: string,
 //     confirmPassword: string,
@@ -38,7 +30,7 @@ interface SendOTPData {
 //     setEmailSent: Dispatch<SetStateAction<boolean>>
 // }
 
-export const sendOtp = (email: string ) => async (dispatch: any) => {
+export const sendOtp = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
@@ -48,12 +40,11 @@ export const sendOtp = (email: string ) => async (dispatch: any) => {
             bodyData: email
         });
 
-        if(response.status === 200)
-        {
+        if (response.status === 200) {
             toast.success(`OTP successfully sent on ${email}.`)
             return true;
         }
-        else{
+        else {
             toast.error(`Failed to send OTP. Please try again.`)
             return false;
         }
@@ -65,7 +56,7 @@ export const sendOtp = (email: string ) => async (dispatch: any) => {
     }
 }
 
-export const signupUser = (signupData: SignupData) => async (dispatch: any) => {
+export const signupUser = (signupData: SignupData) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
     console.log("signupUser", signupUser);
 
@@ -78,13 +69,14 @@ export const signupUser = (signupData: SignupData) => async (dispatch: any) => {
 
         dispatch(setToken(response.data.token));                // Assuming the token is returned in the response
     } catch (error) {
+        console.log("error", error)
         //   dispatch(setError(error.response?.data.message || 'Signup failed')); // Handle the error message
     } finally {
         dispatch(setLoading(false));
     }
 };
 
-export const loginUser = (loginData: string, router:any) => async (dispatch: any) => {
+export const loginUser = (loginData: string, router: AppRouterInstance) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
@@ -93,24 +85,29 @@ export const loginUser = (loginData: string, router:any) => async (dispatch: any
             url: LOGIN_API,
             bodyData: loginData,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded', 
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
         });
 
         console.log("login response", response);
-        
 
-        if(response.data.ok === true){
-            const token = getCookies();
 
-            console.log("token from login", token);
-            // dispatch(setToken(token));
-            toast.success("Login Successfully.");
+        if (response.data.ok === true) {
+            const token = document.cookie;
 
-            await new Promise(resolve => setTimeout(resolve, 100)); // Optional delay
-            // router.push("/");
+            console.log("token after login", token);
+
+            if (token) {
+                dispatch(setToken(token));
+                toast.success("Login Successfully.");
+                await new Promise(resolve => setTimeout(resolve, 100));
+                router.push("/");
+            }
+            else {
+                throw new Error("Token decoding failed");
+            }
         }
-        else{
+        else {
             toast.error("Login credential error");
         }
     }
@@ -121,7 +118,7 @@ export const loginUser = (loginData: string, router:any) => async (dispatch: any
     }
 }
 
-export const logoutUser = (token: string) => async (dispatch: any) => {
+export const logoutUser = (token: string) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
@@ -132,6 +129,8 @@ export const logoutUser = (token: string) => async (dispatch: any) => {
                 Authorization: `Bearer ${token}`,  // Send token in the Authorization header
             },
         })
+
+        console.log("response", response);
 
         dispatch(clearToken());
     }
@@ -147,7 +146,7 @@ export const resetPasswordUser = (
     password: string,
     confirmPassword: string,
     token: string,
-) => async (dispatch: any) => {
+) => async (dispatch: AppDispatch) => {
 
     dispatch(setLoading(true));
 
@@ -176,7 +175,7 @@ export const resetPasswordUser = (
     }
 }
 
-export const passwordResetTokenUser = (email: string, token: string, setEmailSent: Dispatch<SetStateAction<boolean>>) => async (dispatch: any) => {
+export const passwordResetTokenUser = (email: string, token: string, setEmailSent: Dispatch<SetStateAction<boolean>>) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
     try {
         const response = await apiConnector({

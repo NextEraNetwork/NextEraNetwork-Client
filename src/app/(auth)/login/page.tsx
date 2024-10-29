@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
         console.log('Profile submitted:', urlEncodedData.toString());
 
         // Dispatch action with URL-encoded data
-        
+
         dispatch(loginUser(urlEncodedData.toString(), router));
     };
     return (
@@ -90,7 +90,7 @@ const LoginPage: React.FC = () => {
 
                     <div className="mt-4 text-center">
                         <p className="text-sm text-gray-600">
-                            Don't have an account? &nbsp;
+                            Don&apos;t have an account? &nbsp;
                             <Link href="/signup" className="text-blue-500 hover:underline">
                                 Sign Up
                             </Link>

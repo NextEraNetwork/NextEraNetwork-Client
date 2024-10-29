@@ -82,7 +82,7 @@ const UserFilterSection: React.FC<FilterSectionProps> = ({
         />
         <SelectDropdown
           label="Pass Out Year"
-          value={"passOutYear"}
+          value={passOutYear}
           options={passOutYearOptions}
           onChange={handlePassOutyearChange}
         />

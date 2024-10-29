@@ -4,19 +4,27 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { ProfileData } from "@/types/MultiForm";
 import { setLoading } from "@/reducer/studentSlices/profileSlice";
+import { profileUpdateEndpoints } from "@/services/api";
+import { AppDispatch } from "@/reducer/store";
+import Cookies from 'js-cookie';
 
 const {
     PUT_PROFILE_API,
-    UPDATE_PROFILE_API,
-    UPDATE_PROFILE_PICTURE_API
 } = profileEndpoints;
 
+const{
+    UPDATE_PROFILE_PICTURE_API
+} = profileUpdateEndpoints;
 
 
-export const createProfileUser = (formData: ProfileData) => async (dispatch: any) => {
+
+export const createProfileUser = (formData: ProfileData) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
     console.log("Profile data in createProfileUser ", formData)
-    let token ="hello"
+
+    const token = Cookies.get('refresh_token');
+    console.log("toke for profile", token);
+
     try {
         console.log("profile data", formData);
         const response = await apiConnector({
@@ -24,7 +32,7 @@ export const createProfileUser = (formData: ProfileData) => async (dispatch: any
             url: PUT_PROFILE_API,
             bodyData: formData,
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${"token"}`,
             },
         })
 
@@ -41,8 +49,11 @@ export const createProfileUser = (formData: ProfileData) => async (dispatch: any
     }
 }
 
-export const updateProfilePicture = (imageFile : File, token : string) =>async(dispatch:any)=>{
+export const updateProfilePicture = (imageFile : File, token : string) =>async(dispatch:AppDispatch)=>{
     dispatch(setLoading(true));
+
+    const token = Cookies.get('access_token');
+    console.log("toke for profile", token);
 
     try{
         const response = await apiConnector({

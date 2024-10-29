@@ -25,7 +25,7 @@ interface NavLink {
 // Nav links array
 const navLinks: NavLink[] = [
     { _id: 1, label: 'Features', path: "#features" },
-    { _id: 2, label: 'Pricing', path: '#services' },
+    { _id: 2, label: 'Pricing', path: '#pricing' },
     { _id: 3, label: 'Customers', path: "#customers" },
     { _id: 5, label: '', path: '#contact' },
 ];
@@ -94,11 +94,11 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <header className={`sticky top-0 flex items-center bg-white dark:bg-gray-950 shadow-md text-black p-4 transition-all duration-500 z-[997] ${isMobileMenuOpen ? 'shadow-md' : ''}`}>
+        <header className={`sticky top-0 flex items-center bg-white dark:bg-gray-950 shadow-md text-black px-4 p-2 transition-all duration-500 z-[997]  ${isMobileMenuOpen ? 'shadow-md' : ''}`}>
             <div className="container lg:mx-20 flex items-center justify-between relative">
                 <div className='flex items-center justify-between w-full'>
                     <Link href="/" className="flex items-center gap-2">
-                        <div className="h-8 lg:h-14"><Image src={images?.garudblack} alt='logo' className='h-full w-full' /></div>
+                        <div className="h-8 lg:h-12"><Image src={images?.garudblack} alt='logo' className='h-full w-full' /></div>
                         <div className="text-2xl">NextEraNetwork</div>
                     </Link>
                 </div>

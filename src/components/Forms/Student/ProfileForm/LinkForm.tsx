@@ -1,9 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import InputText from '../../Inputs/InputText';
-import SelectInput from '../../Inputs/SelectInput';
-import InputTextArea from '../../Inputs/InputTextArea';
-import SkillManager from '../../MultiForm/AdditionalInformation/SkillManager';
 import LinkInput from '../../MultiForm/AdditionalInformation/LinkInput';
 
 interface FormData {
@@ -24,10 +20,6 @@ const LinkForm: React.FC = () => {
       facebook: '',
     },
   });
-
-  const handleChange = (field: Partial<FormData>) => {
-    setFormData((prevData) => ({ ...prevData, ...field }));
-  };
 
   const handleLinkChange = (platform: keyof FormData['links']) => (value: string) => {
     setFormData((prevData) => ({

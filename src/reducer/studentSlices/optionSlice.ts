@@ -1,6 +1,5 @@
 // universitySlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 interface OptionType {
     value: string;

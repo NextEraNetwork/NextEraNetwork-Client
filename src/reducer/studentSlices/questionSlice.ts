@@ -13,7 +13,7 @@ interface QuestionData {
 interface QuestionState {
     questionList: QuestionData[],
     questionDetail: QuestionData,
-    loading: Boolean
+    loading: boolean
 }
 
 const initialState: QuestionState = {

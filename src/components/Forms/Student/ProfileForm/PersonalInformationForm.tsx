@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import InputText from '../../Inputs/InputText';
 import SelectInput from '../../Inputs/SelectInput';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/reducer/store';
-import { Country, State, City } from 'country-state-city';
+// import { useDispatch } from 'react-redux';
+// import { AppDispatch } from '@/reducer/store';
+import { State, City } from 'country-state-city';
 
 interface FormData {
     firstName: string;
@@ -16,6 +16,15 @@ interface FormData {
     district: string;
     profession: string;
     position: string;
+}
+
+interface State{
+    isoCode:string;
+    name: string;
+}
+
+interface District{
+    name:string;
 }
 
 const PersonalInformationForm: React.FC = () => {
@@ -34,7 +43,7 @@ const PersonalInformationForm: React.FC = () => {
 
     const statesData = State.getStatesOfCountry("IN");
 
-    const states = statesData.map((state :any)=>({
+    const states = statesData.map((state : State)=>({
         value:state.isoCode,
         label:state.name
     }));
@@ -42,7 +51,7 @@ const PersonalInformationForm: React.FC = () => {
     useEffect(() => {
         if (formData.state) {
             const districtData = City.getCitiesOfState("IN", formData.state);
-            const districtOptions = districtData.map((district: any) => ({
+            const districtOptions = districtData.map((district: District) => ({
                 value: district.name,
                 label: district.name
             }));
@@ -52,10 +61,10 @@ const PersonalInformationForm: React.FC = () => {
         }
     }, [formData.state]);
 
-    const dispatch = useDispatch<AppDispatch>();
+    // const dispatch = useDispatch<AppDispatch>();
 
     // useEffect(() => {
-    //     dispatch(fetchState());
+    //     dispatch();
     // }, []);
 
     const handleChange = (field: Partial<FormData>) => {

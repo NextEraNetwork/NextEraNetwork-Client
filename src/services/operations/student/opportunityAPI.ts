@@ -2,14 +2,14 @@ import { apiConnector } from "../../apiConnector";
 import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { opportunityEndpoints } from '../../api';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/reducer/store';
+import { AppDispatch} from '@/reducer/store';
+import { setLoading } from "@/reducer/studentSlices/opportunitySlice";
 const {
     POST_OPPORTUNITY_API
 
 } = opportunityEndpoints;
 
-let token = localStorage.getItem("token");
+// let token = localStorage.getItem("token");
 
 interface OpportunityFormData {
     profile: string;
@@ -22,15 +22,15 @@ interface OpportunityFormData {
     applicationDeadline: string;
 }
 
-export const addOpportunity = (formData: OpportunityFormData) => async (dispatch: any) => {
-
+export const addOpportunity = (formData: OpportunityFormData) => async (dispatch: AppDispatch) => {
+    dispatch(setLoading(true));
     try {
         const response = await apiConnector({
             method: 'POST',
             url: POST_OPPORTUNITY_API,
             bodyData: formData,
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${"token"}`,
             },
         });
 
@@ -42,9 +42,10 @@ export const addOpportunity = (formData: OpportunityFormData) => async (dispatch
 
     } catch (error) {
         toast.error("Network Error, Try again later");
+        console.log("error", error);
         //   dispatch(setError(error.response?.data.message || 'Signup failed')); // Handle the error message
     } finally {
-        // dispatch(setLoading(false));
+        dispatch(setLoading(false));
     }
 }
 

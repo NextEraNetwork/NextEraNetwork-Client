@@ -15,6 +15,8 @@ interface ExperienceFormData {
     continuing: boolean; // Whether the job is ongoing
 }
 
+type ExperienceFormFieldType = | string | boolean| null;
+
 const ExperienceForm = () => {
     const [experienceList, setExperienceList] = useState<ExperienceFormData[]>([
         {
@@ -30,7 +32,7 @@ const ExperienceForm = () => {
     ]);
 
     // Handle input change for a specific experience entry
-    const handleInputChange = (index: number, field: keyof ExperienceFormData, value: any) => {
+    const handleInputChange = (index: number, field: keyof ExperienceFormData, value: ExperienceFormFieldType) => {
         const newList = [...experienceList];
         newList[index] = {
             ...newList[index],
@@ -39,16 +41,17 @@ const ExperienceForm = () => {
         setExperienceList(newList);
     };
 
-    const handleTextEditorChange = (index: number, field: string, value: string) => {
-        const newList = [...experienceList];
-        newList[index] = {
-            ...newList[index],
-            [field]: value,
-        }
-        setExperienceList(newList);
-    };
+    // const handleTextEditorChange = (index: number, field: string, value: string) => {
+    //     const newList = [...experienceList];
+    //     newList[index] = {
+    //         ...newList[index],
+    //         [field]: value,
+    //     }
+    //     setExperienceList(newList);
+    // };
 
     // Add a new experience entry
+    
     const handleAddEntry = () => {
         setExperienceList([
             ...experienceList,

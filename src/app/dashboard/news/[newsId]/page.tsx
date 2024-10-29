@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NewsDetail({
     params
@@ -18,6 +19,8 @@ export default function NewsDetail({
         pdf: "https://example.com/sample.pdf", // Optional PDF link
         tags: ["Campus", "Initiative"],
     };
+
+    console.log("params", params)
 
     return (
         <div className="container mx-auto p-6">
@@ -43,7 +46,7 @@ export default function NewsDetail({
 
             {newsData.image && (
                 <div className="mb-4">
-                    <img src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
+                    <Image src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
                 </div>
             )}
             <p className="text-gray-700 mb-4">{newsData.content}</p>

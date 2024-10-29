@@ -19,6 +19,8 @@ export default function MyProfile({
 }) {
 
 
+    console.log("params", params);
+
     return (
         <>
             <ProfileHeader />

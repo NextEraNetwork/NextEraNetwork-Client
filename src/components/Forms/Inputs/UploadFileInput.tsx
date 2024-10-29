@@ -1,4 +1,5 @@
 // UploadFileInput.tsx
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 interface UploadFileInputProps {
@@ -51,7 +52,7 @@ const UploadFileInput: React.FC<UploadFileInputProps> = ({ label, onFileChange }
       {preview && (
         <div className="mt-4">
           {fileType?.startsWith("image/") ? (
-            <img src={preview} alt="Preview" className="w-full max-w-xs h-auto rounded" />
+            <Image src={preview} alt="Preview" className="w-full max-w-xs h-auto rounded" />
           ) : (
             <iframe
               src={preview}

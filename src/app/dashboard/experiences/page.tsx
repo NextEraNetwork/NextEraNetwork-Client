@@ -58,41 +58,53 @@ const dummyexperiences: ExperienceType[] = [
 ]
     ;
 
-const ExperiencePage: React.FC = () => {
-    const [experiences, setExperiences] = useState<ExperienceType[]>(dummyexperiences);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [page, setPage] = useState<number>(1);
-    const [hasMore, setHasMore] = useState<boolean>(false);
-
-    const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-        const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
-        if (bottom && hasMore && !loading) {
-            setPage(prev => prev + 1);
-        }
-    };
-
-    return (
-        <div className="flex h-full flex-col">
-            <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl font-bold">Experiences</h1>
-                <Link
-                    href ='/experiences/addExperiences'
-                    className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+    const ExperiencePage: React.FC = () => {
+        const [experiences, setExperiences] = useState<ExperienceType[]>(dummyexperiences);
+        const [loading, setLoading] = useState<boolean>(false);
+        // const [page, setPage] = useState<number>(1);
+        const [hasMore, setHasMore] = useState<boolean>(true); // Initialize to true to allow loading more experiences
+    
+        const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+            const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
+            if (bottom && hasMore && !loading) {
+                loadMoreExperiences();
+            }
+        };
+    
+        const loadMoreExperiences = async () => {
+            setLoading(true);
+            // Simulate fetching data
+            setTimeout(() => {
+                // For demonstration, add more dummy experiences or fetch new data
+                const newExperiences: ExperienceType[] = [] // Fetch or generate new experiences based on the current page
+                setExperiences(prev => [...prev, ...newExperiences]);
+                setLoading(false);
+                setHasMore(newExperiences.length > 0); // Set to false if no more experiences
+            }, 1000);
+        };
+    
+        return (
+            <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between mb-4">
+                    <h1 className="text-2xl font-bold">Experiences</h1>
+                    <Link
+                        href='/experiences/addExperiences'
+                        className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+                    >
+                        <FaPlus className="mr-2" />
+                        Add Experience
+                    </Link>
+                </div>
+                <div
+                    className="flex-grow overflow-y-auto"
+                    onScroll={handleScroll}
+                    style={{ maxHeight: 'calc(100vh - 100px)' }}
                 >
-                    <FaPlus className="mr-2" />
-                    Add Experience
-                </Link>
+                    <ExperienceList experiences={experiences} />
+                    {loading && <p className="text-center">Loading more experiences...</p>}
+                </div>
             </div>
-            <div
-                className="flex-grow overflow-y-auto"
-                onScroll={handleScroll}
-                style={{ maxHeight: 'calc(100vh - 100px)' }}
-            >
-                <ExperienceList experiences={experiences} />
-                {loading && <p className="text-center">Loading more experiences...</p>}
-            </div>
-        </div>
-    );
-};
-
-export default ExperiencePage;
+        );
+    };
+    
+    export default ExperiencePage;

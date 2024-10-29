@@ -2,11 +2,12 @@
 import React from 'react';
 import Testimonials from './Testimonials';
 import Feature from './Features';
+import Pricing from './Pricing';
 
 const LandingPage: React.FC = () => {
     return (
         <div>
-            <header className="flex flex-col items-center justify-center h-screen bg-teal-500 text-white">
+            <section className="flex flex-col items-center justify-center h-screen bg-gradient-to-br  from-teal-400 to-blue-800 text-white">
                 <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
                     Unlock Your Potential with Our Alumni Platform
                 </h1>
@@ -18,7 +19,7 @@ const LandingPage: React.FC = () => {
                 >
                     Request Demo
                 </button>
-            </header>
+            </section>
 
             <Feature/>
             {/*  Choose Us Section */}
@@ -38,7 +39,7 @@ const LandingPage: React.FC = () => {
                         <div className="p-6 border rounded-lg shadow-md hover:shadow-lg transition duration-300">
                             <h3 className="text-2xl font-semibold mb-4">Fully Customizable</h3>
                             <p className="text-gray-700">
-                                Tailor the platform to meet your specific needs and branding, ensuring it reflects your institution's identity and values.
+                                Tailor the platform to meet your specific needs and branding, ensuring it reflects your institution&apos;s identity and values.
                             </p>
                         </div>
                         <div className="p-6 border rounded-lg shadow-md hover:shadow-lg transition duration-300">
@@ -50,14 +51,13 @@ const LandingPage: React.FC = () => {
                     </div>
                 </div>
             </section>
-
-
-
+            
+            <Pricing/>
             {/* Testimonials Section */}
             <Testimonials/>
 
             {/* Call to Action */}
-            <footer className="py-20 bg-blue-600 text-white text-center">
+            <footer className="py-20 bg-cyan-600 text-white text-center">
                 <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
                 <p className="mb-6">Join a community that empowers and supports you!</p>
                 <a

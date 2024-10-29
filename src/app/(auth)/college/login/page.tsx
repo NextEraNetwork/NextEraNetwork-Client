@@ -1,11 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import Link from 'next/link';
 import InputText from '@/components/Forms/Inputs/InputText';
 import { RootState } from '@/reducer/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '@/reducer/store';
-import { loginUser } from '@/services/operations/student/authAPI';
+import { useSelector } from 'react-redux';
 import PreLoader from '@/components/PreLoader';
 
 interface LoginData {
@@ -19,7 +16,7 @@ const LoginPage: React.FC = () => {
         password: "",
     });
     const loading = useSelector((state:RootState)=> state.auth.loading)
-    const dispatch = useDispatch<AppDispatch>();
+    // const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (newData: Partial<LoginData>) => {
         setFormData((prev) => ({ ...prev, ...newData }));

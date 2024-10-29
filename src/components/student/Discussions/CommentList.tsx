@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { arrowUndoOutline, chatboxEllipsesOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import { formatTimeAgo } from '@/app/lib/utils';
-import { images } from '@/utils/images';
 import Image from 'next/image';
 
 // Define types for user and comment
@@ -37,13 +36,13 @@ interface CommentListProps {
 const commentsData: Comment[] = [
     {
         _id: "1",
-        userId: { username: "garima", profileImage: images.jinesh },
+        userId: { username: "garima", profileImage: "images.jinesh" },
         body: "Find well balanced valid string input = (fdfsdf(dfgdf(hjk)) op = (dfgdf(hjk))...",
         commentedAt: "2023-10-22T12:00:00Z",
         replies: [
             {
                 _id: "1-1",
-                userId: { username: "user1", profileImage: images.jinesh },
+                userId: { username: "user1", profileImage: "images.jinesh" },
                 body: "This is a nested reply.",
                 commentedAt: "2023-10-22T13:00:00Z"
             }
@@ -51,13 +50,13 @@ const commentsData: Comment[] = [
     },
     {
         _id: "1",
-        userId: { username: "garima", profileImage: images.jinesh },
+        userId: { username: "garima", profileImage: "images.jinesh" },
         body: "Find well balanced valid string input = (fdfsdf(dfgdf(hjk)) op = (dfgdf(hjk))...",
         commentedAt: "2023-10-22T12:00:00Z",
         replies: [
             {
                 _id: "1-1",
-                userId: { username: "user1", profileImage: images.jinesh },
+                userId: { username: "user1", profileImage: "images.jinesh" },
                 body: "This is a nested reply.",
                 commentedAt: "2023-10-22T13:00:00Z"
             }
@@ -65,13 +64,13 @@ const commentsData: Comment[] = [
     },
     {
         _id: "1",
-        userId: { username: "garima", profileImage: images.jinesh },
+        userId: { username: "garima", profileImage: "images.jinesh" },
         body: "Find well balanced valid string input = (fdfsdf(dfgdf(hjk)) op = (dfgdf(hjk))...",
         commentedAt: "2023-10-22T12:00:00Z",
         replies: [
             {
                 _id: "1-1",
-                userId: { username: "user1", profileImage: images.jinesh },
+                userId: { username: "user1", profileImage: "images.jinesh" },
                 body: "This is a nested reply.",
                 commentedAt: "2023-10-22T13:00:00Z"
             }
@@ -84,6 +83,8 @@ export const CommentList: React.FC<CommentListProps> = ({ discussionId }) => {
     const [formValue, setFormValue] = useState<{ commentDescription: string; nestedComment: string }>({ commentDescription: "", nestedComment: "" });
     const [showReplyInput, setShowReplyInput] = useState<string | null>(null);
     const [showReplies, setShowReplies] = useState<Set<string>>(new Set());
+
+    console.log("discussionID", discussionId);
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormValue({ ...formValue, [event.target.name]: event.target.value });
