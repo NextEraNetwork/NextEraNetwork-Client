@@ -24,7 +24,7 @@ export const userEndpoints = {
 
 export const profileEndpoints = {
 
-    PUT_PROFILE_API: `${BASE_URL}/user/create-profile`,
+    PUT_PROFILE_API: `${BASE_URL}/college/profile/create`,
     GET_PROFILE_API: `${BASE_URL}/user/username`,
 } as const;
 

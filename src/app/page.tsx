@@ -82,7 +82,7 @@ import { useAuth } from '@/context/AuthProvider';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 
-export default async function Home() {
+export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
 

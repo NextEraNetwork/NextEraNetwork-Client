@@ -22,18 +22,17 @@ export const createProfileUser = (formData: ProfileData) => async (dispatch: App
     dispatch(setLoading(true));
     console.log("Profile data in createProfileUser ", formData)
 
-    const token = Cookies.get('refresh_token');
-    console.log("toke for profile", token);
 
     try {
         console.log("profile data", formData);
         const response = await apiConnector({
-            method: 'PUT',
+            method: 'POST',
             url: PUT_PROFILE_API,
             bodyData: formData,
             headers: {
-                Authorization: `Bearer ${"token"}`,
+                'Content-Type': 'application/json',
             },
+            withCredentials : true
         })
 
         if (response.status === 200) {

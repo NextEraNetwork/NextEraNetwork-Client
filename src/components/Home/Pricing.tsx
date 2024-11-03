@@ -12,7 +12,7 @@ const Pricing: React.FC = () => {
         Choose a subscription that fits your needs and start building connections with an extensive alumni network!
       </p>
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-8 lg:mx-5">
         {/** Basic Plan */}
         <div className="bg-white rounded-lg shadow-lg p-8 w-80 transform transition-all hover:scale-105 hover:shadow-2xl">
           <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Basic Plan</h3>

@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import StoreProvider from "./StoreProvider";
 import { Inter } from 'next/font/google';
-// import { cookies } from 'next/headers'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,10 +34,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  // const cookieStore = await cookies()
-  // const theme = cookieStore.get('refresh_token')
-  // console.log("theme", theme);
 
   return (
     <html lang="en">

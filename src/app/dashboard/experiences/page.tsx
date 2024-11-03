@@ -96,7 +96,7 @@ const dummyexperiences: ExperienceType[] = [
                     </Link>
                 </div>
                 <div
-                    className="flex-grow overflow-y-auto"
+                    className="flex-grow overflow-y-auto scrollbar"
                     onScroll={handleScroll}
                     style={{ maxHeight: 'calc(100vh - 100px)' }}
                 >

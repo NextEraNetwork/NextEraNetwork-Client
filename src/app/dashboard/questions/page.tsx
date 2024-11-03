@@ -63,7 +63,7 @@ export default async function Questions({
                 </Link>
             </div>
             <div
-                className="flex-grow overflow-y-auto"
+                className="flex-grow overflow-y-auto scrollbar"
             >
                 <QuestionsTable questions={currentQuestions} />
                 <div className="mt-5 flex w-full justify-center">

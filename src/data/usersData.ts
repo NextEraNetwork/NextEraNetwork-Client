@@ -1,12 +1,11 @@
 // data/usersData.ts
-import { images } from "@/utils/images";
 
 const usersData = [
     {
         id: '1',
         fullName: 'Garima Ahari',
         username: 'garimaghari',
-        profileImage: images.jinesh,
+        profileImage: "https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg",
         passOutYear: 2020,
         selectedBranch: 'DA',
         position: 'Data Engineer',
@@ -20,7 +19,7 @@ const usersData = [
         id: '2',
         fullName: 'Kishan Bhatti',
         username: 'kishanbhatti',
-        profileImage: images.jinesh,
+        profileImage: "https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg",
         passOutYear: 2021,
         selectedBranch: 'DA',
         position: 'Student',
@@ -34,7 +33,7 @@ const usersData = [
         id: '3',
         fullName: 'Bhoop Singh',
         username: 'bhoopsingh',
-        profileImage: images.jinesh,
+        profileImage: 'https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg',
         passOutYear: 2020,
         selectedBranch: 'CSE',
         position: 'Student',
@@ -48,7 +47,7 @@ const usersData = [
         id: '4',
         fullName: 'Laksh Raj',
         username: 'lakshraj',
-        profileImage: images.jinesh,
+        profileImage: "https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg",
         passOutYear: 2022,
         selectedBranch: 'EE',
         position: 'Student',
@@ -62,7 +61,7 @@ const usersData = [
         id: '5',
         fullName: 'Jinesh Prajapat',
         username: 'jineshprajapat',
-        profileImage: images.jinesh,
+        profileImage: "https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg",
         passOutYear: 2018,
         selectedBranch: 'DA',
         position: 'Student',
@@ -76,7 +75,7 @@ const usersData = [
         id: '6',
         fullName: 'Yuvraj Singh',
         username: 'yuvrajsingh',
-        profileImage: images.jinesh,
+        profileImage: "https://res.cloudinary.com/dqvkis3qg/image/upload/v1718623320/CollegeChat/WhatsApp_Image_2024-06-17_at_16.50.59_73e0fcf4_onrti1.jpg",
         passOutYear: 2020,
         selectedBranch: 'CSE',
         position: 'Student',

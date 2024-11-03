@@ -8,11 +8,11 @@ export function middleware(request: NextRequest) {
   const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail';
   
   // Define protected paths using startsWith
-  const isProtectedPath = path.startsWith('/dashboard') || path.startsWith('/college'); 
+  const isProtectedPath = path === '/dashboard' || path === '/college'; 
 
   const token = request.cookies.get('refresh_token')?.value || ''; 
 
-  console.log("token in middleware", token);
+  console.log("token in middleware", token, path);
 
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL('/dashboard', request.nextUrl));

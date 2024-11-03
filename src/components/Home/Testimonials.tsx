@@ -80,8 +80,8 @@ const Testimonials: React.FC = () => {
                 <h2 className="text-4xl font-bold mb-10">What Our Users Say</h2>
                 <div
                     ref={containerRef}
-                    className="flex overflow-x-auto scroll-smooth space-x-6 pb-4"
-                    style={{ scrollBehavior: 'smooth' }}
+                    className="flex overflow-x-auto scroll-smooth space-x-6 pb-4 scrollbar"
+                    // style={{ scrollBehavior: 'smooth' }}
                 >
                     {testimonials.map((testimonial, index) => (
                         <div

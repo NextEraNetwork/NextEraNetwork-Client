@@ -23,9 +23,10 @@ type Params =
 interface ApiConnectorProps {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS'; // Added OPTIONS to the type
   url: string;
-  bodyData?: BodyData; // You can define a more specific type if needed
-  headers?: Record<string, string>; // For headers
-  params?: Params; // For query parameters
+  bodyData?: BodyData; 
+  headers?: Record<string, string>; 
+  params?: Params; 
+  withCredentials?: boolean;
 }
 
 // Define the API connector function
@@ -35,6 +36,7 @@ export const apiConnector = async ({
   bodyData = null,
   headers = {},
   params = {},
+  withCredentials = false
 }: ApiConnectorProps): Promise<AxiosResponse<any>> => {
   try {
     // Default to GET if method is OPTIONS
@@ -46,6 +48,7 @@ export const apiConnector = async ({
       data: bodyData,
       headers,
       params,
+      withCredentials
     });
 
     return response;

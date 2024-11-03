@@ -40,7 +40,7 @@ export const SideBar: React.FC = () => {
             <div className='flex items-center justify-between p-4 py-4 border-b border-[#DBDBDB]'>
                 <div className='flex flex-row gap-2 items-center'>
 
-                    <span className={`text-xl md:text-xl h-6 font-semibold duration-500 ${!isToggle ? "hidden" : ""}`}>Wrap It</span>
+                    <span className={`text-xl md:text-xl h-6 font-semibold duration-500 ${!isToggle ? "hidden" : ""}`}>NextEraNetwork</span>
                 </div>
                 <div className='flex items-center w-7 h-5' onClick={() => setIsToggle(!isToggle)}>
                     <MdDoubleArrow className={`w-full h-full cursor-pointer duration-300 ${isToggle ? "rotate-180" : ""}`} />

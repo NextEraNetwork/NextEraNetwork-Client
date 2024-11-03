@@ -1,7 +1,6 @@
 // components/NewsCard.tsx
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 interface NewsCardProps {
     title: string;
@@ -15,7 +14,7 @@ interface NewsCardProps {
 const NewsCard: React.FC<NewsCardProps> = ({ title, content, createdAt, image, tags, id }) => {
     return (
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            {image && <Image src={image} alt={title} className="w-full h-48 lg:h-64 object-cover" />}
+            {image && <img src={image} alt={title} className="w-full h-48 lg:h-64 object-cover" />}
             <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{title}</h2>
                 <p className="text-gray-600 mb-4 line-clamp-4 overflow-hidden">{content}</p>
@@ -33,7 +32,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, content, createdAt, image, t
                         </div>
                     )}
                 </div>
-                <Link href={`/news/${id}`} className="mt-4 inline-block text-blue-500 font-semibold hover:underline">
+                <Link href={`/dashboard/news/${id}`} className="mt-4 inline-block text-blue-500 font-semibold hover:underline">
                     Read More
                 </Link>
             </div>

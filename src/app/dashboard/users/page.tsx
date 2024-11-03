@@ -7,7 +7,7 @@ import UserCard from "@/components/student/users/UserCard";
 const Users: React.FC = () => {
     const [selectedName, setSelectedName] = useState<string>("");
     const [branch, setBranch] = useState("All");
-    const [passOutYear, setPassOutYear] = useState(new Date()); // Default to current date
+    const [passOutYear, setPassOutYear] = useState<number>(0); // Default to current date
     const [profession, setProfession] = useState("All");
     const [position, setPosition] = useState("All");
 
@@ -20,7 +20,7 @@ const Users: React.FC = () => {
     };
 
     const handlePassOutYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setPassOutYear(new Date(e.target.value)); // Adjust based on your requirements
+        setPassOutYear(Number(e.target.value)); 
     };
 
     const handleProfessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +33,7 @@ const Users: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-2">All Users</h1>
+            <h1 className="text-base text-center md:text-2xl font-bold md:mb-2">All Users</h1>
 
             {/* Filter Section */}
             <UserFilterSection
@@ -50,7 +50,7 @@ const Users: React.FC = () => {
             />
 
              {/* Display filtered users here */}
-            <div className="user-cards flex flex-wrap justify-center gap-4">
+            <div className="user-cards grid grid-cols-2 md:flex md:flex-wrap justify-center gap-2 md:gap-4">
                 {usersData.map(user => (
                     <UserCard key={user.id} userData={user} />
                 ))}

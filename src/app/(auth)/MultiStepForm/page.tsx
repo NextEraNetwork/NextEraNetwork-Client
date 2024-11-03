@@ -16,6 +16,7 @@ const ProfileCreationGuide: React.FC = () => {
         firstName: '',
         lastName: '',
         middleName: '',
+        abcID : '',
         gender: 'Male',
         category: 'gen',
         profession: '',
@@ -93,8 +94,10 @@ const ProfileCreationGuide: React.FC = () => {
         setCurrentStep((prev) => Math.max(prev - 1, 0));
     };
 
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         console.log('Profile submitted:', formData);
         dispatch(createProfileUser(formData));
     }

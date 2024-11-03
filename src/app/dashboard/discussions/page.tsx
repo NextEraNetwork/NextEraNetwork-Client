@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from "react";
 import DiscussionFilterSection from "@/components/student/Discussions/DiscussionFilterSection";
 import DiscussionList from "@/components/student/Discussions/DiscussionList";
-import { images } from "@/utils/images";
 import Pagination from "@/components/student/Questions/Pagination";
 
 const discussionTopicData = [
     {
         userId: { username: "user1", profileImage: "images.jinesh" },
-        discussTitle: "You may not find ISO file. hello",
+        discussTitle: "You may not find ISO file.  You may not find ISO file. helloYou may not find ISO file. helloYou may not find ISO file. helloYou may not find ISO file. hello",
         discussDescription: "Some description about ISO file.Some description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO fileSome description about ISO file [...]",
         upvotes: 24,
         views: 305,
@@ -243,7 +242,7 @@ const Discuss: React.FC = ({
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredTopics, setFilteredTopics] = useState(discussionTopicData);
 
-    const filterOptions = ["Hot", "Newest to Oldest", "Most Votes", "Interview"];
+    const filterOptions = ["Hot", "Newest to Oldest", "Most Votes"];
 
     useEffect(() => {
         // setIsLoading(false);
@@ -285,7 +284,7 @@ const Discuss: React.FC = ({
 
     return (
         <div className="flex h-full">
-            <div className="flex flex-col bg-white rounded-lg shadow-md p-6 w-full h-full">
+            <div className="flex flex-col bg-white rounded-lg shadow-md md:p-6 w-full h-full">
                 {/* Header */}
                 <DiscussionFilterSection
                     filterOptions={filterOptions}
@@ -295,7 +294,7 @@ const Discuss: React.FC = ({
                 />
 
                 {/* Discussion List */}
-                <div className="flex-grow overflow-auto">
+                <div className="flex-grow overflow-auto scrollbar">
                     <DiscussionList discussions={currentDiscussions} />
                 </div>
 

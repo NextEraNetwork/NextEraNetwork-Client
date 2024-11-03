@@ -39,7 +39,7 @@ const StudentDashBoard: React.FC = () => {
       <div className="grid gap-6 lg:grid-cols-2">
         <section className="mb-8">
           <h2 className="text-xl font-bold mb-2">Recent Activities</h2>
-          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto">
+          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto scrollbar">
             {dummyData.recentActivities.map(activity => (
               <li key={activity.id} className="border-b last:border-b-0 py-2 text-gray-800 hover:bg-gray-100 transition-colors">
                 {activity.user} {activity.action}
@@ -50,7 +50,7 @@ const StudentDashBoard: React.FC = () => {
 
         <section className="mb-8">
           <h2 className="text-xl font-bold mb-2">Upcoming Events</h2>
-          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto">
+          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto scrollbar">
             {dummyData.events.map(event => (
               <li key={event.id} className="border-b last:border-b-0 py-2 text-gray-800 hover:bg-gray-100 transition-colors">
                 {event.title} - <span className="text-gray-500">{event.date}</span> at {event.location}
@@ -61,7 +61,7 @@ const StudentDashBoard: React.FC = () => {
 
         <section className="mb-8 lg:col-span-2">
           <h2 className="text-xl font-bold mb-2">Job Opportunities</h2>
-          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto">
+          <ul className="bg-white shadow-md rounded-lg p-4 max-h-60 overflow-y-auto scrollbar">
             {dummyData.jobOpportunities.map(job => (
               <li key={job.id} className="border-b last:border-b-0 py-2 text-gray-800 hover:bg-gray-100 transition-colors">
                 {job.title} at <span className="text-gray-500">{job.company}</span> - <span className="italic">{job.location}</span>

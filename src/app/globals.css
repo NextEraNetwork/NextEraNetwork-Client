@@ -25,3 +25,16 @@ body {
     text-wrap: balance;
   }
 }
+
+.scrollbar::-webkit-scrollbar{
+  width: 5px;
+}
+.scrollbar::-webkit-scrollbar-track{
+  @apply bg-slate-100 
+}
+.scrollbar::-webkit-scrollbar-thumb{
+  @apply bg-slate-300 rounded-full
+}
+.scrollbar::-webkit-scrollbar-thumb:hover{
+  @apply bg-slate-500 rounded-full
+}

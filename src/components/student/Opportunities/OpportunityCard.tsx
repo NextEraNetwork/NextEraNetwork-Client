@@ -38,7 +38,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
             </div>
 
             <Link
-                href={`/opportunities/${opportunity.opportunityID}`}
+                href={`/dashboard/opportunities/${opportunity.id}`}
                 className="mt-4 inline-block bg-blue-600 text-white text-center font-semibold py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-500"
                 rel="noopener noreferrer"
             >

@@ -116,7 +116,7 @@ const News: React.FC = () => {
     const [newsItems, setNewsItems] = useState<NewsItem[]>(newsData);
     // const [loading, setLoading] = useState(false);
 
-    setNewsItems(newsData);
+    // setNewsItems(newsData);
 
     // useEffect(() => {
     //     const fetchNews = async () => {

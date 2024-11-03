@@ -5,7 +5,6 @@ import { authEndpoints, } from "../../api";
 import { toast } from 'react-toastify';
 import { AppDispatch } from '@/reducer/store';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { NextRequest } from "next/server";
 
 const {
     SIGNUP_API,
@@ -86,26 +85,16 @@ export const loginUser = (loginData: string, router: AppRouterInstance) => async
             bodyData: loginData,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-            }
+            },
         });
 
         console.log("login response", response);
 
 
         if (response.data.ok === true) {
-            const token = document.cookie;
 
-            console.log("token after login", token);
-
-            if (token) {
-                dispatch(setToken(token));
-                toast.success("Login Successfully.");
-                await new Promise(resolve => setTimeout(resolve, 100));
-                router.push("/");
-            }
-            else {
-                throw new Error("Token decoding failed");
-            }
+            toast.success("Login Successfully.");
+            router.push("/");
         }
         else {
             toast.error("Login credential error");

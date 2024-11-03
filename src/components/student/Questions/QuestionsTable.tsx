@@ -45,7 +45,7 @@ const QuestionsTable: React.FC<QuestionsTableProps> = ({ questions }) => {
               >
                 <td className="py-2 px-4 border-b">{question.questionNo}</td>
                 <td className="py-2 px-4 border-b">{question.branch}</td>
-                <td className="py-2 px-4 border-b">{question.description}</td>
+                <td className="py-2 px-4 border-b overflow-hidden line-clamp-3">{question.description}</td>
                 <td className="py-2 px-4 border-b">{question.difficulty}</td>
                 <td className="py-2 px-4 border-b">{question.company}</td>
                 <td className="py-2 px-4 border-b">{question.year}</td>

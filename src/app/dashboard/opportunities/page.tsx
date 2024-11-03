@@ -198,7 +198,7 @@ const OpportunitiesPage: React.FC = () => {
                     profile: "Product Manager",
                     company: "Tech Innovations Ltd.",
                     branch: "Business",
-                    description: "Join our team to drive innovative product development and strategy.",
+                    description: "Join our team to drive innovative product development and strategy. Join our team to drive innovative product development and strategy Join our team to drive innovative product development and strategy",
                     positionType: "Full-Time",
                     yearOfExperience: 3,
                     opportunityLink: "https://example.com/apply4",
@@ -219,17 +219,17 @@ const OpportunitiesPage: React.FC = () => {
     return (
         <div className="flex h-full flex-col">
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl font-bold">Internship Opportunities</h1>
+                <h1 className="text-sm md:text-2xl font-bold">Internship Opportunities</h1>
                 <Link
                     href='/opportunities/addOpportunities'
                     className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
                 >
-                    <FaPlus className="mr-2" />
-                    Add Opportunity
+                    <FaPlus className="mr-2 text-xs" />
+                    <span className='text-xs md:text-base'>Add Opportunity</span>
                 </Link>
             </div>
             <div
-                className="flex-grow overflow-y-auto"
+                className="flex-grow overflow-y-auto scrollbar"
                 onScroll={handleScroll}
                 style={{ maxHeight: 'calc(100vh - 100px)' }}
             >

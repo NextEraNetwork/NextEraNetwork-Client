@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { arrowUndoOutline, chatboxEllipsesOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import { formatTimeAgo } from '@/app/lib/utils';
-import Image from 'next/image';
 
 // Define types for user and comment
 interface User {
@@ -103,15 +102,15 @@ export const CommentList: React.FC<CommentListProps> = ({ discussionId }) => {
     };
 
     return (
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full  flex justify-center items-center ">
             <div className="w-[99%] max-w-full sm:w-full">
-                <div className="bg-white max-h-full  overflow-hidden overflow-y-auto w-full p-8 rounded-lg relative">
+                <div className="bg-white max-h-full  overflow-hidden overflow-y-auto w-full p-1 md:p-8 rounded-lg relative">
                     <div className="w-full">
                         <div className="absolute top-5 right-8 cursor-pointer sm:top-2 sm:right-2">
                             {/* Close button here */}
                         </div>
 
-                        <div className="text-left text-lg font-semibold mb-4 p-2 border-y-2 border-gray-300">
+                        <div className="text-left text-sm md:text-lg font-semibold mb-4 p-2 border-y-2 border-gray-300">
                             {`Comments: ${commentsData.length ? commentsData.length : "NA"}`}
                         </div>
 
@@ -174,12 +173,12 @@ const CommentItem: React.FC<CommentItemProps> = ({
         <div className="mb-4">
             <div className="flex items-center gap-4">
                 <Link href={`/${comment.userId.username}`}>
-                    <Image src={comment.userId.profileImage} alt={comment.userId.username} className="rounded-full w-8 h-8" />
+                    <img src={comment.userId.profileImage} alt={comment.userId.username} className="rounded-full w-8 h-8" />
                 </Link>
                 <div className="flex flex-col">
                     <span className="text-sm text-gray-700">{comment.userId.username}</span>
                     <span className="text-xs text-gray-500">{formatTimeAgo(comment.commentedAt)}</span>
-                    <p className="text-base">{comment.body}</p>
+                    <p className="text-sm md:text-base">{comment.body}</p>
                 </div>
             </div>
 
@@ -197,7 +196,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
             </div>
 
             {showReplyInput === comment._id && (
-                <form className="px-4 mt-2 flex gap-2 items-center" onSubmit={(e) => { e.preventDefault(); /* Handle nested comment */ }}>
+                <form className="  md:px-4 mt-2 flex gap-2 items-center" onSubmit={(e) => { e.preventDefault(); /* Handle nested comment */ }}>
                     <textarea
                         id="nestedComment"
                         name="nestedComment"
@@ -207,7 +206,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
                         className="w-full rounded-lg p-2 border border-gray-500 focus:outline-slate-300 focus:border-blue-500"
                         required
                     />
-                    <button className="bg-blue-500 text-white font-semibold rounded-lg mt-2 hover:bg-blue-600 transition duration-300">
+                    <button className="bg-blue-500 p-2 text-white font-semibold rounded-lg mt-2 hover:bg-blue-600 transition duration-300">
                         Post
                     </button>
                 </form>

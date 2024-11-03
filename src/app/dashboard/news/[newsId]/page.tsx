@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function NewsDetail({
     params
@@ -24,7 +23,7 @@ export default function NewsDetail({
 
     return (
         <div className="container mx-auto p-6">
-            <Link href="/news" className="flex items-center text-gray-600 hover:text-blue-600 mb-4">
+            <Link href="/dashboard/news" className="flex items-center text-gray-600 hover:text-blue-600 mb-4">
                 <FaArrowLeft className="mr-2" />
                 Back to News
             </Link>
@@ -45,8 +44,8 @@ export default function NewsDetail({
             </div>
 
             {newsData.image && (
-                <div className="mb-4">
-                    <Image src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
+                <div className="mb-4 flex items-center justify-center">
+                    <img src={newsData.image} alt={newsData.title} width={800} height={400} className="rounded-lg" />
                 </div>
             )}
             <p className="text-gray-700 mb-4">{newsData.content}</p>

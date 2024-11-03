@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
-import { SideBar } from '@/components/student/Sidebar';
 import { StudentHeader } from '@/components/student/StudentHeader';
+import NavBar from '@/components/student/Navbar';
 
 const StudentLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -23,9 +23,10 @@ const StudentLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Main Content */}
       <aside className="flex flex-row flex-grow overflow-hidden">
         <div className={`max-w-64 bg-white border-r text-black border-[#DBDBDB]`}>
-          <SideBar />
+          {/* <SideBar /> */}
+          <NavBar/>
         </div>
-        <main className="flex-grow px-8 pt-8 overflow-y-auto bg-slate-50 text-black">
+        <main className="flex-grow p-1 pb-8 md:pb-0 md:p-2 overflow-y-auto bg-slate-100 text-black">
           {children}
         </main>
       </aside>
