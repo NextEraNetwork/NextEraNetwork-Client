@@ -44,14 +44,18 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => (
                 <h4 className="font-semibold text-gray-700 flex items-center">
                     <FaLightbulb className="text-yellow-500 mr-2" /> Experience
                 </h4>
-                <p className="mt-2 text-gray-600">{experience.content}</p>
+                <p className="mt-2 text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: experience.content }}
+                ></p>
             </div>
 
             <div>
                 <h4 className="font-semibold text-gray-700 flex items-center">
                     <FaLightbulb className="text-indigo-500 mr-2" /> Key Takeaways
                 </h4>
-                <p className="mt-2 text-gray-600">{experience.keyTakeaways}</p>
+                <p className="mt-2 text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: experience.keyTakeaways }}
+                ></p>
             </div>
         </div>
 
@@ -60,7 +64,10 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => (
                 <h4 className="font-semibold text-gray-700 flex items-center">
                     <MdTipsAndUpdates className="text-green-500 mr-2" /> Tips & Advice
                 </h4>
-                <p className="mt-2 text-gray-600">{experience.tips}</p>
+                <p className="mt-2 text-gray-600"
+                    dangerouslySetInnerHTML={{ __html: experience.tips }}>
+
+                </p>
             </div>
         )}
 

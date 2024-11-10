@@ -1,25 +1,26 @@
 'use client';
 import React, { useState } from 'react';
 
-interface Question {
-  questionNo: number;
+interface QuestionData {
+  _id: string,
+  profile_id: string;
   branch: string;
-  description: string;
-  link: string;
   difficulty: string;
-  company: string;
-  year: number;
+  description: string;
+  companyName: string;
+  questionTitle: string;
+  questionLink: string;
 }
 
 interface QuestionsTableProps {
-  questions: Question[];
+  questions: QuestionData[];
 }
 
 const QuestionsTable: React.FC<QuestionsTableProps> = ({ questions }) => {
-  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
+  const [selectedQuestion, setSelectedQuestion] = useState<QuestionData | null>(null);
 
-  const handleRowClick = (question: Question) => {
-    setSelectedQuestion(selectedQuestion?.questionNo === question.questionNo ? null : question);
+  const handleRowClick = (question: QuestionData) => {
+    setSelectedQuestion(selectedQuestion?._id === question._id ? null : question);
   };
 
 
@@ -33,31 +34,40 @@ const QuestionsTable: React.FC<QuestionsTableProps> = ({ questions }) => {
             <th className="py-2 px-4 border-b">Description</th>
             <th className="py-2 px-4 border-b">Difficulty</th>
             <th className="py-2 px-4 border-b">Company</th>
-            <th className="py-2 px-4 border-b">Year</th>
           </tr>
         </thead>
         <tbody>
           {questions.map((question) => (
-            <React.Fragment key={question.questionNo}>
+            <React.Fragment key={question._id}>
               <tr
                 className="hover:bg-gray-100 cursor-pointer"
                 onClick={() => handleRowClick(question)}
               >
-                <td className="py-2 px-4 border-b">{question.questionNo}</td>
+                <td className="py-2 px-4 border-b">{question._id.split('-')[1]}</td>
                 <td className="py-2 px-4 border-b">{question.branch}</td>
-                <td className="py-2 px-4 border-b overflow-hidden line-clamp-3">{question.description}</td>
+                {/* Use dangerouslySetInnerHTML for description */}
+                <td
+                  className="py-2 px-4 border-b overflow-hidden line-clamp-3"
+                  dangerouslySetInnerHTML={{ __html: question.description }}
+                />
                 <td className="py-2 px-4 border-b">{question.difficulty}</td>
-                <td className="py-2 px-4 border-b">{question.company}</td>
-                <td className="py-2 px-4 border-b">{question.year}</td>
+                <td className="py-2 px-4 border-b">{question.companyName}</td>
               </tr>
-              {selectedQuestion?.questionNo === question.questionNo && (
+              {selectedQuestion?._id === question._id && (
                 <tr>
                   <td colSpan={6} className="py-2 px-4 border-b bg-gray-50">
                     <div>
-                      <p><strong>Details:</strong> {question.description}</p>
-                      {question.link && (
+                      <strong>Details:</strong>
+                      {/* Again, use dangerouslySetInnerHTML for description */}
+                      <p dangerouslySetInnerHTML={{ __html: question.description }} />
+                      {question.questionLink && (
                         <p>
-                          <a href={question.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                          <a
+                            href={question.questionLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline"
+                          >
                             View Question
                           </a>
                         </p>

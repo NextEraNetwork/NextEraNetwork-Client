@@ -1,12 +1,12 @@
 export interface Opportunity {
-    id: string; 
-    profile: string;       // Assuming you have a profile reference
+    _id: string;
+    profile_id: string;
+    profile: string;
     company: string;
     branch: string;
     positionType: string;
-    yearOfExperience: number;
-    opportunityLink: string;
+    applicationLink: string
+    experience: number;
     applicationDeadline: string;
-    createdAt: string;
-    description: string;   // New field for the opportunity description
+    description: string;
 }

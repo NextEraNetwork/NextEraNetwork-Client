@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import InputText from '../Inputs/InputText'; // Assuming InputText component is in the same directory
 import { useDispatch } from 'react-redux';

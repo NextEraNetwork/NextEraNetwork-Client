@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DiscussionData {
-    id: string;
+    _id: string;
+    profile_id:string;
     title: string;
     branch: string;
     description: string;
+    created_at:string
 }
 
 interface DiscussionState{
@@ -16,17 +18,21 @@ interface DiscussionState{
 
 const initialState : DiscussionState ={
     discussionDetail :{
-        id:"",
+        _id:"",
+        profile_id:"",
         title:"",
         branch:"",
-        description:""
+        description:"",
+        created_at:""
     } ,
     discussionList:[
         {
-            id:"",
+            _id:"",
+            profile_id:"",
             title:"",
             branch:"",
-            description:""
+            description:"",
+            created_at:""
         } 
     ],
     loading:false

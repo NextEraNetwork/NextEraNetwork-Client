@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { formatTimeAgo } from "@/app/lib/utils";
 import { bookmarkOutline, arrowUpCircle } from "ionicons/icons";
 import { FaEye } from "react-icons/fa";
-import CommentList from "@/components/student/Discussions/CommentList";
 import { useRouter } from 'next/navigation'
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
+import { title } from "process";
 
 interface User {
     username: string;
@@ -13,12 +15,12 @@ interface User {
 
 interface Discussion {
     _id: string;
-    discussTitle: string;
-    discussDescription: string;
-    createdAt: string;
-    userId: User;
-    upvotes: string[];
-    views: number;
+    profile_id: string;
+    title: string;
+    branch: string;
+    description: string;
+    created_at: string
+
 }
 
 export default function DiscussionTopicDetail({
@@ -27,23 +29,11 @@ export default function DiscussionTopicDetail({
     params: { discussionTitle: string }
 }) {
 
-    const [discussionTopic] = useState<Discussion>({
-        _id: "1",
-        discussTitle: "Understanding React Context API",
-        discussDescription: "<p>This is a detailed description about the context API in React This is a detailed description about the context API in React...</p>",
-        createdAt: new Date().toISOString(),
-        userId: {
-            username: "Jinesh Prajapat",
-            profileImage: "https://via.placeholder.com/150"
-        },
-        upvotes: ["user1", "user2"],
-        views: 300,
-    });
-
+    const discussionList = useSelector((state: RootState) => state.discussion.discussionList);
+    const discussionTopic : Discussion | undefined = discussionList.find((disussion) => disussion._id === params.discussionTitle)
     const [bookmarkState, setBookmarkState] = useState(false);
     const router = useRouter();
 
-    console.log("params", params);
 
     const handleUpvoteClick = () => {
         console.log("Upvoted!");
@@ -83,7 +73,7 @@ export default function DiscussionTopicDetail({
                     {/* right part profile, title description */}
                     <div className="flex-1 ">
                         <div className="flex items-center justify-between border-b pb-2">
-                            <h2 className='text-sm md:text-lg font-semibold'>{discussionTopic.discussTitle} discussionTopic discussTitl ediscussionT opic. discussTitle </h2>
+                            <h2 className='text-sm md:text-lg font-semibold'>{discussionTopic?.title}</h2>
                             <span
                                 className=' bg-slate-200 font-bold p-2 rounded-md hover:bg-slate-500 hover:text-white text-xs cursor-pointer'
                                 onClick={() => router.back()}
@@ -94,26 +84,30 @@ export default function DiscussionTopicDetail({
 
                         {/* user and discussion time  */}
                         <div className='flex items-center gap-3 pt-2'>
-                            <img src={discussionTopic.userId.profileImage} alt={discussionTopic.userId.username} className="w-8 h-8 rounded-full" />
+                            <img src={`https://api.dicebear.com/5.x/initials/svg?seed=${discussionTopic?.title}`} alt={""} className="w-8 h-8 rounded-full" />
                             <div className="flex flex-col md:flex-row items-start md:gap-3">
-                                <div className="font-medium text-xs md:text-sm">{discussionTopic.userId.username}</div>
+                                <div className="font-medium text-xs md:text-sm">{"Anonymous user"}</div>
                                 <div className="flex flex-row gap-1">
-                                    <div className="text-xs text-gray-400">{formatTimeAgo(discussionTopic.createdAt)}</div>
+                                    <div className="text-xs text-gray-400">{formatTimeAgo(discussionTopic?.created_at as string)}</div>
                                     <div className="flex items-center gap-1 text-xs text-gray-400">
                                         <FaEye className="flex items-center"></FaEye>
-                                        <div>{discussionTopic.views}</div>
+                                        <div>
+                                            {/* {discussionTopic.views} */}
+                                            </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* description */}
-                        <div className='mt-4 text-left text-base text-gray-800' dangerouslySetInnerHTML={{ __html: discussionTopic.discussDescription }} />
+                        <div className='mt-4 text-left text-base text-gray-800' 
+                        dangerouslySetInnerHTML={{ __html: discussionTopic?.description as string }}
+                        />
                     </div>
                 </div>
 
                 {/* Comment List Component */}
-                <CommentList discussionId={discussionTopic._id} />
+                {/* <CommentList discussionId={discussionTopic._id} /> */}
             </div>
         </div>
     )

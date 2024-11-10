@@ -65,7 +65,7 @@ const ExperiencePage: React.FC = () => {
     const experienceList = useSelector((state: RootState) => state.experience.experienceList);
     const dispatch = useDispatch<AppDispatch>();
 
-    const [experiences, setExperiences] = useState<ExperienceType[]>(dummyexperiences);
+    const [experiences, setExperiences] = useState<ExperienceType[]>(experienceList);
     const [loading, setLoading] = useState<boolean>(false);
     // const [page, setPage] = useState<number>(1);
     const [hasMore, setHasMore] = useState<boolean>(true); // Initialize to true to allow loading more experiences
@@ -77,24 +77,6 @@ const ExperiencePage: React.FC = () => {
 
     console.log("experienceList", experienceList);
 
-    const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-        const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
-        if (bottom && hasMore && !loading) {
-            loadMoreExperiences();
-        }
-    };
-
-    const loadMoreExperiences = async () => {
-        setLoading(true);
-        // Simulate fetching data
-        setTimeout(() => {
-            // For demonstration, add more dummy experiences or fetch new data
-            const newExperiences: ExperienceType[] = [] // Fetch or generate new experiences based on the current page
-            setExperiences(prev => [...prev, ...newExperiences]);
-            setLoading(false);
-            setHasMore(newExperiences.length > 0); // Set to false if no more experiences
-        }, 1000);
-    };
 
     return (
         <div className="flex h-full flex-col">
@@ -110,10 +92,9 @@ const ExperiencePage: React.FC = () => {
             </div>
             <div
                 className="flex-grow overflow-y-auto scrollbar"
-                onScroll={handleScroll}
                 style={{ maxHeight: 'calc(100vh - 100px)' }}
             >
-                <ExperienceList experiences={experiences} />
+                <ExperienceList experiences={experienceList} />
                 {loading && <p className="text-center">Loading more experiences...</p>}
             </div>
         </div>

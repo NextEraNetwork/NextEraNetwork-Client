@@ -63,6 +63,7 @@ export const getOpportunity = () => async (dispatch: AppDispatch) => {
         if (response.status === 200) {
             // toast.success("Question added successfully");
             dispatch(setOpportunityList(response.data.data));
+            
         }
 
     } catch (error) {

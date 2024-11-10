@@ -8,10 +8,11 @@ interface OpportunityListProps {
 }
 
 const OpportunityList: React.FC<OpportunityListProps> = ({ opportunities }) => {
+    console.log("opportunity list", opportunities);
     return (
         <div className="space-y-4">
-            {opportunities.map(opportunity => (
-                <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+            {opportunities?.map(opportunity => (
+                <OpportunityCard key={opportunity._id} opportunity={opportunity} />
             ))}
         </div>
     );

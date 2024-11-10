@@ -22,23 +22,26 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
             </p>
             <p className="text-gray-600 mt-1 flex items-center">
                 <MdAccessTime className="text-orange-500 mr-1" />
-                Experience: <span className="font-semibold">{opportunity.yearOfExperience} years</span>
+                Experience: <span className="font-semibold">{opportunity.experience} years</span>
             </p>
 
             {/* Description Section */}
-            <p className="text-gray-600 mt-4 bg-gray-50 p-3 rounded-md">{opportunity.description}</p>
+            <p
+                className="text-gray-600 mt-4 bg-gray-50 p-3 rounded-md "
+                dangerouslySetInnerHTML={{ __html: opportunity.description }}
+            ></p>
 
             <div className="flex items-center mt-4">
                 <FaCalendarAlt className="text-gray-500 mr-2" />
                 <span className="text-gray-600">Application Deadline: <span className="font-semibold">{new Date(opportunity.applicationDeadline).toLocaleDateString()}</span></span>
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
                 <FaCalendarAlt className="text-gray-500 mr-2" />
-                <span className="text-gray-600">Posted on: <span className="font-semibold">{new Date(opportunity.createdAt).toLocaleDateString()}</span></span>
-            </div>
+                <span className="text-gray-600">Posted on: <span className="font-semibold">{new Date(opportunity.).toLocaleDateString()}</span></span>
+            </div> */}
 
             <Link
-                href={`/dashboard/opportunities/${opportunity.id}`}
+                href={`/dashboard/opportunities/${opportunity._id}`}
                 className="mt-4 inline-block bg-blue-600 text-white text-center font-semibold py-2 px-4 rounded transition-colors duration-200 hover:bg-blue-500"
                 rel="noopener noreferrer"
             >

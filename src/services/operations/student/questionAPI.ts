@@ -56,7 +56,7 @@ export const getQuestion = () => async (dispatch: AppDispatch) => {
             withCredentials:true
         });
 
-        console.log("question reponse", response.data.data[0])
+        console.log("question reponse", response.data.data)
         if (response.status === 200) {
             // toast.success("Question added successfully");
             dispatch(setQuestionList(response.data.data));

@@ -6,7 +6,7 @@ interface InputTextProps {
     onChange?: (value: string) => void;
     placeholder?: string;
     required?: boolean;
-    type?:string;
+    type?: string;
     readOnly?: boolean;
 }
 
@@ -14,7 +14,7 @@ const InputText: React.FC<InputTextProps> = ({ type, label, value, onChange, pla
     return (
         <div className="mb-6">
             <label className="block mb-2 text-sm font-medium text-gray-700">
-                {label} {required && <span className="text-red-500">*</span>} 
+                {label} {required && <span className="text-red-500">*</span>}
             </label>
             <input
                 type={type || "text"}

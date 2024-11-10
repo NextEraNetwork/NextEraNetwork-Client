@@ -9,115 +9,115 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/reducer/store';
 import { getOpportunity } from '@/services/operations/student/opportunityAPI';
 
-const dummyOpportunities: Opportunity[] = [
-    {
-        id: "1",
-        profile: "Software Developer",
-        company: "Tech Solutions Inc.",
-        branch: "Computer Science",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Full-Time",
-        yearOfExperience: 2,
-        opportunityLink: "https://example.com/apply1",
-        applicationDeadline: "2024-12-31",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "2",
-        profile: "Data Analyst",
-        company: "Data Insights LLC",
-        branch: "Information Technology",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Internship",
-        yearOfExperience: 0,
-        opportunityLink: "https://example.com/apply2",
-        applicationDeadline: "2024-11-15",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "3",
-        profile: "UI/UX Designer",
-        company: "Creative Agency",
-        branch: "Design",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Part-Time",
-        yearOfExperience: 1,
-        opportunityLink: "https://example.com/apply3",
-        applicationDeadline: "2024-10-30",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "1",
-        profile: "Software Developer",
-        company: "Tech Solutions Inc.",
-        branch: "Computer Science",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Full-Time",
-        yearOfExperience: 2,
-        opportunityLink: "https://example.com/apply1",
-        applicationDeadline: "2024-12-31",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "2",
-        profile: "Data Analyst",
-        company: "Data Insights LLC",
-        branch: "Information Technology",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Internship",
-        yearOfExperience: 0,
-        opportunityLink: "https://example.com/apply2",
-        applicationDeadline: "2024-11-15",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "3",
-        profile: "UI/UX Designer",
-        company: "Creative Agency",
-        branch: "Design",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Part-Time",
-        yearOfExperience: 1,
-        opportunityLink: "https://example.com/apply3",
-        applicationDeadline: "2024-10-30",
-        createdAt: new Date().toISOString(),
-    }, {
-        id: "1",
-        profile: "Software Developer",
-        company: "Tech Solutions Inc.",
-        branch: "Computer Science",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Full-Time",
-        yearOfExperience: 2,
-        opportunityLink: "https://example.com/apply1",
-        applicationDeadline: "2024-12-31",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "2",
-        profile: "Data Analyst",
-        company: "Data Insights LLC",
-        branch: "Information Technology",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Internship",
-        yearOfExperience: 0,
-        opportunityLink: "https://example.com/apply2",
-        applicationDeadline: "2024-11-15",
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: "3",
-        profile: "UI/UX Designer",
-        company: "Creative Agency",
-        branch: "Design",
-        description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
-        positionType: "Part-Time",
-        yearOfExperience: 1,
-        opportunityLink: "https://example.com/apply3",
-        applicationDeadline: "2024-10-30",
-        createdAt: new Date().toISOString(),
-    },
-];
+// const dummyOpportunities: Opportunity[] = [
+//     {
+//         id: "1",
+//         profile: "Software Developer",
+//         company: "Tech Solutions Inc.",
+//         branch: "Computer Science",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Full-Time",
+//         yearOfExperience: 2,
+//         opportunityLink: "https://example.com/apply1",
+//         applicationDeadline: "2024-12-31",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "2",
+//         profile: "Data Analyst",
+//         company: "Data Insights LLC",
+//         branch: "Information Technology",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Internship",
+//         yearOfExperience: 0,
+//         opportunityLink: "https://example.com/apply2",
+//         applicationDeadline: "2024-11-15",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "3",
+//         profile: "UI/UX Designer",
+//         company: "Creative Agency",
+//         branch: "Design",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Part-Time",
+//         yearOfExperience: 1,
+//         opportunityLink: "https://example.com/apply3",
+//         applicationDeadline: "2024-10-30",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "4",
+//         profile: "Software Developer",
+//         company: "Tech Solutions Inc.",
+//         branch: "Computer Science",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Full-Time",
+//         yearOfExperience: 2,
+//         opportunityLink: "https://example.com/apply1",
+//         applicationDeadline: "2024-12-31",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "5",
+//         profile: "Data Analyst",
+//         company: "Data Insights LLC",
+//         branch: "Information Technology",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Internship",
+//         yearOfExperience: 0,
+//         opportunityLink: "https://example.com/apply2",
+//         applicationDeadline: "2024-11-15",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "6",
+//         profile: "UI/UX Designer",
+//         company: "Creative Agency",
+//         branch: "Design",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Part-Time",
+//         yearOfExperience: 1,
+//         opportunityLink: "https://example.com/apply3",
+//         applicationDeadline: "2024-10-30",
+//         createdAt: new Date().toISOString(),
+//     }, {
+//         id: "7",
+//         profile: "Software Developer",
+//         company: "Tech Solutions Inc.",
+//         branch: "Computer Science",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Full-Time",
+//         yearOfExperience: 2,
+//         opportunityLink: "https://example.com/apply1",
+//         applicationDeadline: "2024-12-31",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "8",
+//         profile: "Data Analyst",
+//         company: "Data Insights LLC",
+//         branch: "Information Technology",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Internship",
+//         yearOfExperience: 0,
+//         opportunityLink: "https://example.com/apply2",
+//         applicationDeadline: "2024-11-15",
+//         createdAt: new Date().toISOString(),
+//     },
+//     {
+//         id: "9",
+//         profile: "UI/UX Designer",
+//         company: "Creative Agency",
+//         branch: "Design",
+//         description: "This update will display the description prominently within each opportunity card, giving users a better understanding of what each opportunity entails. Adjust the styling further if you want to make the description stand out more! Let me know if you need any more changes!",
+//         positionType: "Part-Time",
+//         yearOfExperience: 1,
+//         opportunityLink: "https://example.com/apply3",
+//         applicationDeadline: "2024-10-30",
+//         createdAt: new Date().toISOString(),
+//     },
+// ];
 
 // const OpportunitiesPage: React.FC = () => {
 //     const opportunities = useSelector((state: RootState) => state.opportunity.opportunityList)
@@ -173,58 +173,17 @@ const dummyOpportunities: Opportunity[] = [
 
 
 const OpportunitiesPage: React.FC = () => {
-    const opportunitiesFromStore = useSelector((state: RootState) => state.opportunity.opportunityList);
-    const [opportunities, setOpportunities] = useState<Opportunity[]>(dummyOpportunities);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [hasMore, setHasMore] = useState<boolean>(true); // Initialize to true to allow loading more experiences
-
     const opportunityList = useSelector((state:RootState)=>state.opportunity.opportunityList);
+    const loading = useSelector((state:RootState)=>state.opportunity.loading);
     const dispatch = useDispatch<AppDispatch>();
+    
     useEffect(()=>{
         dispatch(getOpportunity());
-    });
+    },[dispatch]);
 
 
     console.log("opportunityList response", opportunityList);
 
-    const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-        const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
-        if (bottom && hasMore && !loading) {
-            loadMoreOpportunities();
-        }
-    };
-
-    const loadMoreOpportunities = async () => {
-        setLoading(true);
-        // Simulate fetching data
-        setTimeout(() => {
-            // For demonstration, you can create new dummy opportunities or fetch them from an API
-            const newOpportunities: Opportunity[] = []; // Replace with actual fetching logic
-            
-            // Example: Add dummy opportunities for demonstration
-            const moreOpportunities = [
-                {
-                    id: "4",
-                    profile: "Product Manager",
-                    company: "Tech Innovations Ltd.",
-                    branch: "Business",
-                    description: "Join our team to drive innovative product development and strategy. Join our team to drive innovative product development and strategy Join our team to drive innovative product development and strategy",
-                    positionType: "Full-Time",
-                    yearOfExperience: 3,
-                    opportunityLink: "https://example.com/apply4",
-                    applicationDeadline: "2025-01-15",
-                    createdAt: new Date().toISOString(),
-                },
-                // Add more opportunities as needed
-            ];
-
-            newOpportunities.push(...moreOpportunities); // Add new opportunities
-
-            setOpportunities(prev => [...prev, ...newOpportunities]);
-            setLoading(false);
-            setHasMore(newOpportunities.length > 0); // Set to false if no more opportunities
-        }, 1000);
-    };
 
     return (
         <div className="flex h-full flex-col">
@@ -240,10 +199,9 @@ const OpportunitiesPage: React.FC = () => {
             </div>
             <div
                 className="flex-grow overflow-y-auto scrollbar"
-                onScroll={handleScroll}
                 style={{ maxHeight: 'calc(100vh - 100px)' }}
             >
-                <OpportunityList opportunities={opportunities} />
+                <OpportunityList opportunities={opportunityList} />
                 {loading && <p className="text-center">Loading more opportunities...</p>}
             </div>
         </div>

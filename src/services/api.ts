@@ -1,5 +1,7 @@
 
-const BASE_URL = "http://localhost:8010/api/v1";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL;
+
+console.log("appurl", BASE_URL)
 
 // Define the endpoints as a constant object with specific types
 

@@ -63,6 +63,7 @@ const DiscussionForm = () => {
                 onChange={(value) => handleChange({ title: value })}
                 placeholder="Enter Discussion Title"
                 required={true}
+
             />
             {/* Branch Selection */}
             <SelectInput

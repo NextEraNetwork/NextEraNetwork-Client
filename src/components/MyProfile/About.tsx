@@ -36,7 +36,7 @@ const About: React.FC<ProfileHeaderProps> = ({ username }) => {
                             <main className="px-8 py-10 rounded-md shadow-[0_2px_10px_2px_rgba(0,0,0,0.1)] bg-white dark:bg-gray-800 flex flex-col gap-6 lg:flex-row justify-between items-center">
                                 <div className="lg:w-1/3 flex flex-col justify-start items-center">
                                     <div className="w-64 h-64 rounded-full mb-4">
-                                        <Image src={images.jinesh ? images.jinesh : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}`} className="w-full h-full rounded-full" alt="profileImage" />
+                                        <Image src={user.profileImage ? user.profileImage : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}`} className="w-full h-full rounded-full" alt="profileImage" />
                                     </div>
                                     <div className="flex flex-col gap-2 justify-start items-start text-slate-700 dark:text-slate-300 whitespace-nowrap">
                                         <p className="text-left"><strong>Name: </strong><span>{user.firstName + " " + user.middleName + " " + user.lastName}</span></p>
