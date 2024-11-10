@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/reducer/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
 import { addExperience } from '@/services/operations/student/experienceAPI';
 
 const ExperienceForm: React.FC = () => {
+  const loading = useSelector((state: RootState) => state.experience.loading)
   const [formData, setFormData] = useState({
     title: '',
     experienceType: '',
@@ -27,23 +28,32 @@ const ExperienceForm: React.FC = () => {
 
   const handleSubmit = () => {
     console.log('Experience submitted:', formData);
-    if(formData)
-    {
-        dispatch(addExperience(formData));
+    if (formData) {
+      dispatch(addExperience(formData));
+      setFormData({
+        title: '',
+        experienceType: '',
+        companyName: '',
+        position: '',
+        location: '',
+        content: '',
+        keyTakeaways: '',
+        tips: ''
+      })
     }
   };
 
   return (
     <div className=" p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Share Your Experience</h2>
-      
+
       <InputText
         label="Title"
         value={formData.title}
         onChange={(value) => handleChange('title', value)}
         placeholder="E.g., Interview at XYZ Corp"
       />
-      
+
       <SelectInput
         label="Experience Type"
         value={formData.experienceType}
@@ -98,9 +108,11 @@ const ExperienceForm: React.FC = () => {
 
       <button
         onClick={handleSubmit}
+        disabled={loading}
         className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
-        Submit Experience
+
+        {loading ? "Processing..." : "Submit Experience"}
       </button>
     </div>
   );

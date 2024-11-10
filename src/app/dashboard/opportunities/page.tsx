@@ -1,12 +1,13 @@
 // /app/opportunities/page.tsx
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import OpportunityList from '@/components/student/Opportunities/OpportunityList';
 import { Opportunity } from '@/types/Opportunity';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/reducer/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
+import { getOpportunity } from '@/services/operations/student/opportunityAPI';
 
 const dummyOpportunities: Opportunity[] = [
     {
@@ -173,9 +174,18 @@ const dummyOpportunities: Opportunity[] = [
 
 const OpportunitiesPage: React.FC = () => {
     const opportunitiesFromStore = useSelector((state: RootState) => state.opportunity.opportunityList);
-    const [opportunities, setOpportunities] = useState<Opportunity[]>(opportunitiesFromStore);
+    const [opportunities, setOpportunities] = useState<Opportunity[]>(dummyOpportunities);
     const [loading, setLoading] = useState<boolean>(false);
     const [hasMore, setHasMore] = useState<boolean>(true); // Initialize to true to allow loading more experiences
+
+    const opportunityList = useSelector((state:RootState)=>state.opportunity.opportunityList);
+    const dispatch = useDispatch<AppDispatch>();
+    useEffect(()=>{
+        dispatch(getOpportunity());
+    });
+
+
+    console.log("opportunityList response", opportunityList);
 
     const handleScroll = (e: React.UIEvent<HTMLElement>) => {
         const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
@@ -221,7 +231,7 @@ const OpportunitiesPage: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
                 <h1 className="text-sm md:text-2xl font-bold">Internship Opportunities</h1>
                 <Link
-                    href='/opportunities/addOpportunities'
+                    href='/dashboard/opportunities/addOpportunities'
                     className="flex items-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
                 >
                     <FaPlus className="mr-2 text-xs" />

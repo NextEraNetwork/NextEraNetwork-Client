@@ -25,8 +25,8 @@ const DiscussionList: React.FC<DiscussionListProps> = ({ discussions }) => {
                 <div key={index} className="border-b border-gray-200 transition hover:bg-gray-100 p-1 md:p-4">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center">
-                            <Link href={`/user/${discussion.userId.username}`} className="mr-4">
-                                <img src={"https://api.dicebear.com/7.x/fun-emoji/svg?radius=50"} alt={discussion.userId.username} className="w-10 h-10 rounded-full" />
+                            <Link href={`/user/${discussion.userId.username}`} className="mr-4 w-10 h-10">
+                                <img src={`https://api.dicebear.com/5.x/initials/svg?seed=${discussion.userId.username}`} alt={discussion.userId.username} className="w-10 h-10 rounded-full" />
                             </Link>
                             <div className="cursor-pointer w-full text-xs md:text-sm ">
                                 <Link href={`/dashboard/discussions/${discussion.discussTitle}`} className=" text-xs md:text-sm font-medium text-black block">

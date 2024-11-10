@@ -1,8 +1,12 @@
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { IonIcon } from '@ionic/react';
-import {  settingsSharp, logOut, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline,analyticsSharp, bookmarkOutline } from "ionicons/icons";
+import {  settingsSharp, logOut, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline,analyticsSharp, bookmarkOutline, chatbubblesOutline } from "ionicons/icons";
 import LogOutButton from './LogOutButton';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/reducer/store';
+import { getFullName } from '@/utils/getFullName';
 
 interface SlideInProps {
   isSlideInToggle: boolean;
@@ -16,16 +20,19 @@ interface MenuItem {
 }
 
 const SlideIn: React.FC<SlideInProps> = ({ isSlideInToggle, setIsSlideInToggle }) => {
+  const user = useSelector((state: RootState) => state.profile.profileData)
   const Menus: MenuItem[] = [
     {},
     { name: 'News', icon: newspaperOutline, path: '/dashboard/news' },
     { name: 'Events', icon: calendarClearOutline, path: '/dashboard/events' },
     { name: 'Gallery', icon: imageOutline, path: '/dashboard/gallery' },
     { name: 'Experiences', icon: chatboxEllipsesOutline, path: '/dashboard/experiences' },
-    { name: 'Bookmarks', icon: bookmarkOutline, path: '/dashboard/bookmark' },
-    { name: 'Placement Statistics', icon: analyticsSharp, path: '/dashboard/placement-statistics' },
+    { name: "Community", icon: chatbubblesOutline, path: "/dashboard/community" },
+
+    // { name: 'Bookmarks', icon: bookmarkOutline, path: '/dashboard/bookmark' },
+    // { name: 'Placement Statistics', icon: analyticsSharp, path: '/dashboard/placement-statistics' },
     { name: 'Setting', icon: settingsSharp, path: '/dashboard/setting' },
-    // { name: "Logout", icon: logOut, path: "/Logout" },
+    
   ];
 
   const [active, setActive] = useState<number>(0);
@@ -38,9 +45,6 @@ const SlideIn: React.FC<SlideInProps> = ({ isSlideInToggle, setIsSlideInToggle }
     setIsSlideInToggle(!isSlideInToggle);
   };
 
-  const userName = typeof window !== 'undefined' ? localStorage.getItem('userName') : '';
-  const avatarUrl = typeof window !== 'undefined' ? localStorage.getItem('avatarUrl') : '';
-
   return (
     <>
       {isSlideInToggle && (
@@ -49,17 +53,17 @@ const SlideIn: React.FC<SlideInProps> = ({ isSlideInToggle, setIsSlideInToggle }
             {/* User Info Section */}
             <div className="user-info border-b-2 border-grey-600 pb-4">
               <div className="w-16 h-16 rounded-full">
-                <Link href="/dashboard/user/username" passHref>
+                <Link href={`/dashboard/user/${user.userName}`} passHref>
                   <div className="profile cursor-pointer">
                     <img
-                      src={"https://api.dicebear.com/7.x/fun-emoji/svg?radius=50"}
+                      src={ user.profileImage ? user.profileImage :`https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}`}
                       alt="User Avatar"
                       className="rounded-full w-10 h-10"
                     />
                   </div>
                 </Link>
               </div>
-              <div className="text-left font-serif px-2">{userName || 'Jinesh Prajapat'}</div>
+              <div className="text-left font-serif px-2">{getFullName(user.firstName, user.middleName, user.lastName)}</div>
             </div>
 
             {/* Menu Items */}

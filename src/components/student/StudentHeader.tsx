@@ -1,25 +1,34 @@
-import React, { useState, useRef } from 'react';
-// import { IoNotificationsOutline } from "react-icons/io5";
+import React, { useState, useRef, useEffect } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
 import { images } from '@/utils/images';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IonIcon } from "@ionic/react";
-import { notificationsSharp, chatbubblesOutline, options, createOutline, personOutline, settingsOutline, helpCircleOutline, moonOutline, logOutOutline } from "ionicons/icons";
+import { options, createOutline, personOutline, settingsOutline, helpCircleOutline, moonOutline, logOutOutline } from "ionicons/icons";
 import LogOutButton from './LogOutButton';
 import SlideIn from './SlideIn';
 import useClickOutside from '@/hooks/useClickOutside';
+import { getUserData } from '@/services/operations/student/profileAPI';
+import { GiConsoleController } from 'react-icons/gi';
+import { getFullName } from '@/utils/getFullName';
 
 
 export const StudentHeader: React.FC = () => {
+    const user = useSelector((state: RootState) => state.profile.profileData)
+    // const loading = useSelector((state: RootState) => state.profile.loading);
+    const dispatch = useDispatch<AppDispatch>();
+
     const [isProfileBar, setIsProfileBar] = useState<boolean>(false);
     const [isSlideInToggle, setIsSildeInToggle] = useState<boolean>(false);
 
+    useEffect(()=>{
+        dispatch(getUserData());
+    },[dispatch]);
 
-    // profile controls
-    const profilePath = ``;
     const ProfileMenufirst = [
-        { name: "My Profile", icon: personOutline, path: "/user/username" },
+        { name: "My Profile", icon: personOutline, path: `/user/${user.userName}` },
         { name: "Edit Profile", icon: createOutline, path: '/dashboard/edit-profile' },
         { name: "Setting", icon: settingsOutline, path: "/dashboard/setting" },
     ]
@@ -70,16 +79,16 @@ export const StudentHeader: React.FC = () => {
                 {/* User info */}
                 <div className="flex items-center gap-4">
                     <div className="flex-col text-right hidden md:flex">
-                        <span className="text-sm font-medium whitespace-nowrap">Jinesh Prajapat</span>
-                        <span className="text-xs text-grey whitespace-nowrap">Rajasthan, India</span>
+                        <span className="text-sm font-medium whitespace-nowrap">{getFullName(user.firstName, user.middleName, user.lastName)}</span>
+                        <span className="text-xs text-grey whitespace-nowrap">{user.email}</span>
                     </div>
 
                     {/* Profile picture and dropdown */}
                     <div className="flex items-center gap-2 cursor-pointer"
                         onClick={() => setIsProfileBar(!isProfileBar)}
                     >
-                        <Image
-                            src={images.garudblack}
+                        <img
+                            src={user.profileImage ? user.profileImage : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}`}
                             alt="Profile"
                             className=" w-6 h-6 md:w-10 md:h-10 rounded-full"
                         />
@@ -102,14 +111,15 @@ export const StudentHeader: React.FC = () => {
                 <div ref={profileRef} className={`flex flex-col fixed shadow-md w-[254px] sm:w-[295px] top-12 right-4 sm:top-20 sm:right-6 z-50 `}>
                     <div className=' pt-3 pb-4 w-[254px] sm:w-[295px] absolute bg-white rounded-lg shadow-2xl shadow-black '>
                         <div className=' px-4 pb-3 text-left font-sans'>
-                            <div className='text-[16px] sm:text-2xl '>{"fullName"}</div>
-                            <div className=' text-xs  sm:text-[16px] '>{"email"}</div>
+                            <div className='text-[16px] sm:text-2xl '>{user.firstName + " " + user.middleName + " " + user.lastName}</div>
+                            <div className=' text-xs  sm:text-[16px] '>{user.email}</div>
                         </div>
                         <hr className=' m-0' />
                         <ul className='px-3 sm:py-4  '>
                             {ProfileMenufirst.map((menu, index) => (
-                                <li className='links'>
+                                <li className='links' key={index}>
                                     <Link
+                                    
                                         className={`flex items-center gap-2 py-3 rounded-full hover:bg-blue-400 hover:text-white`}
                                         href={menu.path}
                                         onClick={() => handleProfileClick(isProfileBar)}
@@ -127,7 +137,7 @@ export const StudentHeader: React.FC = () => {
                         <hr className='m-0' />
                         <ul className='px-3 sm:py-4'>
                             {ProfileMenuSecond.map((menu, index) => (
-                                <li className='links'>
+                                <li className='links' key={index}>
                                     <Link
                                         className={`flex items-center gap-2 py-3 rounded-full hover:bg-blue-400 hover:text-white`}
                                         href={menu.path}

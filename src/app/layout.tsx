@@ -5,7 +5,7 @@ import { AuthProvider } from "../../src/context/AuthProvider"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import StoreProvider from "./StoreProvider";
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,10 +18,18 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+// const inter = localFont({
+//   src: "./fonts/Inter-Regular.woff2", 
+//   weight: "400",
+//   style: "normal",
+//   variable: "--font-inter",
+// });
+
+
+// const inter = Inter({
+//   subsets: ['latin'],
+//   display: 'swap',
+// })
 
 
 export const metadata: Metadata = {
@@ -38,7 +46,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  ${inter.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}   antialiased`}
       >
         <StoreProvider>
           <AuthProvider>

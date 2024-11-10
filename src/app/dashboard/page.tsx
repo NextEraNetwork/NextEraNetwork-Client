@@ -1,8 +1,9 @@
 // pages/index.tsx
-
+'use client'
 import React from 'react';
 import { images } from '@/utils/images';
-import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/reducer/store';
 
 const dummyData = {
   userName: "John Doe",
@@ -29,11 +30,12 @@ const dummyData = {
 };
 
 const StudentDashBoard: React.FC = () => {
+  const user = useSelector((state: RootState) => state.profile.profileData)
   return (
     <>
       <header className="flex items-center mb-6">
-        <Image src={dummyData.profilePic} alt="Profile Picture" className="w-16 h-16 rounded-full mr-4" />
-        <h1 className="text-2xl font-semibold">Welcome back, {dummyData.userName}!</h1>
+        <img src={user.profileImage ? user.profileImage : `https://api.dicebear.com/5.x/initials/svg?seed=${user.firstName}`} alt="Profile Picture" className="w-16 h-16 rounded-full mr-4" />
+        <h1 className="text-2xl font-semibold">Welcome back, {user.firstName + " " + user.middleName + " " + user.lastName}!</h1>
       </header>
 
       <div className="grid gap-6 lg:grid-cols-2">

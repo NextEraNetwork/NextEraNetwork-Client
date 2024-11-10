@@ -1,65 +1,66 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface OpportunityData{
-    id:string;
-    profile: string;       
+interface OpportunityData {
+    _id: string;
+    profile_id: string;
+    profile: string;
     company: string;
     branch: string;
     positionType: string;
-    yearOfExperience: number;
-    opportunityLink: string;
+    applicationLink: string
+    experience: number;
     applicationDeadline: string;
-    createdAt: string;
-    description: string; 
+    description: string;
+
 }
 
-interface OpportunityState{
+interface OpportunityState {
     opportunityList: OpportunityData[],
-    opportunityDetail : OpportunityData,
-    loading:boolean
+    opportunityDetail: OpportunityData,
+    loading: boolean
 }
 
-const initialState : OpportunityState={
-    opportunityList:[
+const initialState: OpportunityState = {
+    opportunityList: [
         {
-            id:"",
-            profile: "",     
+            _id: "",
+            profile_id: "",
+            profile: "",
             company: "",
             branch: "",
             positionType: "",
-            yearOfExperience: 0,
-            opportunityLink: "",
+            experience: 0,
+            applicationLink: "",
             applicationDeadline: "",
-            createdAt: "",
-            description: "", 
+            description: "",
         }
     ],
-    opportunityDetail :{
-        id:"",
-        profile: "",     
+    opportunityDetail: {
+        _id: "",
+        profile_id: "",
+        profile: "",
         company: "",
         branch: "",
         positionType: "",
-        yearOfExperience: 0,
-        opportunityLink: "",
+        experience: 0,
+        applicationLink: "",
         applicationDeadline: "",
-        createdAt: "",
-        description: "", 
+        description: "",
     },
-    loading:false
+    loading: false
 };
 
 const opportunitySlice = createSlice({
     name: 'experience',
     initialState,
-    reducers:{
-        setOpportunityList(state, action :PayloadAction<OpportunityData[]>){
+    reducers: {
+        setOpportunityList(state, action: PayloadAction<OpportunityData[]>) {
             state.opportunityList = action.payload;
         },
-        setOpportunity(state, action: PayloadAction<OpportunityData>){
+        setOpportunity(state, action: PayloadAction<OpportunityData>) {
             state.opportunityDetail = action.payload;
         },
-        setLoading(state, action : PayloadAction<boolean>){
+        setLoading(state, action: PayloadAction<boolean>) {
             state.loading = action.payload;
         }
     }

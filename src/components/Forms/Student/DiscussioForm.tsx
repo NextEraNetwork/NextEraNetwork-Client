@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/reducer/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
 import { addDiscussion } from '@/services/operations/student/discussionAPI';
 
 
@@ -15,6 +15,7 @@ interface DiscussionFormData {
 }
 
 const DiscussionForm = () => {
+    const loading = useSelector((state: RootState) => state.discussion.loading)
     const [formData, setFormData] = useState<DiscussionFormData>({
         title: '',
         branch: '',
@@ -44,7 +45,12 @@ const DiscussionForm = () => {
         e.preventDefault();
         console.log("form value", formData);
         dispatch(addDiscussion(formData));
-        
+        setFormData({
+            title: '',
+            branch: '',
+            description: '',
+        })
+
     };
 
     return (
@@ -81,9 +87,10 @@ const DiscussionForm = () => {
             {/* Submit Button */}
             <button
                 type="submit"
+                disabled={loading}
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-                Submit Discussion
+                {loading ? "Processing..." : "Submit Discussion"}
             </button>
         </form>
     );

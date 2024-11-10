@@ -1,7 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputText from '../../Inputs/InputText';
 import InputTextArea from '../../Inputs/InputTextArea';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store'
+import { FaTrash } from 'react-icons/fa';
+import { addUserCertificates, deleteUserDetail, getUserCertificate } from '@/services/operations/student/profileAPI';
+
 
 interface CertificationData {
     certificationName: string;
@@ -13,42 +18,119 @@ interface CertificationData {
 }
 
 const CertificationForm: React.FC = () => {
-    const [certifications, setCertifications] = useState<CertificationData[]>([
-        { certificationName: '', issuingOrganization: '', certificateURL: '', issue_date: '', expiry_date: '', description: '' },
-    ]);
+    const user = useSelector((state: RootState) => state.profile.profileData)
+    const userCertification = useSelector((state: RootState) => state.profile.certicationList)
+    const loading = useSelector((state: RootState) => state.profile.loading);
+    const dispatch = useDispatch<AppDispatch>();
 
-    const handleCertificationChange = (index: number, field: keyof CertificationData, value: string) => {
-        const updatedCertifications = [...certifications];
-        updatedCertifications[index][field] = value;
-        setCertifications(updatedCertifications);
+    const [certification, setCertification] = useState<CertificationData>({
+        certificationName: '',
+        issuingOrganization: '',
+        certificateURL: '',
+        issue_date: '',
+        expiry_date: '',
+        description: ''
+    });
+
+    useEffect(() => {
+        dispatch(getUserCertificate(user.userName));
+    }, [dispatch, user.userName]);
+
+    const handleInputChange = (field: keyof CertificationData, value: string | boolean | null) => {
+        setCertification((prev) => ({ ...prev, [field]: value }));
     };
 
-    const addCertification = () => {
-        setCertifications([
-            ...certifications,
-            { certificationName: '', issuingOrganization: '', certificateURL: '', issue_date: '', expiry_date: '', description: '' },
-        ]);
+    console.log("certification");
+    const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("certification 2");
+        dispatch(addUserCertificates(certification,user.userName));
+        setCertification({
+            certificationName: '',
+            issuingOrganization: '',
+            certificateURL: '',
+            issue_date: '',
+            expiry_date: '',
+            description: ''
+        });
+
     };
 
-    const removeCertification = (index: number) => {
-        setCertifications(certifications.filter((_, i) => i !== index));
+    const handleDelete = (certificateID: string): void => {
+        console.log(`Delete certification at index: ${certificateID}`);
+        dispatch(deleteUserDetail('certificationList',certificateID, user.userName ))
     };
-
-    const handleSave = () => {
-
-    }
+    
 
     return (
-        <form className="bg-white shadow-md rounded-lg p-6">
+        <div>
             <h2 className="text-xl font-bold text-gray-800 mb-4">Certifications</h2>
 
-            {certifications.map((certification, index) => (
+            {userCertification.map((certification, index) => (
                 <div key={index} className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">Certification - {index + 1}</h3>
+                    <div className='flex justify-between items-center'>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                            Certification - {index + 1}
+                        </h3>
+                        <button
+                            className="text-gray-500 hover:text-red-600 focus:outline-none transform transition-transform duration-200 hover:scale-110"
+                            title='Delete Certificate'
+                            onClick={() => handleDelete(certification._id)} 
+                        >
+                            <FaTrash size={20} />
+                        </button>
+                    </div>
                     <InputText
                         label="Certification Name"
                         value={certification.certificationName}
-                        onChange={(value) => handleCertificationChange(index, 'certificationName', value)}
+                        readOnly
+                    />
+
+                    <InputText
+                        label="Issuing Organization"
+                        value={certification.issuingOrganization}
+                        readOnly
+                    />
+
+                    <InputText
+                        label="Certificate URL"
+                        type="url"
+                        value={certification.certificateURL}
+                        readOnly
+                    />
+
+                    <InputText
+                        label="Issue Date"
+                        type="text"
+                        value={certification.issue_date}
+                        readOnly
+                    />
+
+                    <InputText
+                        label="Expiry Date"
+                        type="date"
+                        value={certification.expiry_date}
+                        readOnly
+                    />
+
+                    <InputTextArea
+                        label="Description"
+                        value={certification.description}
+                        readOnly
+                    />
+                </div>
+            ))}
+
+
+            <form onSubmit={handleSave} className="bg-white shadow-md rounded-lg p-6 mt-8">
+                <h2 className="text-lg font-semibold text-gray-700 mb-2">Add Certification</h2>
+
+                <div className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
+
+                    <InputText
+                        label="Certification Name"
+                        value={certification.certificationName}
+                        onChange={(value) => handleInputChange('certificationName', value)}
                         placeholder="Enter certification name"
                         required={true}
                     />
@@ -56,7 +138,7 @@ const CertificationForm: React.FC = () => {
                     <InputText
                         label="Issuing Organization"
                         value={certification.issuingOrganization}
-                        onChange={(value) => handleCertificationChange(index, 'issuingOrganization', value)}
+                        onChange={(value) => handleInputChange('issuingOrganization', value)}
                         placeholder="Enter issuing organization"
                         required={true}
                     />
@@ -65,7 +147,7 @@ const CertificationForm: React.FC = () => {
                         label="Certificate URL"
                         type="url"
                         value={certification.certificateURL}
-                        onChange={(value) => handleCertificationChange(index, 'certificateURL', value)}
+                        onChange={(value) => handleInputChange('certificateURL', value)}
                         placeholder="Enter certificate URL"
                         required={true}
                     />
@@ -74,7 +156,7 @@ const CertificationForm: React.FC = () => {
                         label="Issue Date"
                         type="date"
                         value={certification.issue_date}
-                        onChange={(value) => handleCertificationChange(index, 'issue_date', value)}
+                        onChange={(value) => handleInputChange('issue_date', value)}
                         required={true}
                     />
 
@@ -82,7 +164,7 @@ const CertificationForm: React.FC = () => {
                         label="Expiry Date"
                         type="date"
                         value={certification.expiry_date}
-                        onChange={(value) => handleCertificationChange(index, 'expiry_date', value)}
+                        onChange={(value) => handleInputChange('expiry_date', value)}
                         placeholder="Leave blank if no expiry"
                         required={false}
                     />
@@ -90,43 +172,25 @@ const CertificationForm: React.FC = () => {
                     <InputTextArea
                         label="Description"
                         value={certification.description}
-                        onChange={(value) => handleCertificationChange(index, 'description', value)}
+                        onChange={(value) => handleInputChange('description', value)}
                         placeholder="Describe the certification"
                         required={false}
                     />
-
-                    <div className="flex justify-end">
-                        {certifications.length > 1 && (
-                            <button
-                                type="button"
-                                className="text-red-500 hover:underline mt-2"
-                                onClick={() => removeCertification(index)}
-                            >
-                                Remove Certification
-                            </button>
-                        )}
-                    </div>
                 </div>
-            ))}
 
-            <div className='flex flex-row justify-between'>
-                <button
-                    type="button"
-                    className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 mt-4"
-                    onClick={addCertification}
-                >
-                    Add Another Certification
-                </button>
+                <div className="flex flex-row justify-between mt-4">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition duration-200"
+                    >
+                        Save
+                    </button>
+                </div>
 
-                <button
-                    type="button"
-                    className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-                    onClick={handleSave}
-                >
-                    Save
-                </button>
-            </div>
-        </form>
+
+            </form>
+        </div>
     );
 };
 

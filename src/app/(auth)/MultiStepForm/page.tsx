@@ -13,12 +13,12 @@ import { createProfileUser } from '@/services/operations/student/profileAPI';
 
 const ProfileCreationGuide: React.FC = () => {
     const [formData, setFormData] = useState<ProfileData>({
-        firstName: '',
-        lastName: '',
-        middleName: '',
+        firstname: '',
+        lastname: '',
+        middlename: '',
         abcID : '',
-        gender: 'Male',
-        category: 'gen',
+        gender: 'male',
+        category: 'GEN',
         profession: '',
         position: '',
         state: '',
@@ -78,8 +78,8 @@ const ProfileCreationGuide: React.FC = () => {
 
     const validatePersonalDetails = () => {
         const requiredFields = [
-            formData.firstName,
-            formData.lastName,
+            formData.firstname,
+            formData.lastname,
             formData.category,
             formData.gender,
             formData.state,
@@ -104,7 +104,7 @@ const ProfileCreationGuide: React.FC = () => {
 
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-16 px-32">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-16 px-32 text-black">
             <form onSubmit={handleFormSubmit} className="p-10 bg-white rounded-lg shadow-xl w-full space-y-10">
                 <h2 className="text-xl font-semibold text-center">Create Your Profile</h2>
                 <p className="text-center text-gray-600">

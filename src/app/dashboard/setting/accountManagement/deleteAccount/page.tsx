@@ -61,7 +61,7 @@ const DeleteAccount: React.FC = () => {
         <div className="mt-4 text-red-600 font-semibold">
           <p>Your account has been successfully deleted.</p>
           <p>All your information has been permanently removed.</p>
-          <p>We're sorry to see you go.</p>
+          <p>We are sorry to see you go.</p>
         </div>
       )}
     </div>

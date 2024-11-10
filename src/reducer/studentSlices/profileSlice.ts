@@ -1,47 +1,140 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UsersData, UserExperienceData, UserProjectData, UserEducationData, UserAchievementData, UserCertificationData } from "@/types/Profile";
 
-// Define the ProfileData interface
-interface ProfileData {
-    username: string;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    fullName: string;
-    profession: string;
-    position: string;
-    passOut_Year: string;
-    profileImage: string;
-    university: string;
-    college: string;
-    department: string;
-    courses: string;
-    branch: string;
-}
 
 // Define the overall state interface, including loading state
 interface ProfileState {
-    profileData: ProfileData;
+    profileData: UsersData;
+    profilDataByUsername: UsersData;
+    experienceList: UserExperienceData[],
+    projectList: UserProjectData[],
+    educationList: UserEducationData[],
+    achievementList: UserAchievementData[]
+    certicationList: UserCertificationData[]
     loading: boolean;
 }
 
 // Define the initial state with default values
 const initialState: ProfileState = {
     profileData: {
-        username:"",
+        _id: "",
         firstName: "",
         middleName: "",
         lastName: "",
-        fullName: "",
+        userName: "",
+        email: "",
+        abcID: "",
+        about:"",
+        branch: "",
+        category: "",
+        college: "",
+        courses: "",
+        coverImage: "",
+        created_at: "",
+        department: "",
+        enrollmentID: [],
+        enrollmentNumber: "",
+        gender: "",
+        hobbies: [],
+        languages: [],
+        links: [],
         profession: "",
         position: "",
-        passOut_Year: "",
         profileImage: "",
+        passOut_Year: null,
+        skills: [],
+        state: "",
         university: "",
-        college: "",
-        department: "",
-        courses: "",
-        branch: "",
+        updated_at: "",
     },
+    profilDataByUsername: {
+        _id: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        abcID: "",
+        about:"",
+        branch: "",
+        category: "",
+        college: "",
+        courses: "",
+        coverImage: "",
+        created_at: "",
+        department: "",
+        enrollmentID: [],
+        enrollmentNumber: "",
+        gender: "",
+        hobbies: [],
+        languages: [],
+        links: [],
+        profession: "",
+        position: "",
+        profileImage: "",
+        passOut_Year: null,
+        skills: [],
+        state: "",
+        university: "",
+        updated_at: "",
+    },
+    experienceList: [
+        {
+            _id: "",
+            jobTitle: "",
+            experienceType: "",
+            companyName: "",
+            description: null,
+            jobMode: "",
+            location: "",
+            start_date: "",
+            end_date: "",
+            continuing: false,
+        },
+    ],
+    projectList: [
+        {
+            _id: "",
+            projectName: "",
+            description: "",
+            technology: [],
+            projectURL: "",
+            start_date: "",
+            end_date: "",
+        }
+    ],
+    educationList: [
+        {
+            _id: "",
+            insitutionName: "",
+            degree: "",
+            field_of_study: "",
+            start_date: "",
+            end_date: "",
+            grade: null,
+            description: "",
+        }
+    ],
+    achievementList: [
+        {
+            _id: "",
+            title: "",
+            description: "",
+            date_achieved: "",
+            awardingOrganization: "",
+        }
+    ],
+    certicationList: [
+        {
+            _id: "",
+            certificationName: "",
+            issuingOrganization: "",
+            certificateURL: "",
+            issue_date: "",
+            expiry_date: "",
+            description: "",
+        }
+    ],
     loading: false,
 };
 
@@ -49,40 +142,34 @@ const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        setProfile(state, action: PayloadAction<ProfileData>) {
-            const {
-                username,
-                firstName,
-                middleName,
-                lastName,
-                profession,
-                position,
-                passOut_Year,
-                profileImage,
-                university,
-                college,
-                department,
-                courses,
-                branch,
-            } = action.payload;
+        setProfile(state, action: PayloadAction<UsersData>) {
+            console.log("payload", action.payload);
+            state.profileData = action.payload;
+        },
 
-            // Update all profile fields in the profileData object
-            state.profileData.username = username;
-            state.profileData.firstName = firstName;
-            state.profileData.middleName = middleName;
-            state.profileData.lastName = lastName;
-            state.profileData.profession = profession;
-            state.profileData.position = position;
-            state.profileData.passOut_Year = passOut_Year;
-            state.profileData.profileImage = profileImage;
-            state.profileData.university = university;
-            state.profileData.college = college;
-            state.profileData.department = department;
-            state.profileData.courses = courses;
-            state.profileData.branch = branch;
+        setProfileByUserName(state, action: PayloadAction<UsersData>) {
+            console.log("payload", action.payload);
+            state.profilDataByUsername = action.payload;
+        },
 
-            // Combine names into a single fullName
-            state.profileData.fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+        setUserExperience(state, action: PayloadAction<UserExperienceData[]>) {
+            state.experienceList = action.payload;
+        },
+
+        setUserProject(state, action: PayloadAction<UserProjectData[]>) {
+            state.projectList = action.payload;
+        },
+
+        setUserEducation(state, action: PayloadAction<UserEducationData[]>) {
+            state.educationList = action.payload;
+        },
+
+        setUserAchievement(state, action: PayloadAction<UserAchievementData[]>) {
+            state.achievementList = action.payload;
+        },
+
+        setUserCerticattion(state, action: PayloadAction<UserCertificationData[]>) {
+            state.certicationList = action.payload;
         },
 
         setLoading(state, action: PayloadAction<boolean>) {
@@ -92,7 +179,7 @@ const profileSlice = createSlice({
 });
 
 // Export the actions to use in your components
-export const { setProfile, setLoading } = profileSlice.actions;
+export const { setProfile, setUserExperience, setUserProject, setUserEducation, setUserAchievement, setUserCerticattion,setProfileByUserName, setLoading } = profileSlice.actions;
 
 // Export the reducer to be used in the store
 export default profileSlice.reducer;

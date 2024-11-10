@@ -1,17 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
-import { BsLinkedin, BsGithub, BsYoutube,  BsTwitter } from 'react-icons/bs';
+import { BsLinkedin, BsGithub, BsYoutube, BsTwitter } from 'react-icons/bs';
+import { getFullName } from '@/utils/getFullName';
 
 interface UserCardProps {
   userData: {
-    id: string;
-    profileImage: string | null;
-    fullName: string;
-    passOutYear: number;
-    selectedBranch: string;
-    position: string;
+    _id: string,
+    username: string,
+    email: string,
+    firstname: string,
+    lastname: string,
+    profileImage: string | null,
+    middlename: string | null,
+    profession: string,
+    position: string,
+    passoutYear: number,
     links: { type: string; url: string }[];
-    username: string;
+    branchName: string,
+    coursesName: string
   };
 }
 
@@ -21,48 +27,59 @@ const UserCard: React.FC<UserCardProps> = ({ userData }) => {
       <div className=" flex items-center justify-center relative">
         <div className="max-w-sm mx-auto">
           <img
-            src={userData?.profileImage || ""}
-            alt={userData.fullName}
+            src={userData?.profileImage || `https://api.dicebear.com/5.x/initials/svg?seed=${userData.firstname}`}
+            alt={userData.username}
             className="w-20 h-20 md:w-28 md:h-28 rounded-full object-cover"
           />
         </div>
         <div className="passing-year absolute bottom-0 right-50 text-xs bg-black text-white px-2 rounded">
-          {userData?.passOutYear}
+          {userData?.passoutYear}
         </div>
       </div>
 
       <div className="user-details p-2 text-xs md:text-base">
         <p className="user-name font-bold  text-gray-800">
-          {userData.fullName} 
+          {getFullName(userData.firstname, userData.middlename, userData.lastname)}
         </p>
         <p className="user-specialty my-1 text-gray-600">{userData.position}</p>
-        <p className="user-branch italic text-gray-500">{userData.selectedBranch}</p>
+        <p className="user-branch italic text-gray-500">{userData.branchName}</p>
 
         <div className="user-links flex justify-center space-x-4 mt-3">
-          {userData.links.map((link, index) => (
-            <li key={index} className="list-none">
-              {link.type === "LinkedIn" && (
-                <a href={link.url} className="text-gray-600 hover:text-blue-600">
-                  <BsLinkedin className="fab fa-linkedin-in" />
-                </a>
-              )}
-              {link.type === "GitHub" && link.url && (
-                <a href={link.url} className="text-gray-600 hover:text-black">
-                  <BsGithub className="fab fa-github" />
-                </a>
-              )}
-              {link.type === "Twitter" && link.url && (
-                <a href={link.url} className="text-gray-600 hover:text-blue-400">
-                  <BsTwitter className="fab fa-twitter" />
-                </a>
-              )}
-              {link.type === "YouTube" && link.url && (
-                <a href={link.url} className="text-gray-600 hover:text-red-600">
-                  <BsYoutube className="fab fa-youtube" />
-                </a>
-              )}
-            </li>
-          ))}
+          {userData.links && Object.keys(userData.links).length > 0 ? (
+            Object.keys(userData.links).map((key, index) => {
+              const url = userData.links[key as keyof typeof userData.links];
+
+              // Check if url is a string before rendering
+              if (typeof url !== 'string') return null;
+
+              return (
+                <li key={index} className="list-none text-xl">
+                  {key === "linkedin" && url && (
+                    <a href={url} className="text-gray-600 hover:text-blue-600">
+                      <BsLinkedin />
+                    </a>
+                  )}
+                  {key === "github" && url && (
+                    <a href={url} className="text-gray-600 hover:text-black">
+                      <BsGithub />
+                    </a>
+                  )}
+                  {key === "twitter" && url && (
+                    <a href={url} className="text-gray-600 hover:text-blue-400">
+                      <BsTwitter />
+                    </a>
+                  )}
+                  {key === "youtube" && url && (
+                    <a href={url} className="text-gray-600 hover:text-red-600">
+                      <BsYoutube />
+                    </a>
+                  )}
+                </li>
+              );
+            })
+          ) : (
+            <p>No user links available</p>
+          )}
         </div>
         <Link href={`/user/${userData.username}`}>
           <div className="mt-4">

@@ -1,7 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputText from '../../Inputs/InputText';
 import InputTextArea from '../../Inputs/InputTextArea';
+import { addUserAchievement, deleteUserDetail, getUserAchievment } from '@/services/operations/student/profileAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
+import { FaTrash } from 'react-icons/fa';
 
 interface AchievementData {
     title: string;
@@ -11,40 +15,92 @@ interface AchievementData {
 }
 
 const AchievementForm: React.FC = () => {
-    const [achievements, setAchievements] = useState<AchievementData[]>([
-        { title: '', description: '', date_achieved: '', awardingOrganization: '' },
-    ]);
+    const user = useSelector((state: RootState) => state.profile.profileData)
+    const userAchievements = useSelector((state: RootState) => state.profile.achievementList)
+    const loading = useSelector((state: RootState) => state.profile.loading);
+    const dispatch = useDispatch<AppDispatch>();
 
-    const handleAchievementChange = (index: number, field: keyof AchievementData, value: string) => {
-        const updatedAchievements = [...achievements];
-        updatedAchievements[index][field] = value;
-        setAchievements(updatedAchievements);
+    const [achievement, setAchievement] = useState<AchievementData>({
+        title: '',
+        description: '',
+        date_achieved: '',
+        awardingOrganization: ''
+    });
+
+    useEffect(() => {
+        dispatch(getUserAchievment(user.userName));
+    }, [dispatch, user.userName])
+
+    const handleInputChange = (field: keyof AchievementData, value: string | boolean | null) => {
+        setAchievement((prev) => ({ ...prev, [field]: value }));
     };
 
-    const addAchievement = () => {
-        setAchievements([...achievements, { title: '', description: '', date_achieved: '', awardingOrganization: '' }]);
+    const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(addUserAchievement(achievement, user.userName));
+        setAchievement({
+            title: '',
+            description: '',
+            date_achieved: '',
+            awardingOrganization: ''
+        });
     };
 
-    const removeAchievement = (index: number) => {
-        setAchievements(achievements.filter((_, i) => i !== index));
+    const handleDelete = (achievementID: string): void => {
+        dispatch(deleteUserDetail('achievementList',achievementID, user.userName ))
     };
-
-    const handleSave = () => {
-
-    }
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <div >
             <h2 className="text-xl font-bold text-gray-800 mb-4">Achievements</h2>
 
-            {achievements.map((achievement, index) => (
+            {userAchievements.map((achievement, index) => (
                 <div key={index} className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">Achievment - {index + 1}</h3>
+                    <div className='flex justify-between items-center'>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-2">Achievment - {index + 1}</h3>
+                        <button
+                            className="text-gray-500 hover:text-red-600 focus:outline-none transform transition-transform duration-200 hover:scale-110"
+                            title='Delete Achievment'
+                            onClick={() => handleDelete(achievement._id)}
+                        >
+                            <FaTrash size={20} />
+                        </button>
+                    </div>
+                    <InputText
+                        label="Title"
+                        value={achievement.title}
+                        readOnly
+                    />
+                    <InputText
+                        label="Date Achieved"
+                        type="text"
+                        value={achievement.date_achieved}
+                        readOnly
+                    />
+                    <InputText
+                        label="Awarding Organization"
+                        value={achievement.awardingOrganization}
+                        readOnly
+                    />
+
+                    <InputTextArea
+                        label="Description"
+                        value={achievement.description}
+                        readOnly
+                    />
+                </div>
+            ))}
+
+
+            <form onSubmit={handleSave} className="bg-white shadow-md rounded-lg p-6 mt-8">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Add Achievment</h3>
+
+                <div className="mb-6 p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
 
                     <InputText
                         label="Title"
                         value={achievement.title}
-                        onChange={(value) => handleAchievementChange(index, 'title', value)}
+                        onChange={(value) => handleInputChange('title', value)}
                         placeholder="Enter achievement title"
                         required={true}
                     />
@@ -52,13 +108,13 @@ const AchievementForm: React.FC = () => {
                         label="Date Achieved"
                         type="date"
                         value={achievement.date_achieved}
-                        onChange={(value) => handleAchievementChange(index, 'date_achieved', value)}
+                        onChange={(value) => handleInputChange('date_achieved', value)}
                         required={false}
                     />
                     <InputText
                         label="Awarding Organization"
                         value={achievement.awardingOrganization}
-                        onChange={(value) => handleAchievementChange(index, 'awardingOrganization', value)}
+                        onChange={(value) => handleInputChange('awardingOrganization', value)}
                         placeholder="Enter awarding organization"
                         required={false}
                     />
@@ -66,44 +122,27 @@ const AchievementForm: React.FC = () => {
                     <InputTextArea
                         label="Description"
                         value={achievement.description}
-                        onChange={(value) => handleAchievementChange(index, 'description', value)}
+                        onChange={(value) => handleInputChange('description', value)}
                         placeholder="Describe the achievement"
                         required={false}
                     />
 
-                    <div className="flex justify-end">
-                        {achievements.length > 1 && (
-                            <button
-                                type="button"
-                                className="text-red-500 hover:underline mt-2"
-                                onClick={() => removeAchievement(index)}
-                            >
-                                Remove Achievement
-                            </button>
-                        )}
-                    </div>
                 </div>
-            ))}
 
-            <div className='flex flex-row justify-between'>
-                <button
-                    type="button"
-                    className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 mt-4"
-                    onClick={addAchievement}
-                >
-                    Add Another Achievement
-                </button>
-
-                <button
-                    type="button"
-                    className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-                    onClick={handleSave}
-                >
-                    Save
-                </button>
-            </div>
+                <div className="flex flex-row justify-between mt-4">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition duration-200"
+                    >
+                        Save
+                    </button>
+                </div>
+            </form>
 
         </div>
+
+
     );
 };
 

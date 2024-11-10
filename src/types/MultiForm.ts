@@ -1,12 +1,12 @@
 // types.ts
-export type GenderType = 'Male' | 'Female' | 'Other';
-export type CategoryType = 'gen' | 'sc' | 'st' | 'obc';
+export type GenderType = 'male' | 'female' | 'other';
+export type CategoryType = 'GEN' | 'SC' | 'ST' | 'OBC';
 export type StateType = 'andhra_pradesh' | 'other_states'; // Add all states as needed
 
 export interface ProfileData {
-    firstName: string;
-    middleName?: string;
-    lastName: string;
+    firstname: string;
+    middlename?: string;
+    lastname: string;
     gender: GenderType | string;
     abcID?: string;
     category: CategoryType;
@@ -33,4 +33,51 @@ export interface ProfileData {
     // experience: string[];
     // certification: string[];
     // achievement: string[];
+}
+
+export interface ExperienceData {
+    jobTitle: string;
+    experienceType:string;
+    companyName: string;
+    description: string | null;
+    jobMode: string;
+    location: string | null;
+    start_date: string;
+    end_date: string;
+    continuing: boolean;
+}
+
+export interface EducationData {
+    insitutionName: string;
+    degree: string;
+    field_of_study: string;
+    start_date: string;
+    end_date: string;
+    grade: number | null;
+    description: string | null;
+  }
+
+export interface AchievementData {
+    title: string;
+    description: string;
+    date_achieved: string;
+    awardingOrganization: string;
+}
+
+export interface CertificationData {
+    certificationName: string;
+    issuingOrganization: string;
+    certificateURL: string;
+    issue_date: string;
+    expiry_date: string;
+    description: string;
+}
+
+export interface ProjectData {
+    projectName: string;
+    description: string;
+    technology: string[];
+    projectURL: string;
+    start_date: string;
+    end_date: string;
 }

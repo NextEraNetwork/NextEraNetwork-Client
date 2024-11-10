@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import LinkInput from '../../MultiForm/AdditionalInformation/LinkInput';
+import { useSelector } from 'react-redux';
+// import { RootState } from '@/reducer/store'
 
 interface FormData {
   links: {
@@ -11,7 +13,22 @@ interface FormData {
   };
 }
 
+interface Links {
+  github?: string;
+  twitter?: string;
+}
+
+
+interface RootState {
+  profile: {
+    profileData: {
+      links: Links;
+    };
+  };
+}
+
 const LinkForm: React.FC = () => {
+  const user =useSelector((state:RootState)=> state.profile.profileData.links)
   const [formData, setFormData] = useState<FormData>({
     links: {
       github: '',
@@ -35,6 +52,7 @@ const LinkForm: React.FC = () => {
   return (
     <div className="p-6 bg-white shadow-md rounded-md">
       <h2 className="text-lg font-semibold mb-4 mt-10">Links</h2>
+
       <div className="md:grid md:grid-cols-2 md:gap-x-10 mt-6">
         <LinkInput
           label="GitHub"
@@ -57,6 +75,29 @@ const LinkForm: React.FC = () => {
           onChange={handleLinkChange('facebook')}
         />
       </div>
+      
+      {/* <div className="md:grid md:grid-cols-2 md:gap-x-10 mt-6">
+        <LinkInput
+          label="GitHub"
+          value={formData.links.github || ''}
+          onChange={handleLinkChange('github')}
+        />
+        <LinkInput
+          label="LinkedIn"
+          value={formData.links.linkedin || ''}
+          onChange={handleLinkChange('linkedin')}
+        />
+        <LinkInput
+          label="Twitter"
+          value={formData.links.twitter || ''}
+          onChange={handleLinkChange('twitter')}
+        />
+        <LinkInput
+          label="Facebook"
+          value={formData.links.facebook || ''}
+          onChange={handleLinkChange('facebook')}
+        />
+      </div> */}
 
       <div className="flex justify-end mt-6">
         <button

@@ -7,15 +7,16 @@ import 'react-quill/dist/quill.snow.css';
 interface InputTextEditorProps {
     label: string;
     value: string;
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
     placeholder?: string;
-    required? : boolean
+    required? : boolean;
+    readOnly? : boolean
 }
 
 // Dynamically import the React-Quill editor to prevent SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const MyRichTextEditor: React.FC<InputTextEditorProps> = ({ label, value, onChange, placeholder, required }) => {
+const MyRichTextEditor: React.FC<InputTextEditorProps> = ({ label, value, onChange, placeholder, required, readOnly }) => {
     // const [value, setValue] = useState('');
 
     const modules = {
@@ -40,10 +41,16 @@ const MyRichTextEditor: React.FC<InputTextEditorProps> = ({ label, value, onChan
             <ReactQuill
                 theme="snow"
                 value={value}
-                onChange={onChange}
+                // onChange={onChange}
+                onChange={(val) => {
+                    if (!readOnly && onChange) {
+                        onChange(val);
+                    }
+                }}
                 modules={modules}
                 placeholder={placeholder}
                 className=''
+                readOnly={readOnly}
 
             />
         </div>

@@ -12,9 +12,9 @@ const UserList: React.FC = () => {
         {/* Add filter inputs here */}
       </div>
       <div className="user-cards flex flex-wrap justify-center gap-4">
-        {usersData.map(user => (
+        {/* {usersData.map(user => (
           <UserCard key={user.id} userData={user} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

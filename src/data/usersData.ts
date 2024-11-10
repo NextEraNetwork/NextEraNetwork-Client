@@ -2,6 +2,14 @@
 
 const usersData = [
     {
+        email: "",
+        firstname: "",
+        lastname: "",
+        middlename: "",
+        profession: "",
+        passoutYear: 0,
+        branchName: "",
+        coursesName: "",
         id: '1',
         fullName: 'Garima Ahari',
         username: 'garimaghari',

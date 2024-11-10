@@ -25,8 +25,8 @@ const initialState: AuthState = {
     confirmPassword: "",
   },
   loading: false,
-  token: typeof window !== 'undefined' && Cookies.get('refresh_token')
-    ? Cookies.get('refresh_token') as string
+  token: typeof window !== 'undefined' && Cookies.get('access_token')
+    ? Cookies.get('access_token') as string
     : null,
 };
 

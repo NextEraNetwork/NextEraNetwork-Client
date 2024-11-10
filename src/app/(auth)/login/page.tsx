@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
         dispatch(loginUser(urlEncodedData.toString(), router));
     };
     return (
-        <div className="flex-grow flex items-center justify-center" >
+        <div className="flex-grow flex items-center justify-center text-black" >
             <div className="bg-white rounded-lg shadow-custom p-8 w-full max-w-sm md:max-w-md lg:max-w-2xl">
                 <h2 className="text-2xl font-semibold text-center mb-6">Student Login</h2>
                 <form onSubmit={handleFormSubmit}>

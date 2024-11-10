@@ -5,6 +5,8 @@ import SelectInput from '../../Inputs/SelectInput';
 // import { useDispatch } from 'react-redux';
 // import { AppDispatch } from '@/reducer/store';
 import { State, City } from 'country-state-city';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/reducer/store';
 
 interface FormData {
     firstName: string;
@@ -28,6 +30,7 @@ interface District{
 }
 
 const PersonalInformationForm: React.FC = () => {
+    const user =useSelector((state:RootState)=> state.profile.profileData)
     const [formData, setFormData] = useState<FormData>({
         firstName: '',
         middleName: '',
@@ -76,33 +79,33 @@ const PersonalInformationForm: React.FC = () => {
         console.log('Saved data:', formData);
     };
 
-    console.log(State.getStatesOfCountry("IN"))
-
-
     return (
         <div className="p-6 bg-white shadow-md rounded-md">
             <h2 className="text-lg font-semibold mb-4">Personal Information</h2>
 
-            <div className="md:grid md:grid-cols-3 md:gap-x-10">
+            {/* <div className="md:grid md:grid-cols-3 md:gap-x-10">
                 <InputText
                     label="First Name"
                     value={formData.firstName}
-                    onChange={(value) => handleChange({ firstName: value })}
-                    placeholder="Enter First Name"
-                    required={true}
+                    // onChange={(value) => handleChange({ firstName: value })}
+                    // placeholder="Enter First Name"
+                    // required={true}
+                    readOnly
                 />
                 <InputText
                     label="Middle Name"
                     value={formData.middleName || ''}
-                    onChange={(value) => handleChange({ middleName: value })}
-                    placeholder="Enter Middle Name"
+                    // onChange={(value) => handleChange({ middleName: value })}
+                    // placeholder="Enter Middle Name"
+                    readOnly
                 />
                 <InputText
                     label="Last Name"
                     value={formData.lastName}
-                    onChange={(value) => handleChange({ lastName: value })}
-                    placeholder="Enter Last Name"
-                    required={true}
+                    // onChange={(value) => handleChange({ lastName: value })}
+                    // placeholder="Enter Last Name"
+                    // required={true}
+                    readOnly
                 />
             </div>
 
@@ -158,9 +161,91 @@ const PersonalInformationForm: React.FC = () => {
                     placeholder="Enter Position"
                     required={true}
                 />
+            </div> */}
+
+            {/* for in***************** */}
+
+            <div className="md:grid md:grid-cols-3 md:gap-x-10">
+                <InputText
+                    label="First Name"
+                    value={user.firstName}
+                    // onChange={(value) => handleChange({ firstName: value })}
+                    // placeholder="Enter First Name"
+                    // required={true}
+                    readOnly
+                />
+                <InputText
+                    label="Middle Name"
+                    value={user.middleName || ''}
+                    // onChange={(value) => handleChange({ middleName: value })}
+                    // placeholder="Enter Middle Name"
+                    readOnly
+                />
+                <InputText
+                    label="Last Name"
+                    value={user.lastName}
+                    // onChange={(value) => handleChange({ lastName: value })}
+                    // placeholder="Enter Last Name"
+                    // required={true}
+                    readOnly
+                />
             </div>
 
-            <div className="flex justify-end mt-6">
+            <div className="md:grid md:grid-cols-2 md:gap-x-10 mt-6">
+                <SelectInput
+                    label="Gender"
+                    value={user.gender}
+                    options={[
+                        { value: 'Male', label: 'Male' },
+                        { value: 'Female', label: 'Female' },
+                    ]}
+                    onChange={(value) => handleChange({ gender: value })}
+                    required={true}
+                />
+                <SelectInput
+                    label="Category"
+                    value={user.category}
+                    options={[
+                        { value: 'obc', label: 'OBC' },
+                        { value: 'general', label: 'General' },
+                        { value: 'sc', label: 'SC' },
+                        { value: 'st', label: 'ST' },
+                    ]}
+                    onChange={(value) => handleChange({ category: value })}
+                    required={true}
+                />
+                <SelectInput
+                    label="State"
+                    value={user.state}
+                    options={states}
+                    onChange={(value) => handleChange({ state: value })}
+                    required={true}
+                />
+                <SelectInput
+                    label="District"
+                    value={formData?.district}
+                    options={districts}
+                    onChange={(value) => handleChange({ district: value })}
+                    required={true}
+                />
+
+                <InputText
+                    label="Profession"
+                    value={user.profession}
+                    onChange={(value) => handleChange({ profession: value })}
+                    required={true}
+                    placeholder="Enter Profession"
+                />
+                <InputText
+                    label="Position"
+                    value={user.position}
+                    onChange={(value) => handleChange({ position: value })}
+                    placeholder="Enter Position"
+                    required={true}
+                />
+            </div>
+
+            {/* <div className="flex justify-end mt-6">
                 <button
                     type="button"
                     onClick={handleSave}
@@ -168,7 +253,7 @@ const PersonalInformationForm: React.FC = () => {
                 >
                     Save
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };

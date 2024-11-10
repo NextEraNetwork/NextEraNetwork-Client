@@ -6,7 +6,7 @@ import { FaUniversity, FaClipboardList, FaBriefcase, FaComments, FaUserAlt, FaCh
 const Feature: React.FC = () => {
     return (
         <>
-            <section id="features" className="landing min-h-screen flex flex-col items-center justify-center scroll-mt-14 pt-20">
+            <section id="features" className="landing min-h-screen flex flex-col items-center justify-center scroll-mt-14 pt-20 bg-white text-black">
                 <div className="w-full max-w-7xl">
                     <h1 className="text-4xl font-bold mb-10 text-center">Explore Our Key Features</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">

@@ -9,8 +9,8 @@ type BodyData =
   | boolean 
   | null 
   | JSON
-  | { [key: string]: any }  // For more complex objects
-  | Array<any>;  // For arrays
+  | { [key: string]: any }  
+  | Array<any>;  
 
 type Params = 
   | string 

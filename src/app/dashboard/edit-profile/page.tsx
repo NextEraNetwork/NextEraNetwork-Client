@@ -31,11 +31,11 @@ const UpdateProfile: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center  bg-gray-100">
-      <div className="w-full  bg-white rounded-lg shadow-lg p-6 lg:p-12">
+      <div className="w-full h-[91vh] overflow-hidden overflow-y-auto  bg-white rounded-lg shadow-lg p-6 lg:p-12">
         <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Update Profile</h1>
 
         {/* Navbar */}
-        <nav className="flex gap-2 overflow-x-auto mb-6 border-b-2 pb-2">
+        <nav className="flex gap-2 overflow-x-auto mb-6 border-b-2 pb-1 scrollbar">
           {TABS.map(tab => (
             <button
               key={tab.id}
@@ -49,7 +49,7 @@ const UpdateProfile: React.FC = () => {
         </nav>
 
         {/* Form Section */}
-        <div className="mt-4">
+        <div className="mt-4 ">
           {renderForm()}
         </div>
       </div>

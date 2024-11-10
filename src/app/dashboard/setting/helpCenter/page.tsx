@@ -22,7 +22,7 @@ const HelpCenter: React.FC = () => {
             <Link href={`${appURL}/setting/security/changeEmail`} className="text-blue-500 hover:underline">Change Email</Link>
           </li>
           <li className="mb-2">
-            <Link href={`${appURL}/${userName}/Update`} className="text-blue-500 hover:underline">Profile Settings</Link>
+            <Link href={`${appURL}/dashboard/edit-profile`} className="text-blue-500 hover:underline">Profile Settings</Link>
           </li>
         </ul>
       </div>

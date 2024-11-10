@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import DiscussionFilterSection from "@/components/student/Discussions/DiscussionFilterSection";
 import DiscussionList from "@/components/student/Discussions/DiscussionList";
 import Pagination from "@/components/student/Questions/Pagination";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
+import { getDiscussion } from "@/services/operations/student/discussionAPI";
 
 const discussionTopicData = [
     {
@@ -239,14 +242,20 @@ const Discuss: React.FC = ({
         page?: string;
     };
 }) => {
+    const discussionList = useSelector((state:RootState)=>state.discussion.discussionList);
+    const dispatch = useDispatch<AppDispatch>();
+
+
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredTopics, setFilteredTopics] = useState(discussionTopicData);
 
     const filterOptions = ["Hot", "Newest to Oldest", "Most Votes"];
 
-    useEffect(() => {
-        // setIsLoading(false);
-    }, []);
+    useEffect(()=>{
+        dispatch(getDiscussion());
+    }, [dispatch])
+
+    console.log("discussion list",discussionList );
 
     const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;

@@ -24,10 +24,12 @@ interface NavLink {
 
 // Nav links array
 const navLinks: NavLink[] = [
-    { _id: 1, label: 'Features', path: "#features" },
-    { _id: 2, label: 'Pricing', path: '#pricing' },
-    { _id: 3, label: 'Customers', path: "#customers" },
-    { _id: 5, label: '', path: '#contact' },
+    // { _id: 1, label: 'Login', path: "/login" },
+    // { _id: 2, label: 'Register', path: "/signup" },
+    { _id: 3, label: 'Features', path: "#features" },
+    { _id: 4, label: 'Pricing', path: '#pricing' },
+    { _id: 5, label: 'Customers', path: "#customers" },
+    { _id: 6, label: 'Feedback Form', path: '#contact' },
 ];
 
 const Header: React.FC = () => {
@@ -94,8 +96,8 @@ const Header: React.FC = () => {
     }, []);
 
     return (
-        <header className={`sticky top-0 flex items-center bg-white dark:bg-gray-950 shadow-md text-black px-4 p-2 transition-all duration-500 z-[997]  ${isMobileMenuOpen ? 'shadow-md' : ''}`}>
-            <div className="container lg:mx-20 flex items-center justify-between relative">
+        <header className={`sticky top-0 flex items-center bg-white  shadow-md text-black px-4 p-2 transition-all duration-500 z-[997]  ${isMobileMenuOpen ? 'shadow-md' : ''}`}>
+            <div className="container lg:mx-10 flex w-full items-center justify-between relative">
                 <div className='flex items-center justify-between w-full'>
                     <Link href="/" className="flex items-center gap-2">
                         <div className="h-8 lg:h-12"><Image src={images?.garudblack} alt='logo' className='h-full w-full' /></div>
@@ -104,8 +106,14 @@ const Header: React.FC = () => {
                 </div>
 
                 {windowWidth < 1024 && isMobileMenuOpen ? (
-                    <nav className="absolute top-16 left-0 right-0 bg-black text-white rounded-md shadow-lg p-4 z-50">
-                        <ul className="flex flex-col space-y-4">
+                    <nav className="absolute top-16 left-0 right-0 bg-gray-100 rounded-md shadow-2xl shadow-black p-4 z-50">
+                        {!user && (
+                            <div className='flex flex-col space-y-2 justify-start items-start'>
+                                <Link href={"/login"} className='bg-teal-500 hover:bg-teal-600 text-white min-w-max font-bold py-1 px-4 rounded-full'>LogIn</Link>
+                                <Link href={"/signup"} className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-4 rounded-full'>SignUp</Link>
+                            </div>
+                        )}
+                        <ul className="flex flex-col space-y-2">
                             {navLinks.map((link, index) => (
                                 <li key={link._id} className="relative">
                                     <span
@@ -133,8 +141,9 @@ const Header: React.FC = () => {
                                     )}
                                 </li>
                             ))}
-                            <button className='bg-blue-500 py-2 rounded-full'>Request Demo</button>
+                            {/* <button className='bg-blue-500 py-2 rounded-full'>Request Demo</button> */}
                         </ul>
+                        
                     </nav>
                 ) : (
                     <nav className={`lg:flex lg:items-center lg:relative lg:shadow-none flex gap-8 ${!isMobileMenuOpen ? "hidden" : ""}`}>
@@ -158,7 +167,7 @@ const Header: React.FC = () => {
 
                                     {link.subMenu && (
                                         <ul
-                                            className={`absolute left-0 mt-4 w-max ${!isMobileMenuOpen ? "bg-white dark:bg-gray-800 dark:text-gray-300 text-black rounded-md shadow-lg" : "bg-gray-100 rounded-md"} transition-all duration-300 ease-in ${hoveredDropdown === index ? 'lg:translate-y-0 lg:opacity-100 visible' : 'lg:translate-y-4 lg:opacity-0 lg:invisible'}`}
+                                            className={`absolute left-0 mt-4 w-max ${!isMobileMenuOpen ? "bg-white   text-black rounded-md shadow-lg" : "bg-gray-100 rounded-md"} transition-all duration-300 ease-in ${hoveredDropdown === index ? 'lg:translate-y-0 lg:opacity-100 visible' : 'lg:translate-y-4 lg:opacity-0 lg:invisible'}`}
                                         >
                                             {link.subMenu.map((subLink, subIndex) => (
                                                 <li
@@ -175,7 +184,7 @@ const Header: React.FC = () => {
                                                     </span>
                                                     {subLink.subMenu && (
                                                         <ul
-                                                            className={`absolute right-full top-0 mt-0 w-max bg-white dark:bg-gray-800 dark:text-gray-300 text-black rounded-md shadow-lg transition-all duration-300 ease-in ${hoveredSubDropdown === subIndex ? 'translate-x-2 lg:translate-x-0 lg:opacity-100 lg:visible block' : 'lg:translate-x-4 lg:opacity-0 lg:invisible hidden'}`}
+                                                            className={`absolute right-full top-0 mt-0 w-max bg-white  text-black rounded-md shadow-lg transition-all duration-300 ease-in ${hoveredSubDropdown === subIndex ? 'translate-x-2 lg:translate-x-0 lg:opacity-100 lg:visible block' : 'lg:translate-x-4 lg:opacity-0 lg:invisible hidden'}`}
                                                         >
                                                             {subLink.subMenu.map((deepLink) => (
                                                                 <li key={deepLink._id}>

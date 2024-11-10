@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/reducer/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
 import { addQuestion } from '@/services/operations/student/questionAPI';
 
 interface QuestionFormData {
@@ -17,6 +17,8 @@ interface QuestionFormData {
 }
 
 const QuestionForm = () => {
+    const loading = useSelector((state: RootState) => state.question.loading);
+
     const [formData, setFormData] = useState<QuestionFormData>({
         branch: '',
         difficulty: '',
@@ -47,6 +49,15 @@ const QuestionForm = () => {
         e.preventDefault();
         console.log("form value", formData);
         dispatch(addQuestion(formData));
+
+        setFormData({
+            branch: '',
+            difficulty: '',
+            description: '',
+            companyName: '',
+            questionTitle: '',
+            questionLink: '',
+        })
 
     };
 
@@ -92,7 +103,7 @@ const QuestionForm = () => {
                     value={formData.questionLink}
                     onChange={(value) => handleChange({ questionLink: value })}
                     placeholder="Enter question link"
-                    // required={true}
+                // required={true}
                 />
             </div>
 
@@ -110,7 +121,7 @@ const QuestionForm = () => {
                 type="submit"
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-                Submit Question
+                {loading ? "Processing..." : "Submit Question"}
             </button>
         </form>
     );

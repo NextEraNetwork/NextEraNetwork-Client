@@ -23,7 +23,7 @@ const LandingPage: React.FC = () => {
 
             <Feature/>
             {/*  Choose Us Section */}
-            <section className="py-20 bg-white">
+            <section className="py-20 bg-white text-black">
                 <div className="container mx-auto w-full max-w-7xl text-center">
                     <h2 className="text-4xl font-bold mb-10">Why Choose Our Platform?</h2>
                     <p className="text-lg mb-6">

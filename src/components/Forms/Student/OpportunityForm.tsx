@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import InputText from '../Inputs/InputText';
 import SelectInput from '../Inputs/SelectInput';
 import MyRichTextEditor from '../Inputs/MyTextEditor';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
 import { addOpportunity } from '@/services/operations/student/opportunityAPI';
-import { AppDispatch } from '@/reducer/store';
 
 interface OpportunityFormData {
     profile: string;
@@ -19,6 +19,7 @@ interface OpportunityFormData {
 }
 
 const OpportunityForm = () => {
+    const loading = useSelector((state: RootState) => state.opportunity.loading)
     const [formData, setFormData] = useState<OpportunityFormData>({
         profile: '',
         company: '',
@@ -29,7 +30,7 @@ const OpportunityForm = () => {
         positionType: '',
         applicationDeadline: '',
     });
-    const dispatch=useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>();
 
     const branches = ['Computer Science', 'Mechanical', 'Electrical', 'Civil'];
     const positionTypes = [
@@ -59,6 +60,16 @@ const OpportunityForm = () => {
         e.preventDefault();
         console.log("form value", formData);
         dispatch(addOpportunity(formData));
+        setFormData({
+            profile: '',
+            company: '',
+            description: '',
+            experience: '',
+            applicationLink: '',
+            branch: '',
+            positionType: '',
+            applicationDeadline: '',
+        })
     };
 
     return (
@@ -136,9 +147,10 @@ const OpportunityForm = () => {
             {/* Submit Button */}
             <button
                 type="submit"
+                disabled={loading}
                 className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-                Submit Opportunity
+                {loading ? "Processing..." : "Submit Opportunity"}
             </button>
         </form>
     );

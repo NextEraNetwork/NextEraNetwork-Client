@@ -47,21 +47,21 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
             <div className='md:grid md:grid-cols-3 md:gap-x-10'>
                 <InputText
                     label="First Name"
-                    value={formData.firstName}
-                    onChange={(value) => handleChange({ firstName: value })}
+                    value={formData.firstname}
+                    onChange={(value) => handleChange({ firstname: value })}
                     placeholder="Enter First Name"
                     required={true}
                 />
                 <InputText
                     label="Middle Name"
-                    value={formData.middleName || ''}
-                    onChange={(value) => handleChange({ middleName: value })}
+                    value={formData.middlename || ''}
+                    onChange={(value) => handleChange({ middlename: value })}
                     placeholder="Enter Middle Name"
                 />
                 <InputText
                     label="Last Name"
-                    value={formData.lastName}
-                    onChange={(value) => handleChange({ lastName: value })}
+                    value={formData.lastname}
+                    onChange={(value) => handleChange({ lastname: value })}
                     placeholder="Enter Last Name"
                     required={true}
                 />
@@ -71,8 +71,9 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
                     label="Gender"
                     value={formData.gender}
                     options={[
-                        { value: 'Male', label: 'Male' },
-                        { value: 'Female', label: 'Female' },
+                        { value: 'male', label: 'Male' },
+                        { value: 'female', label: 'Female' },
+                        { value: 'other', label: 'Other' },
                     ]}
                     onChange={(value) => handleChange({ gender: value })}
                     required={true}
@@ -81,10 +82,10 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
                     label="Category"
                     value={formData.category}
                     options={[
-                        { value: 'obc', label: 'OBC' },
-                        { value: 'general', label: 'General' },
-                        { value: 'sc', label: 'SC' },
-                        { value: 'st', label: 'ST' }
+                        { value: 'OBC', label: 'OBC' },
+                        { value: 'GEN', label: 'General' },
+                        { value: 'SC', label: 'SC' },
+                        { value: 'ST', label: 'ST' }
                     ]}
                     onChange={(value) => handleChange({ gender: value })}
                     required={true}

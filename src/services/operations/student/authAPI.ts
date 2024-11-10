@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { apiConnector } from "../../apiConnector";
 import { clearToken, setLoading, setToken } from "@/reducer/studentSlices/authSlice";
-import { authEndpoints, } from "../../api";
+import { authEndpoints, userEndpoints } from "../../api";
 import { toast } from 'react-toastify';
 import { AppDispatch } from '@/reducer/store';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
@@ -12,14 +12,16 @@ const {
     LOGIN_API,
     LOGOUT_API,
     RESETPASSWORDTOKEN_API,
-    RESETPASSWORD_API
+    POST_UPDATE_PASSWORD_API,
 } = authEndpoints;
 
-interface SignupData {
-    userName: string;
+const {
+    PUT_EMAIL_USERNAME_API
+} =userEndpoints;
+
+interface SignUpData {
+    username: string;
     email: string;
-    password: string;
-    confirmPassword: string;
 }
 
 // interface ResetPassword {
@@ -55,21 +57,25 @@ export const sendOtp = (email: string) => async (dispatch: AppDispatch) => {
     }
 }
 
-export const signupUser = (signupData: SignupData) => async (dispatch: AppDispatch) => {
+export const signupUser = (signupData: SignUpData) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
-    console.log("signupUser", signupUser);
-
     try {
         const response = await apiConnector({
             method: 'POST',
             url: SIGNUP_API,
             bodyData: signupData,
+            withCredentials: true
         });
 
-        dispatch(setToken(response.data.token));                // Assuming the token is returned in the response
-    } catch (error) {
-        console.log("error", error)
-        //   dispatch(setError(error.response?.data.message || 'Signup failed')); // Handle the error message
+        if (response.status === 200) {
+            toast.success("Account created successfully");
+            window.location.href = "/login";
+        }
+    } catch (error: any) {
+        if (error.status === 409) {
+            window.location.href = "/login";
+            toast.error("User already exist.");
+        }
     } finally {
         dispatch(setLoading(false));
     }
@@ -86,42 +92,48 @@ export const loginUser = (loginData: string, router: AppRouterInstance) => async
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
+            withCredentials: true
         });
 
         console.log("login response", response);
 
 
         if (response.data.ok === true) {
-
-            toast.success("Login Successfully.");
             router.push("/");
+            toast.success("Login Successfully.");
         }
         else {
             toast.error("Login credential error");
         }
     }
-    catch (error) {
+    catch (error: any) {
+        if (error.status === 401) {
+            toast.error("Credentials are not valid");
+        }
         console.error(error);
     } finally {
         dispatch(setLoading(false));
     }
 }
 
-export const logoutUser = (token: string) => async (dispatch: AppDispatch) => {
+export const logoutUser = () => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
         const response = await apiConnector({
             method: 'POST',
             url: LOGOUT_API,
-            headers: {
-                Authorization: `Bearer ${token}`,  // Send token in the Authorization header
-            },
+            withCredentials:true
         })
 
         console.log("response", response);
 
-        dispatch(clearToken());
+        if(response.status === 200)
+        {
+            localStorage.clear();  
+            sessionStorage.clear();
+            dispatch(clearToken());
+        }
     }
     catch (error) {
         console.error(error);
@@ -131,25 +143,22 @@ export const logoutUser = (token: string) => async (dispatch: AppDispatch) => {
 
 }
 
-export const resetPasswordUser = (
-    password: string,
-    confirmPassword: string,
-    token: string,
+export const updatePassword = (
+    old_password: string,
+    new_password: string,
 ) => async (dispatch: AppDispatch) => {
 
     dispatch(setLoading(true));
 
     try {
         const response = await apiConnector({
-            method: 'PUT',
-            url: RESETPASSWORD_API,
+            method: 'POST',
+            url: POST_UPDATE_PASSWORD_API,
             bodyData: {
-                password,
-                confirmPassword,
+                old_password,
+                new_password,
             },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            withCredentials:true
         });
 
         if (response.status === 200) {
@@ -176,6 +185,30 @@ export const passwordResetTokenUser = (email: string, token: string, setEmailSen
         if (response.status === 200) {
             setEmailSent(true);
         }
+    } catch (error) {
+        console.error(error);
+    } finally {
+        dispatch(setLoading(false));
+    }
+}
+
+export const changeEmailUserName = (key: string, value: string) => async (dispatch: AppDispatch) => {
+    dispatch(setLoading(true));
+
+    try {
+        const response = await apiConnector({
+            method: 'PUT',
+            url: `${PUT_EMAIL_USERNAME_API}?${key}=${encodeURIComponent(value)}`,
+            bodyData: {
+                key : value
+            },
+        });
+
+        if (response.status === 200) {
+            toast.success("Password Updated Successfully.");
+        }
+
+
     } catch (error) {
         console.error(error);
     } finally {

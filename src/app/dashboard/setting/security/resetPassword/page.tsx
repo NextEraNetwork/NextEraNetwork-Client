@@ -1,10 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/reducer/store';
+import { updatePassword } from '@/services/operations/student/authAPI';
+import { toast } from 'react-toastify';
 
 const ResetPassword: React.FC = () => {
-    const [processing, setProcessing] = useState<boolean>(false);
-    const [flashMessage, setFlashMessage] = useState<{ type: string; message: string } | null>(null);
     const [formValue, setFormValue] = useState<{
         currentPassword: string;
         newPassword: string;
@@ -15,6 +16,9 @@ const ResetPassword: React.FC = () => {
         confirmPassword: ''
     });
 
+    const loading = useSelector((state: RootState) => state.auth.loading);
+    const dispatch = useDispatch<AppDispatch>();
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormValue({
             ...formValue,
@@ -22,65 +26,18 @@ const ResetPassword: React.FC = () => {
         });
     };
 
-    const baseURL = "http:localhost:8010/api/v1"
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setProcessing(true);
-
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setFlashMessage({ type: 'error', message: 'Authentication token not found.' });
-            setProcessing(false);
+        if (formValue.newPassword !== formValue.confirmPassword) {
+            toast.error("New password and confirmation password must match.");
             return;
         }
-
-        try {
-            const response = await axios.put(
-                `${baseURL}/user/changepassword`,
-                {
-                    currentPassword: formValue.currentPassword,
-                    newPassword: formValue.newPassword,
-                    confirmNewPassword: formValue.confirmPassword
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}` // Include token in Authorization header
-                    }
-                }
-            );
-
-            if (response.status === 200) {
-                setFlashMessage({ type: 'success', message: 'Password updated successfully' });
-            }
-        } catch (error: any) {
-            if (error.response) {
-                switch (error.response.status) {
-                    case 404:
-                        setFlashMessage({ type: 'error', message: 'Incorrect password.' });
-                        break;
-                    case 400:
-                        setFlashMessage({ type: 'error', message: "New password doesn't match the current confirm password." });
-                        break;
-                    case 402:
-                        setFlashMessage({ type: 'error', message: 'Current Password is Incorrect' });
-                        break;
-                    default:
-                        setFlashMessage({ type: 'error', message: 'Server Error' });
-                        break;
-                }
-            } else {
-                console.error('Network or request error:', error);
-                setFlashMessage({ type: 'error', message: 'Server Error' });
-            }
-        } finally {
-            setProcessing(false);
-            setFormValue({
-                currentPassword: '',
-                newPassword: '',
-                confirmPassword: ''
-            });
+    
+        if (formValue.newPassword.length < 8) {
+            toast.error("Password must be at least 8 characters long.");
+            return; 
         }
+        dispatch(updatePassword(formValue.currentPassword, formValue.newPassword))
     };
 
     return (
@@ -127,9 +84,9 @@ const ResetPassword: React.FC = () => {
                 <button
                     type="submit"
                     className="w-full bg-blue-500 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-blue-600"
-                    disabled={processing}
+                    disabled={loading}
                 >
-                    {processing ? 'Processing...' : 'Reset Password'}
+                    {loading ? 'Processing...' : 'Reset Password'}
                 </button>
             </form>
         </div>

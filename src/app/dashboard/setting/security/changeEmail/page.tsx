@@ -25,61 +25,43 @@ const ChangeEmail: React.FC = () => {
     const handleSendVerification = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setProcessing(true);
-        try {
-            const response = await axios.post(`${baseURL}/user/sendOTP`, {
-                email: formValue.currentEmail
-            });
+        // try {
+        //     const response = await axios.post(`${baseURL}/user/sendOTP`, {
+        //         email: formValue.currentEmail
+        //     });
 
-            if (response.status === 200) {
-                setIsCodeSent(true);
-            }
-        } catch (error: any) {
-            if (error.response) {
-                handleError(error);
-            } else {
-                console.error('Network or request error:', error);
-            }
-        } finally {
-            setProcessing(false);
-        }
+        //     if (response.status === 200) {
+        //         setIsCodeSent(true);
+        //     }
+        // } catch (error: any) {
+        //     if (error.response) {
+        //         handleError(error);
+        //     } else {
+        //         console.error('Network or request error:', error);
+        //     }
+        // } finally {
+        //     setProcessing(false);
+        // }
     };
 
-    const handleError = (error: any) => {
-        if (error.response) {
-            switch (error.response.status) {
-                case 401:
-                    window.location.href = '/login'; // Redirect to login
-                    break;
-                case 403:
-                    break;
-                default:
-                    console.error('Error:', error);
-                    break;
-            }
-        }
-    };
+    // const handleError = (error: any) => {
+    //     if (error.response) {
+    //         switch (error.response.status) {
+    //             case 401:
+    //                 window.location.href = '/login'; // Redirect to login
+    //                 break;
+    //             case 403:
+    //                 break;
+    //             default:
+    //                 console.error('Error:', error);
+    //                 break;
+    //         }
+    //     }
+    // };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setProcessing(true);
-        try {
-            const response = await axios.put(`${baseURL}/user/changeemail`, {
-                currentEmail: formValue.currentEmail,
-                verificationCode: formValue.verificationCode,
-                newEmail: formValue.newEmail
-            });
-
-            if (response.status === 200) {
-            }
-        } catch (error: any) {
-            if (error.response) {
-                handleError(error);
-            } else {
-                console.error('Network or request error:', error);
-            }
-        } finally {
-            setProcessing(false);
-        }
     };
 
     return (

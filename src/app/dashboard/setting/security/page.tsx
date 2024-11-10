@@ -6,7 +6,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { BsArrowRight } from 'react-icons/bs';
 
 const SecurityMenu = [
-    { name: "Email", path: "/dashboard/setting/security/changeEmail" },
+    // { name: "Email", path: "/dashboard/setting/security/changeEmail" },
     { name: "Reset Password", path: "/dashboard/setting/security/resetPassword" },
     { name: "Change Username", path: "/dashboard/setting/security/changeUsername" }
 ];
@@ -14,6 +14,8 @@ const SecurityMenu = [
 const Security: React.FC = () => {
     const router = useRouter();
     const pathname = usePathname();
+
+    
 
     return (
         <div className='bg-white h-full'>

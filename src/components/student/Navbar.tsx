@@ -18,7 +18,7 @@ interface MenuItem {
 
 const NavBar: React.FC = () => {
   const MobileMenus: MenuItem[] = [
-    { name: "Home", icon: home, dis: "translate-x-[1vw]", path: "/dashboard" },
+    { name: "Dashboard", icon: home, dis: "translate-x-[1vw]", path: "/dashboard" },
     { name: "My Network", icon: people, dis: "translate-x-[19vw]", path: "/dashboard/users" },
     { name: "Questions", icon: book, dis: "translate-x-[37vw]", path: "/dashboard/questions" },
     { name: "Discuss", icon: chatbubble, dis: "translate-x-[55vw]", path: "/dashboard/discussions" },

@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface QuestionData {
-    id: string,
+    _id: string,
+    profile_id: string;
     branch: string;
     difficulty: string;
     description: string;
@@ -19,7 +20,8 @@ interface QuestionState {
 const initialState: QuestionState = {
     questionList: [
         {
-            id: '',
+            _id: '',
+            profile_id: '',
             branch: '',
             difficulty: '',
             description: '',
@@ -28,29 +30,30 @@ const initialState: QuestionState = {
             questionLink: '',
         }
     ],
-    questionDetail : {
-        id: '',
-            branch: '',
-            difficulty: '',
-            description: '',
-            companyName: '',
-            questionTitle: '',
-            questionLink: '',
+    questionDetail: {
+        _id: '',
+        branch: '',
+        profile_id: '',
+        difficulty: '',
+        description: '',
+        companyName: '',
+        questionTitle: '',
+        questionLink: '',
     },
-    loading:false
+    loading: false
 };
 
 const questionSlice = createSlice({
-    name:'question',
+    name: 'question',
     initialState,
-    reducers:{
-        setQuestionList(state, action :PayloadAction<QuestionData[]>){
+    reducers: {
+        setQuestionList(state, action: PayloadAction<QuestionData[]>) {
             state.questionList = action.payload;
         },
-        setQuestion(state, action: PayloadAction<QuestionData>){
+        setQuestion(state, action: PayloadAction<QuestionData>) {
             state.questionDetail = action.payload;
         },
-        setLoading(state, action : PayloadAction<boolean>){
+        setLoading(state, action: PayloadAction<boolean>) {
             state.loading = action.payload
         }
     }

@@ -168,7 +168,7 @@ const UserFilterSection: React.FC<FilterSectionProps> = ({
   ];
 
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:gap-6 justify-between items-center py-3 md:py-8">
+    <div className="flex flex-col gap-4 overflow-hidden overflow-x-auto scrollbar md:flex-row md:gap-6 justify-between items-center py-3 md:py-8">
       {/* Search Bar with Filter Icon on Small Screens */}
       <div className="flex items-center w-full max-w-md bg-white rounded-lg px-4 py-2 shadow-sm">
         <RiSearchLine className="text-gray-500 mr-2 text-lg" />

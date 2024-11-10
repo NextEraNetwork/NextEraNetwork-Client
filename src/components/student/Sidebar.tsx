@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { analyticsSharp, homeOutline, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline, chatbubbleOutline, bookOutline, briefcaseOutline, personOutline, bookmarkOutline } from "ionicons/icons";
+import { analyticsSharp, homeOutline, newspaperOutline, calendarClearOutline, imageOutline, chatboxEllipsesOutline, chatbubbleOutline, bookOutline, briefcaseOutline, personOutline, bookmarkOutline,chatbubblesOutline } from "ionicons/icons";
 import { usePathname } from 'next/navigation';
 import { IonIcon } from '@ionic/react';
 import { MdDoubleArrow } from "react-icons/md";
@@ -14,7 +14,7 @@ interface MenuItem {
 
 // Menu items
 const Menus: MenuItem[] = [
-    { name: "Home", icon: homeOutline, path: "/dashboard" },
+    { name: "Dashboard", icon: homeOutline, path: "/dashboard" },
     { name: "News", icon: newspaperOutline, path: "/dashboard/news" },
     { name: "Events", icon: calendarClearOutline, path: "/dashboard/events" },
     { name: "My Network", icon: personOutline, path: "/dashboard/users" },
@@ -23,9 +23,10 @@ const Menus: MenuItem[] = [
     { name: "Discuss", icon: chatbubbleOutline, path: "/dashboard/discussions" },
     { name: "Opportunities", icon: briefcaseOutline, path: "/dashboard/opportunities" },
     { name: "Expericences", icon: chatboxEllipsesOutline, path: "/dashboard/experiences" },
-    { name: "Saved", icon: bookmarkOutline, path: "/dashboard/saves" },
+    { name: "Community", icon: chatbubblesOutline, path: "/dashboard/community" },
+    // { name: "Saved", icon: bookmarkOutline, path: "/dashboard/saves" },
     // { name: "Community", icon: thumbsUpOutline, path: "/Community" },
-    { name: "Placement Statistics", icon: analyticsSharp, path: "/dashboard/placementStats" },
+    // { name: "Placement Statistics", icon: analyticsSharp, path: "/dashboard/placementStats" },
 
 ];
 

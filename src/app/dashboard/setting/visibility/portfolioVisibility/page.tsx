@@ -7,7 +7,7 @@ const PortfolioVisibility: React.FC = () => {
       <div className="mb-4">
         <p className="text-gray-600 mb-2">
           Our platform allows registered users to view portfolios uploaded by other users. 
-          Once a user's portfolio is made public, it can be viewed by anyone with access to the platform.
+          Once a user&apos;s portfolio is made public, it can be viewed by anyone with access to the platform.
         </p>
         <p className="text-gray-600 mb-2">
           Registered users also have the option to download portfolios for offline viewing and share them with others.

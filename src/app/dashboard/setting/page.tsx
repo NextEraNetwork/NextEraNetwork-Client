@@ -5,6 +5,7 @@ import { IonIcon } from "@ionic/react";
 import { eye, lockClosed, shieldHalf } from "ionicons/icons";
 import { BiArrowBack } from 'react-icons/bi';
 import { BsArrowRight } from 'react-icons/bs';
+import Link from 'next/link';
 
 const SettingMenu = [
     { name: "Sign In & Security", icon: lockClosed, path: "/dashboard/setting/security" },
@@ -46,12 +47,12 @@ const Settings: React.FC = () => {
                         <ul className='sm:py-4'>
                             {SettingMenu.map((menu, index) => (
                                 <li key={index} className='links px-3 hover:bg-gray-100 flex justify-between items-center'>
-                                    <a className={`flex items-center gap-2 py-3`} href={menu.path}>
+                                    <Link className={`flex items-center gap-2 py-3`} href={menu.path}>
                                         <span className={`text-xl sm:text-2xl pl-2 flex items-center`}>
                                             <IonIcon icon={menu.icon} />
                                         </span>
                                         <span>{menu.name}</span>
-                                    </a>
+                                    </Link>
                                     <BsArrowRight className=""></BsArrowRight>
                                 </li>
                             ))}
@@ -60,9 +61,9 @@ const Settings: React.FC = () => {
                         <ul className='sm:py-4'>
                             {InfoMenu.map((menu, index) => (
                                 <li key={index} className='links px-3 hover:bg-gray-100'>
-                                    <a className={`flex items-center gap-2 py-3 font-semibold text-gray-700 hover:text-black`} href={menu.path}>
+                                    <Link className={`flex items-center gap-2 py-3 font-semibold text-gray-700 hover:text-black`} href={menu.path}>
                                         <span className={`text-xs`}>{menu.name}</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

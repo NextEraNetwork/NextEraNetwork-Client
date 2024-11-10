@@ -1,16 +1,22 @@
 'use client';
 import React, { useState } from 'react';
 import SkillManager from '../../MultiForm/AdditionalInformation/SkillManager';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/reducer/store';
 
 interface FormData {
   skills: string[];
-  
+
 }
 
 const SkillForm: React.FC = () => {
+  const userSkillsList = useSelector((state: RootState) => state.profile.profileData.skills);
+  const loading = useSelector((state: RootState) => state.profile.loading);
+
+
   const [formData, setFormData] = useState<FormData>({
     skills: [],
-   
+
   });
 
   const handleChange = (field: Partial<FormData>) => {
@@ -37,6 +43,21 @@ const SkillForm: React.FC = () => {
   return (
     <div className="p-6 bg-white shadow-md rounded-md">
       <h2 className="text-lg font-semibold mb-4 mt-10">Skills</h2>
+
+      <div className="flex flex-wrap gap-4 mb-8">
+        {loading ?
+          <p>Loading...</p>
+          :
+          (
+            userSkillsList.map((skill, index) => (
+              <div key={index} className="flex items-center">
+                <span className="bg-blue-200 text-gray-800 py-1 px-4 md:py-2 md:text-base rounded-full text-sm">
+                  {skill}
+                </span>
+              </div>
+            ))
+          )}
+      </div>
 
       <SkillManager
         skills={formData.skills}

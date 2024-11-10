@@ -1,14 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AllUsersData {
-    id: string;
-    profileImage: string | null;
-    fullName: string;
-    passOutYear: number;
-    selectedBranch: string;
-    position: string;
+    _id: string,
+    username: string,
+    email: string,
+    firstname: string,
+    lastname: string,
+    profileImage: string | null,
+    middlename: string | null,
+    profession: string,
+    position: string,
+    passoutYear: number,
     links: { type: string; url: string }[];
-    username: string;
+    branchName: string,
+    coursesName: string
 };
 
 interface AllUserState {
@@ -19,14 +24,19 @@ interface AllUserState {
 const initialState: AllUserState = {
     allUseresList: [
         {
-            id: "",
-        profileImage: "",
-        fullName: "",
-        passOutYear: 0,
-        selectedBranch: "",
-        position: "",
-        links: [],
-        username: "",
+            _id: "",
+            username: "",
+            email: "",
+            firstname: "",
+            lastname: "",
+            profileImage: "" ,
+            middlename: "",
+            profession: "",
+            position: "",
+            passoutYear: 0,
+            links: [],
+            branchName: "",
+            coursesName: ""
         }
     ],
     loading:false
