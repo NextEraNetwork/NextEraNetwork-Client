@@ -87,7 +87,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({ formData, han
                         { value: 'SC', label: 'SC' },
                         { value: 'ST', label: 'ST' }
                     ]}
-                    onChange={(value) => handleChange({ gender: value })}
+                    onChange={(value) => handleChange({ category: value })}
                     required={true}
                 />
                 <SelectInput

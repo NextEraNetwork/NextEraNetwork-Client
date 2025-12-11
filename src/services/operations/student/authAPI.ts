@@ -99,7 +99,7 @@ export const loginUser = (loginData: string, router: AppRouterInstance) => async
 
 
         if (response.status === 200) {
-            router.push("/");
+            router.push("/dashboard");
             toast.success("Login Successfully.");
         }
         else {

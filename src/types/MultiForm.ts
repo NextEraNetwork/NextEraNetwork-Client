@@ -9,7 +9,7 @@ export interface ProfileData {
     lastname: string;
     gender: GenderType | string;
     abcID?: string;
-    category: CategoryType;
+    category: CategoryType | string;
     profession: string;
     position: string;
     state: StateType | string;

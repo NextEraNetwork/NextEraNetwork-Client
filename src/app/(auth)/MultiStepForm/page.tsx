@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { ProfileData } from '@/types/MultiForm';
+import { CategoryType, GenderType, ProfileData, StateType } from '@/types/MultiForm';
 import EducationalDetails from '@/components/Forms/MultiForm/EducationalDetails/EducationalDetails';
 import PersonalInformation from '@/components/Forms/MultiForm/PersonalInformation/PersonalInformation';
 import AdditionalInformation from '@/components/Forms/MultiForm/AdditionalInformation/AdditionalInformation';
@@ -11,8 +11,45 @@ import { RootState } from '@/reducer/store';
 import PreLoader from '@/components/PreLoader';
 import { createProfileUser } from '@/services/operations/student/profileAPI';
 
+
+interface LinkType {
+    url: string;
+    label: string;  // Optional label for the link, can be something like 'LinkedIn', 'Portfolio', etc.
+}
+export interface ProfileDataType {
+    firstname: string;
+    middlename?: string;
+    lastname: string;
+    gender: GenderType | string;
+    abcID?: string;
+    category: CategoryType | string;
+    profession: string;
+    position: string;
+    state: StateType | string;
+    district: string
+    about?: string;
+    passOut_Year: number;
+    skills: string[];
+    hobbies: string[];
+    links:{}; // Assuming URL as string
+    languages: string[];
+    coverImage?: string;
+    profileImage?: string;
+    university: string;
+    college: string;
+    department: string;
+    courses: string;
+    branch: string;
+    enrollmentNumber: string;
+    // education: string[];
+    // projects: string[];
+    // experience: string[];
+    // certification: string[];
+    // achievement: string[];
+}
+
 const ProfileCreationGuide: React.FC = () => {
-    const [formData, setFormData] = useState<ProfileData>({
+    const [formData, setFormData] = useState<ProfileDataType>({
         firstname: '',
         lastname: '',
         middlename: '',
@@ -27,7 +64,7 @@ const ProfileCreationGuide: React.FC = () => {
         passOut_Year: new Date().getFullYear(),
         skills: [],
         hobbies: [],
-        links: {},
+        links: [],
         languages: [],
         university: '',
         college: '',
