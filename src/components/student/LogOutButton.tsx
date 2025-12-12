@@ -15,7 +15,7 @@ const LogOutButton: React.FC = () => {
         sessionStorage.clear();
 
         // Dispatch the logout action
-        dispatch(logoutUser());
+        dispatch(logoutUser(router));
 
         // Redirect to the home page or login page
         router.push('/'); // Use Next.js router for redirection

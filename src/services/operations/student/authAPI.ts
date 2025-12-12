@@ -5,7 +5,7 @@ import { authEndpoints, userEndpoints } from "../../api";
 import { toast } from 'react-toastify';
 import { AppDispatch } from '@/reducer/store';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { serverLogin } from '@/services/lib/serverAuth';
+import { serverLogin, serverLogout } from '@/services/lib/serverAuth';
 
 const {
     SIGNUP_API,
@@ -107,24 +107,13 @@ export const loginUser = (loginData: string, router: AppRouterInstance) => async
     }
 }
 
-export const logoutUser = () => async (dispatch: AppDispatch) => {
+export const logoutUser = (router: AppRouterInstance) => async (dispatch: AppDispatch) => {
     dispatch(setLoading(true));
 
     try {
-        const response = await apiConnector({
-            method: 'POST',
-            url: LOGOUT_API,
-            withCredentials:true
-        })
-
-        console.log("response", response);
-
-        if(response.status === 200)
-        {
-            localStorage.clear();  
-            sessionStorage.clear();
-            dispatch(clearToken());
-        }
+        await serverLogout();
+        router.push("/");
+        router.refresh();
     }
     catch (error) {
         console.error(error);

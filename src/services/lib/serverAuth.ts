@@ -61,3 +61,9 @@ export async function serverLogin(urlEncodedBody: string) {
     };
   }
 }
+
+export async function serverLogout() {
+  cookies().delete("access_token");
+  cookies().delete("refresh_token");
+  cookies().delete("profile_id");
+}
