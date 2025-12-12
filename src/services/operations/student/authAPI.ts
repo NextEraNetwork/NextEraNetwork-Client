@@ -5,6 +5,7 @@ import { authEndpoints, userEndpoints } from "../../api";
 import { toast } from 'react-toastify';
 import { AppDispatch } from '@/reducer/store';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { serverLogin } from '@/services/lib/serverAuth';
 
 const {
     SIGNUP_API,
@@ -85,22 +86,12 @@ export const loginUser = (loginData: string, router: AppRouterInstance) => async
     dispatch(setLoading(true));
 
     try {
-        const response = await apiConnector({
-            method: 'POST',
-            url: LOGIN_API,
-            bodyData: loginData,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            withCredentials: true
-        });
-
-        console.log("login response", response);
-
-
-        if (response.status === 200) {
+        const result = await serverLogin(loginData);
+        console.log("result", result);
+        if (result.success) {
             router.push("/dashboard");
             toast.success("Login Successfully.");
+            // router.refresh();
         }
         else {
             toast.error("Login credential error");
